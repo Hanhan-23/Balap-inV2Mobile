@@ -1,6 +1,6 @@
 # Balap-inV2Mobile
 Repository development of BALAP-IN Mobile version role Masyarakat. 
-Powered by PBLIF20-PBLIF24 Polytechnic Batam State 
+Powered by PBLIF20-PBLIF24 Polytechnic Batam State.
 Farhan Ramadhan - 3312301105
 Yulia Pipka Ziliwu - 3312301035
 M Iskandar Dinata - 3312301086
