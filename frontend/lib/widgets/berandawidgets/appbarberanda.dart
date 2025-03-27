@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppBarBeranda extends StatelessWidget {
   const AppBarBeranda({super.key});
@@ -12,7 +13,7 @@ class AppBarBeranda extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 10),
               alignment: AlignmentDirectional.centerEnd,
               height: double.infinity,
-              child: Image.asset(asset)
+              child: SvgPicture.asset(asset)
             ),
           );
     }
@@ -34,8 +35,8 @@ class AppBarBeranda extends StatelessWidget {
                 SizedBox(
                   child: Row(
                     children: [
-                      twoBar('assets/icons/search.png', null),
-                      twoBar('assets/icons/notification.png', null),
+                      twoBar('assets/icons/search.svg', null),
+                      twoBar('assets/icons/notification.svg', null),
                     ],
                   ),
                 )
