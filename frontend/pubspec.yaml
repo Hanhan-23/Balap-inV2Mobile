@@ -55,9 +55,24 @@ flutter:
   assets:
     - assets/images/logo.png
 
-    - assets/icons/notification.svg
-    - assets/icons/search.svg
-    - assets/icons/fullmap.svg
+    - assets/icons/beranda/notification.svg
+    - assets/icons/beranda/search.svg
+    - assets/icons/beranda/fullmap.svg
+    - assets/icons/beranda/files.svg
+    - assets/icons/beranda/megaphone.svg
+
+  fonts:
+    - family: Instrument-Sans
+      fonts:
+        - asset: assets/fonts/instrumentsans/InstrumentSans-Bold.ttf
+        - asset: assets/fonts/instrumentsans/InstrumentSans-BoldItalic.ttf
+        - asset: assets/fonts/instrumentsans/InstrumentSans-Italic.ttf
+        - asset: assets/fonts/instrumentsans/InstrumentSans-Italic.ttf
+        - asset: assets/fonts/instrumentsans/InstrumentSans-Medium.ttf
+        - asset: assets/fonts/instrumentsans/InstrumentSans-MediumItalic.ttf
+        - asset: assets/fonts/instrumentsans/InstrumentSans-Regular.ttf
+        - asset: assets/fonts/instrumentsans/InstrumentSans-SemiBold.ttf
+        - asset: assets/fonts/instrumentsans/InstrumentSans-SemiBoldItalic.ttf
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

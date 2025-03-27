@@ -35,8 +35,8 @@ class AppBarBeranda extends StatelessWidget {
                 SizedBox(
                   child: Row(
                     children: [
-                      twoBar('assets/icons/search.svg', null),
-                      twoBar('assets/icons/notification.svg', null),
+                      twoBar('assets/icons/beranda/search.svg', null),
+                      twoBar('assets/icons/beranda/notification.svg', null),
                     ],
                   ),
                 )

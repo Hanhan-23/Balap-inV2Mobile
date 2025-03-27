@@ -9,15 +9,21 @@ class MapBeranda extends StatefulWidget {
 }
 
   viewMap() {
-    return Placeholder();
+    return Container(
+      color: Colors.yellow,
+    );
   }
 
   mapButton() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: IconButton(onPressed: () {
+      child: IconButton(
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(Colors.white)
+        ),
+        onPressed: () {
           null;
-        }, icon: SvgPicture.asset('assets/icons/fullmap.svg')
+        }, icon: SvgPicture.asset('assets/icons/beranda/fullmap.svg')
       ),
     );
   }
@@ -30,8 +36,8 @@ class _MapBerandaState extends State<MapBeranda> {
       child: Stack(
         alignment: Alignment.topRight,
         children: [
-          mapButton(),
           viewMap(),
+          mapButton(),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/berandawidgets/analisisberanda.dart';
 import 'package:frontend/widgets/berandawidgets/appbarberanda.dart';
 import 'package:frontend/widgets/berandawidgets/mapberanda.dart';
 
@@ -13,6 +14,7 @@ class _BerandaPagesState extends State<BerandaPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: SizedBox(
           height: MediaQuery.of(context).size.height * 0.06,
@@ -29,6 +31,14 @@ class _BerandaPagesState extends State<BerandaPages> {
                 height: MediaQuery.of(context).size.height * 0.35,
                 child: MapBeranda(),
               ),
+              Padding(
+                padding: const EdgeInsets.only(top: 14, bottom: 24),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.18,
+                  child: AnalisisBeranda(),
+                ),
+              )
             ],
           )
         ),
