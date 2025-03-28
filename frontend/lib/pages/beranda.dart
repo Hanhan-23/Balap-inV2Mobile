@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/widgets/berandawidgets/analisisberanda.dart';
 import 'package:frontend/widgets/berandawidgets/appbarberanda.dart';
 import 'package:frontend/widgets/berandawidgets/mapberanda.dart';
+import 'package:frontend/widgets/navigations/botnav.dart';
 
 class BerandaPages extends StatefulWidget {
   const BerandaPages({super.key});
@@ -13,8 +14,9 @@ class BerandaPages extends StatefulWidget {
 class _BerandaPagesState extends State<BerandaPages> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      bottomNavigationBar: BottomNavigation(),
       appBar: AppBar(
         title: SizedBox(
           height: MediaQuery.of(context).size.height * 0.06,

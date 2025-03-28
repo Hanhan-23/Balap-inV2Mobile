@@ -35,6 +35,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.17
+  awesome_bottom_bar: ^1.2.4
+  draggable_home: ^1.0.5
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +63,15 @@ flutter:
     - assets/icons/beranda/files.svg
     - assets/icons/beranda/megaphone.svg
 
+    - assets/icons/botnav/home.svg
+    - assets/icons/botnav/report.svg
+    - assets/icons/botnav/tutorial.svg
+    - assets/icons/botnav/urgent.svg
+
   fonts:
+    - family: CustomIconsBotNav
+      fonts: 
+      - asset:  assets\icons\botnav\icomoon.ttf
     - family: Instrument-Sans
       fonts:
         - asset: assets/fonts/instrumentsans/InstrumentSans-Bold.ttf

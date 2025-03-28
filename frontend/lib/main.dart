@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
       title: 'BALAP-IN',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(17, 84, 237, 1)),
       ),
       home: const BerandaPages(),
     );
