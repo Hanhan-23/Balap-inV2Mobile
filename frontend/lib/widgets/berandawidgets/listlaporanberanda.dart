@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/berandawidgets/listlaporan/headerlistlapor.dart';
 
 class ListLaporanBeranda extends StatefulWidget {
   const ListLaporanBeranda({super.key});
@@ -10,6 +11,14 @@ class ListLaporanBeranda extends StatefulWidget {
 class _ListLaporanBerandaState extends State<ListLaporanBeranda> {
   @override
   Widget build(BuildContext context) {
-    return const SizedBox();
+    return Column(
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 1,
+          height: MediaQuery.of(context).size.height * 0.08,
+          child: HeaderListLapor(),
+        ),
+      ],
+    );
   }
 }

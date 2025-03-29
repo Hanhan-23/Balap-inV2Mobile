@@ -62,6 +62,7 @@ flutter:
     - assets/icons/beranda/fullmap.svg
     - assets/icons/beranda/files.svg
     - assets/icons/beranda/megaphone.svg
+    - assets/icons/beranda/filter.svg
 
     - assets/icons/botnav/home.svg
     - assets/icons/botnav/report.svg
