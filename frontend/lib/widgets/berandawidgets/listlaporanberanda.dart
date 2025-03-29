@@ -24,7 +24,7 @@ class _ListLaporanBerandaState extends State<ListLaporanBeranda> {
           width: MediaQuery.of(context).size.width * 1,
           child: Column(
             spacing: 8,
-            children: List.generate(5, (index) => ListLaporan()), // Menggunakan children agar bisa menerima List<Widget>
+            children: List.generate(5, (index) => ListLaporan()), 
           ),
         )
       ],
