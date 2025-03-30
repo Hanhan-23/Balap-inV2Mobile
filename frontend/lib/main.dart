@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/beranda.dart';
+import 'package:frontend/widgets/navigations/botnav.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(17, 84, 237, 1)),
       ),
-      home: const BerandaPages(),
+      home: const BottomNavigation(),
     );
   }
 }

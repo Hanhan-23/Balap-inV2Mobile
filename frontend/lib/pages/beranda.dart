@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/widgets/berandawidgets/analisisberanda.dart';
 import 'package:frontend/widgets/berandawidgets/appbarberanda.dart';
 import 'package:frontend/widgets/berandawidgets/mapberanda.dart';
-import 'package:frontend/widgets/navigations/botnav.dart';
 import 'package:frontend/widgets/berandawidgets/listlaporanberanda.dart';
 
 class BerandaPages extends StatefulWidget {
@@ -20,6 +19,9 @@ class _BerandaPagesState extends State<BerandaPages> {
     headerWidget () {
       return Column(
             children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
+              ),
               SizedBox(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.35,
@@ -38,7 +40,6 @@ class _BerandaPagesState extends State<BerandaPages> {
     }
 
     return Scaffold(
-      bottomNavigationBar: BottomNavigation(),
       appBar: AppBar(
         title: SizedBox(
           height: MediaQuery.of(context).size.height * 0.06,
