@@ -69,6 +69,10 @@ flutter:
     - assets/icons/botnav/tutorial.svg
     - assets/icons/botnav/urgent.svg
 
+    - assets/icons/buatlaporan/arrowleft.svg
+    - assets/icons/buatlaporan/folders.svg
+    - assets/icons/buatlaporan/pencil-simple.svg
+
   fonts:
     - family: CustomIconsBotNav
       fonts: 

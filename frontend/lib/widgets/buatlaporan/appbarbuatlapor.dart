@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:frontend/widgets/navigations/botnav.dart';
 
 class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {
@@ -7,6 +8,7 @@ class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      centerTitle: true,
       titleSpacing: 0,
       leading: IconButton(
         onPressed: () {
@@ -14,16 +16,26 @@ class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {
             context,
             MaterialPageRoute(builder: (context) => BottomNavigation()),
           );
-        }, icon: Icon(Icons.arrow_back,
-          weight: 0.5,
-          size: 30,
-        )
+        }, icon: SvgPicture.asset('assets/icons/buatlaporan/arrowleft.svg',
+        width: 32,
+        height: 32,)
       ),
-      title: const Text('Buat Laporan',
-        style: TextStyle(
-          fontFamily: 'instrument-Sans',
-          color: Colors.black,
-          fontWeight: FontWeight.w700
+      title: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.8,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text('Buat Laporan',
+              style: TextStyle(
+                fontFamily: 'instrument-Sans',
+                color: Colors.black,
+                fontWeight: FontWeight.w700
+              ),
+            ),
+        
+            SvgPicture.asset('assets/icons/buatlaporan/folders.svg')
+        
+          ],
         ),
       ),
       backgroundColor: Colors.white,
