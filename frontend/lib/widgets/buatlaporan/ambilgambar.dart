@@ -28,7 +28,7 @@ class AmbilGambar extends StatelessWidget {
                   height: 48,
                   child: FloatingActionButton(
                     onPressed: () {
-                    print('ambil gambar ditekan');
+                    null;
                   },
                   backgroundColor: Colors.white,
                   child: Padding(

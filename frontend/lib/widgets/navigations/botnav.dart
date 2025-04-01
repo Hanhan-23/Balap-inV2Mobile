@@ -53,6 +53,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       bottomNavigationBar: selectedPage == 0 ? 
       Container(
         decoration: BoxDecoration(
+          color: Colors.white,
           border: Border(
             top: BorderSide(
               color: Color.fromRGBO(202, 213, 226, 1),

@@ -19,20 +19,34 @@ class _BerandaPagesState extends State<BerandaPages> {
     headerWidget () {
       return Column(
             children: [
-              SizedBox(
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white
+                ),
                 height: MediaQuery.of(context).size.height * 0.01,
               ),
-              SizedBox(
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white
+                ),
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.35,
                 child: MapBeranda(),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 14, bottom: 24),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.18,
-                  child: AnalisisBeranda(),
+              Container(
+                decoration: BoxDecoration(
+                      color: Colors.white
+                    ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 14, bottom: 24),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white
+                    ),
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.18,
+                    child: AnalisisBeranda(),
+                  ),
                 ),
               ),
             ],
@@ -40,6 +54,7 @@ class _BerandaPagesState extends State<BerandaPages> {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: SizedBox(
           height: MediaQuery.of(context).size.height * 0.06,

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class Judulpengaduan extends StatefulWidget {
-  const Judulpengaduan({super.key});
+class DeskripsiPengaduan extends StatefulWidget {
+  const DeskripsiPengaduan({super.key});
 
   @override
-  State<Judulpengaduan> createState() => _JudulpengaduanState();
+  State<DeskripsiPengaduan> createState() => _DeskripsiPengaduanState();
 }
 
-class _JudulpengaduanState extends State<Judulpengaduan> {
+class _DeskripsiPengaduanState extends State<DeskripsiPengaduan> {
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Judul Pengaduan',
+        const Text('Deskripsi Pengaduan',
         style: TextStyle(
             color: Colors.black,
             fontFamily: 'Instrument-Sans',
@@ -24,11 +24,11 @@ class _JudulpengaduanState extends State<Judulpengaduan> {
         ),
         
         SizedBox(
-          height: 50,
+          height: 150,
           child: TextField(
             textAlignVertical: TextAlignVertical.top,
             expands: true,
-            maxLength: 40,
+            maxLength: 120,
             maxLines: null,
             style: TextStyle(
               fontFamily: 'Instrument-Sans',
@@ -38,7 +38,7 @@ class _JudulpengaduanState extends State<Judulpengaduan> {
             ),
             decoration: InputDecoration(
               counterText: '',
-              hintText: 'Jalan di simpang lampu merah berlubang',
+              hintText: 'Jalan berlubang penyebab kecelakaan motor kemarin sore dan sudah satu bulan belum diperbaiki sama sekali',
               hintStyle: TextStyle(
                 fontFamily: 'Instrument-Sans',
                 fontWeight: FontWeight.w400,

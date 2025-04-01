@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/buatlaporan/ambilgambar.dart';
 import 'package:frontend/widgets/buatlaporan/appbarbuatlapor.dart';
+import 'package:frontend/widgets/buatlaporan/deskripsipengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/judulpengaduan.dart';
 
 class BuatLaporanPages extends StatelessWidget {
@@ -19,7 +20,20 @@ class BuatLaporanPages extends StatelessWidget {
             children: [
               AmbilGambar(),
               SizedBox(height: 12,),
-              Judulpengaduan()        
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 1,
+                height: 76,
+                child: Judulpengaduan()
+              ),   
+
+              SizedBox(height: 14,),   
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 1,
+                height: 176,
+                child: DeskripsiPengaduan()
+              ),
+
+
             ],
           ),
         ),
