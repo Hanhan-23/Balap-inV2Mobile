@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/buatlaporan/ambilgambar.dart';
 import 'package:frontend/widgets/buatlaporan/appbarbuatlapor.dart';
+import 'package:frontend/widgets/buatlaporan/cuacapengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/deskripsipengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/judulpengaduan.dart';
+import 'package:frontend/widgets/buatlaporan/nilaikerusakan.dart';
 
 class BuatLaporanPages extends StatelessWidget {
   const BuatLaporanPages({super.key});
@@ -16,24 +18,39 @@ class BuatLaporanPages extends StatelessWidget {
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.92,
           child: ListView(
+            shrinkWrap: true,
             scrollDirection: Axis.vertical,
             children: [
               AmbilGambar(),
               SizedBox(height: 12,),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 1,
-                height: 76,
+                width: double.infinity,
+                height: 78,
                 child: Judulpengaduan()
               ),   
 
               SizedBox(height: 14,),   
               SizedBox(
-                width: MediaQuery.of(context).size.width * 1,
+                width: double.infinity,
                 height: 176,
                 child: DeskripsiPengaduan()
               ),
 
+              SizedBox(height: 14,), 
+              SizedBox(
+                width: double.infinity,
+                height: 78,
+                child: CuacaPengaduan()
+              ),
 
+              SizedBox(height: 14,),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: NilaiKerusakan()
+              ),
+
+              SizedBox(height: 40,)
             ],
           ),
         ),

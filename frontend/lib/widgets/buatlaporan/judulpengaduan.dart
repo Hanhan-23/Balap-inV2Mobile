@@ -24,7 +24,7 @@ class _JudulpengaduanState extends State<Judulpengaduan> {
         ),
         
         SizedBox(
-          height: 50,
+          height: 52,
           child: TextField(
             textAlignVertical: TextAlignVertical.top,
             expands: true,
