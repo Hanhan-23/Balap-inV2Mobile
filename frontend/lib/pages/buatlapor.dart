@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/buatlaporan/alamatpengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/ambilgambar.dart';
 import 'package:frontend/widgets/buatlaporan/appbarbuatlapor.dart';
+import 'package:frontend/widgets/buatlaporan/buttonpengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/cuacapengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/deskripsipengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/judulpengaduan.dart';
@@ -50,7 +52,20 @@ class BuatLaporanPages extends StatelessWidget {
                 child: NilaiKerusakan()
               ),
 
-              SizedBox(height: 40,)
+              SizedBox(height: 14,),
+              SizedBox(
+                width: double.infinity,
+                height: 94,
+                child: AlamatPengaduan()
+              ),
+
+              SizedBox(height: 40,),
+              SizedBox(
+                width: double.infinity,
+                height: 118,
+                child: ButtonPengaduan()
+              ),
+              SizedBox(height: 14,),
             ],
           ),
         ),
