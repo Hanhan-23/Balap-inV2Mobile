@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/pages/draflapor.dart';
 import 'package:frontend/widgets/navigations/botnav.dart';
 
 class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {
@@ -33,8 +34,17 @@ class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
         
-            SvgPicture.asset('assets/icons/buatlaporan/folders.svg')
-        
+            IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  backgroundColor: Colors.white,
+                  context: context, 
+                  builder: (context) => const DrafLaporScreen()
+                );
+              }, 
+              icon: SvgPicture.asset('assets/icons/buatlaporan/folders.svg')
+            )
+
           ],
         ),
       ),

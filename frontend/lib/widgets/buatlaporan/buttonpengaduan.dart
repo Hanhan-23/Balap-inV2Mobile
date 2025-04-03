@@ -16,6 +16,7 @@ class ButtonPengaduan extends StatelessWidget {
     buttonKirimDraft(colorButton, Color borderColor, String buttonText, Color textcolortext) {
       return TextButton(
             style: TextButton.styleFrom(
+              overlayColor: Colors.black,
               backgroundColor: colorButton,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(100),
