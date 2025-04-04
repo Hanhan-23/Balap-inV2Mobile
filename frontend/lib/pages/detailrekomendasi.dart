@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/widgets/berandawidgets/listlaporan/listlaporan.dart';
 import 'package:frontend/widgets/navigations/botnav.dart';
 import 'package:frontend/widgets/textwidget.dart';
 
-class DetailLaporanScreen extends StatelessWidget {
-  const DetailLaporanScreen({super.key});
+class DetailRekomendasiScreen extends StatelessWidget {
+  const DetailRekomendasiScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -36,7 +35,7 @@ class DetailLaporanScreen extends StatelessWidget {
                 Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 17),
+                      padding: EdgeInsets.only(bottom: 12),
                       child: SizedBox(
                         width: double.infinity,
                         child: TextWidget(text: 'Jalan Rusak',
@@ -48,49 +47,20 @@ class DetailLaporanScreen extends StatelessWidget {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.only(bottom: 12),
                       child: SizedBox(
                         width: double.infinity,
                         child: TextWidget(
                           text: 'Jalan di simpang lampu merah berlubang',
                           colortext: Colors.black,
                           fontsize: 20,
-                          fontweight: FontWeight.w500,
+                          fontweight: FontWeight.w600,
                         ),
                       ),
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: TextWidget(
-                          text: '12 Maret 2025 (sehari lalu)',
-                          colortext: Color.fromRGBO(98, 116, 142, 1),
-                          fontsize: 14,
-                          fontweight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 19),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        clipBehavior: Clip.hardEdge,
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height * 0.428,
-                        child: Image.asset(
-                          'assets/images/logo.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 18),
+                      padding: const EdgeInsets.only(bottom: 40),
                       child: SizedBox(
                         width: double.infinity,
                         child: Row(
@@ -134,29 +104,36 @@ class DetailLaporanScreen extends StatelessWidget {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 18),
+                      padding: const EdgeInsets.only(bottom: 16),
                       child: SizedBox(
                         width: double.infinity,
-                        child: Divider(color: Colors.black),
+                        child: TextWidget(
+                          text: 'Dokumentasi', 
+                          colortext: Colors.black, 
+                          fontsize: 20, 
+                          fontweight: FontWeight.w600
+                        ),
                       ),
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 18),
-                      child: TextWidget(
-                        text: 'Jalan berlubang penyebab kecelakaan motor kemarin sore dan sudah satu bulan belum diperbaiki sama sekali',
-                        colortext: Colors.black,
-                        fontsize: 14,
-                        fontweight: FontWeight.w400,
+                    SizedBox(
+                      width: double.infinity,
+                      child: Column(
+                        children: List.generate(5, (index) => Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: ListLaporan(),
+                        )),
                       ),
-                    ),
+                    )
+
                   ],
-                ),
+                )
               ],
-            ),
+            )
           ),
         ),
       ),
+
     );
   }
 }

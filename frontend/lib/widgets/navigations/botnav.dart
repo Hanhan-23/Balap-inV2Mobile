@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/pages/beranda.dart';
 import 'package:frontend/pages/buatlapor.dart';
 import 'package:frontend/pages/detaillaporan.dart';
+import 'package:frontend/pages/detailrekomendasi.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -19,6 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     const BerandaPages(),
     const BuatLaporanPages(),
     const DetailLaporanScreen(),
+    const DetailRekomendasiScreen(),
   ];
 
   List<TabItem> items = [
