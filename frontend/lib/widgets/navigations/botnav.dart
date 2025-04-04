@@ -2,6 +2,7 @@ import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/pages/beranda.dart';
 import 'package:frontend/pages/buatlapor.dart';
+import 'package:frontend/pages/detaillaporan.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -17,6 +18,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final List<Widget> pages = [
     const BerandaPages(),
     const BuatLaporanPages(),
+    const DetailLaporanScreen(),
   ];
 
   List<TabItem> items = [
@@ -50,7 +52,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           });
         },
       ),
-      bottomNavigationBar: selectedPage == 0 ? 
+      bottomNavigationBar: [0, 2, 3].contains(selectedPage) ? 
       Container(
         decoration: BoxDecoration(
           color: Colors.white,

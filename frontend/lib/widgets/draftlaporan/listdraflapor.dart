@@ -31,6 +31,7 @@ class _ListDrafLaporState extends State<ListDrafLapor> {
           children: [
             Container(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+              clipBehavior: Clip.hardEdge,
               width: 104,
               height: 104,
               child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),

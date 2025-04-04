@@ -36,6 +36,7 @@ class _ListLaporanState extends State<ListLaporan> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8)
               ),
+              clipBehavior: Clip.hardEdge,
               width: 104,
               height: 104,
               child: Image.asset('assets/images/logo.png',

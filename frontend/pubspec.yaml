@@ -74,6 +74,8 @@ flutter:
     - assets/icons/buatlaporan/folders.svg
     - assets/icons/buatlaporan/pencil-simple.svg
 
+    - assets/icons/map-pin.svg
+
   fonts:
     - family: CustomIconsBotNav
       fonts: 
