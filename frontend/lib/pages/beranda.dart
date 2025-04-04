@@ -64,22 +64,25 @@ class _BerandaPagesState extends State<BerandaPages> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.045),
-          child: DraggableHome(
-            centerTitle: true,
-            appBarColor: Colors.white,
-            headerExpandedHeight: 0.6,
-            title: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(75, 87, 103, 1),
-                borderRadius: BorderRadius.circular(20)
+          child: Scrollbar(
+            radius: Radius.circular(100),
+            child: DraggableHome(
+              centerTitle: true,
+              appBarColor: Colors.white,
+              headerExpandedHeight: 0.6,
+              title: Container(
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(75, 87, 103, 1),
+                  borderRadius: BorderRadius.circular(20)
+                ),
               ),
+              headerWidget: headerWidget(), 
+              body: [
+                ListLaporanBeranda()
+              ] 
             ),
-            headerWidget: headerWidget(), 
-            body: [
-              ListLaporanBeranda()
-            ] 
           )
         ),
       )

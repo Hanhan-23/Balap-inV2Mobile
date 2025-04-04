@@ -36,12 +36,17 @@ class DrafLaporScreen extends StatelessWidget {
             ),
 
             Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                children: [
-                  ListDrafLapor(),
-                ],
+              child: Scrollbar(
+                radius: Radius.circular(100),
+                child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  children: 
+                    List.generate(5, (index) => Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: ListDrafLapor(),
+                    )),
+                ),
               ),
             ),
             
