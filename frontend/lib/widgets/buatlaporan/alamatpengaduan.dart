@@ -52,7 +52,7 @@ class AlamatPengaduan extends StatelessWidget {
         ),
         
         SizedBox(
-          height: 68,
+          height: 72,
           child: TextField(
             readOnly: true,
             textAlignVertical: TextAlignVertical.top,

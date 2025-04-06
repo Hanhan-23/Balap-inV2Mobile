@@ -20,11 +20,14 @@ class _ListLaporanBerandaState extends State<ListLaporanBeranda> {
           child: HeaderListLapor(),
         ),
         SizedBox(height: 14,),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 1,
-          child: Column(
-            spacing: 8,
-            children: List.generate(5, (index) => ListLaporan()), 
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 1,
+            child: Column(
+              spacing: 8,
+              children: List.generate(5, (index) => ListLaporan()), 
+            ),
           ),
         )
       ],
