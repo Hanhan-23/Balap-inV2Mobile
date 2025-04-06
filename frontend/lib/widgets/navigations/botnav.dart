@@ -1,9 +1,11 @@
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/pages/beranda.dart';
+// import 'package:frontend/pages/beranda.dart';
 import 'package:frontend/pages/buatlapor.dart';
-import 'package:frontend/pages/detaillaporan.dart';
+// import 'package:frontend/pages/detaillaporan.dart';
 import 'package:frontend/pages/detailrekomendasi.dart';
+import 'package:frontend/pages/privacy_policy.dart';
+import 'package:frontend/pages/rekomendasi_urgensi.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -13,13 +15,13 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int selectedPage = 2;
+  int selectedPage = 0;
   final PageController _pageController = PageController();
 
   final List<Widget> pages = [
-    const BerandaPages(),
+    const PrivacyPolicyPagesPages(),
     const BuatLaporanPages(),
-    const DetailLaporanScreen(),
+    const RekomendasiUrgensiPages(),
     const DetailRekomendasiScreen(),
   ];
 
