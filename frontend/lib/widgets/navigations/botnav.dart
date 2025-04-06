@@ -13,7 +13,7 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int selectedPage = 0;
+  int selectedPage = 2;
   final PageController _pageController = PageController();
 
   final List<Widget> pages = [
