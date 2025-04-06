@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/pages/buatlapor.dart';
 // import 'package:frontend/pages/detaillaporan.dart';
 import 'package:frontend/pages/detailrekomendasi.dart';
-import 'package:frontend/pages/privacy_policy.dart';
+import 'package:frontend/pages/notifikasi.dart';
+// import 'package:frontend/pages/privacy_policy.dart';
 import 'package:frontend/pages/rekomendasi_urgensi.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -19,7 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final PageController _pageController = PageController();
 
   final List<Widget> pages = [
-    const PrivacyPolicyPagesPages(),
+    const NotifikasiPages(),
     const BuatLaporanPages(),
     const RekomendasiUrgensiPages(),
     const DetailRekomendasiScreen(),

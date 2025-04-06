@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'BALAP-IN',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Instrument-Sans',
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(17, 84, 237, 1)),
       ),
