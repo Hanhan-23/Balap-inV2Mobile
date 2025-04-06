@@ -29,7 +29,7 @@ class BuatLaporanPages extends StatelessWidget {
                 SizedBox(height: 12,),
                 SizedBox(
                   width: double.infinity,
-                  height: 78,
+                  height: 80,
                   child: Judulpengaduan()
                 ),   
             
@@ -57,7 +57,7 @@ class BuatLaporanPages extends StatelessWidget {
                 SizedBox(height: 14,),
                 SizedBox(
                   width: double.infinity,
-                  height: 94,
+                  height: 98,
                   child: AlamatPengaduan()
                 ),
             

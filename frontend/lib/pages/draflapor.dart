@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/draftlaporan/buttondeload.dart';
 import 'package:frontend/widgets/draftlaporan/listdraflapor.dart';
 
-class DrafLaporScreen extends StatelessWidget {
+class DrafLaporScreen extends StatefulWidget {
   const DrafLaporScreen({super.key});
+
+  @override
+  State<DrafLaporScreen> createState() => _DrafLaporScreenState();
+}
+
+class _DrafLaporScreenState extends State<DrafLaporScreen> {
+  int? selectedIndex;
+  Color colorSelected = Color.fromRGBO(17, 84, 237, 1);
+  Color colorNotSelected = Color.fromRGBO(202, 213, 226, 1);
+
+  void handleSelected(index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +26,7 @@ class DrafLaporScreen extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.92,
         child: Column(
-          spacing: 16,
+          spacing: 10,
           children: [
             Container(
               padding: EdgeInsets.only(top: 16),
@@ -26,33 +42,72 @@ class DrafLaporScreen extends StatelessWidget {
               ),
             ),
 
-            Text(
-              'Draf laporan anda',
-              style: TextStyle(
-                fontFamily: 'Instrument-Sans',
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            selectedIndex == null
+                ? textDrlaporanda()
+                : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    butdel(), 
+                    textDrlaporanda(), 
+                    butload()
+                  ],
+                ),
 
             Expanded(
               child: Scrollbar(
                 radius: Radius.circular(100),
-                child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  children: 
-                    List.generate(5, (index) => Padding(
+                child: ListView.builder(
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return Padding(
                       padding: const EdgeInsets.only(bottom: 8),
-                      child: ListDrafLapor(),
-                    )),
+                      child: GestureDetector(
+                        onTap: () {
+                          handleSelected(index);
+                        },
+                        child: ListDrafLapor(
+                          indexlaporan: index,
+                          colorSelected:
+                              index == selectedIndex
+                                  ? colorSelected
+                                  : colorNotSelected,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
-            
           ],
         ),
       ),
     );
   }
+}
+
+butload() {
+  return ButtonDeLoadDraft(
+    iconRequired: Icon(Icons.check),
+    colorButton: Colors.green,
+    onPress: null,
+  );
+}
+
+butdel() {
+  return ButtonDeLoadDraft(
+    iconRequired: Icon(Icons.delete),
+    colorButton: const Color.fromARGB(255, 207, 36, 24),
+    onPress: null,
+  );
+}
+
+textDrlaporanda() {
+  return Text(
+    'Draf laporan anda',
+    style: TextStyle(
+      fontFamily: 'Instrument-Sans',
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+    ),
+  );
 }

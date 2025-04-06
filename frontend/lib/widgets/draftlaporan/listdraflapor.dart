@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ListDrafLapor extends StatefulWidget {
-  const ListDrafLapor({super.key});
+  final int indexlaporan;
+  final Color colorSelected;
+  const ListDrafLapor({super.key, required this.indexlaporan, required this.colorSelected});
 
   @override
   State<ListDrafLapor> createState() => _ListDrafLaporState();
 }
 
 class _ListDrafLaporState extends State<ListDrafLapor> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +26,7 @@ class _ListDrafLaporState extends State<ListDrafLapor> {
         ],
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(width: 1, color: Color.fromRGBO(202, 213, 226, 1)),
+        border: Border.all(width: 1, color: widget.colorSelected),
       ),
       child: Padding(
         padding: const EdgeInsets.all(10),

@@ -37,9 +37,13 @@ class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {
             IconButton(
               onPressed: () {
                 showModalBottomSheet(
+                  isScrollControlled: true,
                   backgroundColor: Colors.white,
                   context: context, 
-                  builder: (context) => const DrafLaporScreen()
+                  builder: (context) => SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child: const DrafLaporScreen()
+                  )
                 );
               }, 
               icon: SvgPicture.asset('assets/icons/buatlaporan/folders.svg')
