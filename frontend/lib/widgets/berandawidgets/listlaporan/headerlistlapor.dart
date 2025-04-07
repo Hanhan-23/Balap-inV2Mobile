@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/widgets/berandawidgets/listlaporan/dialogfilterlap.dart';
 
 class HeaderListLapor extends StatefulWidget {
   const HeaderListLapor({super.key});
@@ -11,6 +12,14 @@ class HeaderListLapor extends StatefulWidget {
 class _HeaderListLaporState extends State<HeaderListLapor> {
   @override
   Widget build(BuildContext context) {
+    dialogFilter() {
+      return showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (context) => DialogFilterLaporan()
+      );
+    }
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -19,18 +28,25 @@ class _HeaderListLaporState extends State<HeaderListLapor> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Laporan',
+              Text(
+                'Laporan',
                 style: TextStyle(
                   fontFamily: 'Instrument-Sans',
                   fontSize: 20,
-                  fontWeight: FontWeight.w600
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(
-                height: 24,
-                width: 24,
-                child: SvgPicture.asset('assets/icons/beranda/filter.svg'),
-              )
+
+              GestureDetector(
+                onTap: () {
+                  dialogFilter();
+                },
+                child: SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: SvgPicture.asset('assets/icons/beranda/filter.svg'),
+                ),
+              ),
             ],
           ),
         ),
@@ -46,7 +62,7 @@ class _HeaderListLaporState extends State<HeaderListLapor> {
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
-            children: <TextSpan>[
+              children: <TextSpan>[
                 TextSpan(
                   text: 'Seminggu terakhir',
                   style: TextStyle(
@@ -55,12 +71,11 @@ class _HeaderListLaporState extends State<HeaderListLapor> {
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
-                )
-              ]
-            )
-          )
+                ),
+              ],
+            ),
+          ),
         ),
-
       ],
     );
   }

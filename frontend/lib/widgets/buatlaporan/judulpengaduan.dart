@@ -26,6 +26,7 @@ class _JudulpengaduanState extends State<Judulpengaduan> {
         SizedBox(
           height: 54,
           child: TextField(
+            cursorColor: Color(0XFF1154ED),
             textAlignVertical: TextAlignVertical.top,
             expands: true,
             maxLength: 40,

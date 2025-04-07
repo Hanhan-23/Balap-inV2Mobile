@@ -54,6 +54,7 @@ class AlamatPengaduan extends StatelessWidget {
         SizedBox(
           height: 72,
           child: TextField(
+            cursorColor: Color(0XFF1154ED),
             readOnly: true,
             textAlignVertical: TextAlignVertical.top,
             expands: true,

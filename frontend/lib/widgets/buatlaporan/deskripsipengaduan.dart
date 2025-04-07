@@ -26,6 +26,7 @@ class _DeskripsiPengaduanState extends State<DeskripsiPengaduan> {
         SizedBox(
           height: 150,
           child: TextField(
+            cursorColor: Color(0XFF1154ED),
             textAlignVertical: TextAlignVertical.top,
             expands: true,
             maxLength: 120,
