@@ -67,7 +67,14 @@ class PrivacyPolicyPages extends StatelessWidget {
                         {
                           
                         },
-                        child: const Text('Lanjut'),
+                        child: const Text(
+                          'Lanjut',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color:Colors.white,
+                          ),
+                        ),
                       ),
                     ),
 
