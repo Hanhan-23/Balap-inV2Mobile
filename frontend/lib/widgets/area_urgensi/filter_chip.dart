@@ -20,12 +20,13 @@ class _FilterUrgensiState extends State<FilterUrgensi> {
       physics: const BouncingScrollPhysics(),
       child: Row(
         children: [
-          // Tombol Urutkan Berdasarkan
+          // Tombol 'Urutkan Berdasarkan'
           TextButton.icon(
             style: TextButton.styleFrom(
               shape: StadiumBorder(
-                side: BorderSide(color: Colors.black, width: 1),
+                side: BorderSide(color: Color(0XFFCAD5E2), width: 1),
               ),
+              padding: EdgeInsets.only(top: 4, left: 8, bottom: 4, right: 8),
             ),
             onPressed: () {},
             icon: PhosphorIcon(
@@ -35,10 +36,12 @@ class _FilterUrgensiState extends State<FilterUrgensi> {
           ),
             label: Text(
               'Urutkan berdasarkan',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 12,
+              ),
             ),
           ),
-
           // Chips
           ChipsChoice<int>.single(
             value: selected,
@@ -50,11 +53,15 @@ class _FilterUrgensiState extends State<FilterUrgensi> {
             ),
             direction: Axis.horizontal,
             choiceStyle: C2ChipStyle.outlined(
+              color: Color(0XFFCAD5E2),
               borderRadius: BorderRadius.circular(20),
+              borderWidth: 1,
+              foregroundStyle: TextStyle(color: Colors.black),
               selectedStyle: C2ChipStyle.filled(
-                color: Colors.black,
+                color: Color(0XFF1154ED),
                 foregroundStyle: TextStyle(color: Colors.white),
               ),
+              
             ),
           ),
         ],

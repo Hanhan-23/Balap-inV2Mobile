@@ -11,7 +11,6 @@ class _ListLaporanState extends State<ListLaporan> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.195,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
