@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/navigations/botnav.dart';
+import 'package:frontend/pages/privacy_policy.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(17, 84, 237, 1)),
       ),
-      home: const BottomNavigation(),
+      home: const PrivacyPolicyPages(),
     );
   }
 }

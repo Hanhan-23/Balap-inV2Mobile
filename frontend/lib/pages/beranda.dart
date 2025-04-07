@@ -80,8 +80,8 @@ class _BerandaPagesState extends State<BerandaPages> {
               ),
               headerWidget: headerWidget(), 
               body: [
-                ListLaporanBeranda()
-              ] 
+                ListLaporanBeranda(),
+              ],
             ),
           )
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/cara_melapor/informasi_umum/card_list.dart';
+import 'package:frontend/pages/privacy_policy.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:frontend/pages/cara_melapor/langkah_melapor.dart';
+import 'package:frontend/widgets/cara_melapor/informasi_umum/card_list.dart';
 import 'package:frontend/widgets/kustom_widget/gap_y.dart';
 
 class InformasiUmumPages extends StatelessWidget {
@@ -17,7 +19,12 @@ class InformasiUmumPages extends StatelessWidget {
             color: Colors.black,
             size: 30.0,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => PrivacyPolicyPages(),), 
+            );
+          },
         ),
       ),
       body: SafeArea(
@@ -84,7 +91,10 @@ class InformasiUmumPages extends StatelessWidget {
                   ),
                   onPressed: ()
                   {
-                    
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => LangkahMelaporPages(),), 
+                    );
                   },
                   child: const Text(
                     'Lanjut',

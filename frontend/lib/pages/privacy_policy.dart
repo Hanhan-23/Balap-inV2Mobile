@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/privacy_policy/checkbox_widget.dart';
 import 'package:frontend/widgets/kustom_widget/gap_y.dart';
+import 'package:frontend/pages/cara_melapor/informasi_umum.dart';
 
 class PrivacyPolicyPages extends StatelessWidget {
   const PrivacyPolicyPages({super.key});
@@ -65,7 +66,10 @@ class PrivacyPolicyPages extends StatelessWidget {
                         ),
                         onPressed: ()
                         {
-                          
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => InformasiUmumPages(),), 
+                          );
                         },
                         child: const Text(
                           'Lanjut',

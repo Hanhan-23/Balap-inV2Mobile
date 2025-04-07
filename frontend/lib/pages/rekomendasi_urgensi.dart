@@ -19,7 +19,14 @@ class RekomendasiUrgensiPages extends StatelessWidget {
           ),
           onPressed: () {},
         ),
-        title: const Text('Area Urgensi'),
+        title: const Text(
+          'Area Urgensi',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: Padding(padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.045),  
       child: Column(

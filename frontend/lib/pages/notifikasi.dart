@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/navigations/botnav.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:frontend/widgets/Notifikasi/card_notifikasi.dart';
 import 'package:frontend/widgets/kustom_widget/gap_y.dart';
@@ -17,13 +18,19 @@ class NotifikasiPages extends StatelessWidget {
             color: Colors.black,
             size: 30.0,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => BottomNavigation(),), 
+            );
+          },
         ),
         title: const Text(
           'Notifikasi',
           style: TextStyle(
             fontSize: 24,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
           ),
         ),
       ),

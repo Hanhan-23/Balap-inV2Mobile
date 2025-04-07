@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/cara_melapor/langkah_pelaporan/card_tutorial_list.dart';
+import 'package:frontend/pages/cara_melapor/informasi_umum.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:frontend/widgets/kustom_widget/gap_y.dart';
+import 'package:frontend/widgets/cara_melapor/langkah_pelaporan/card_tutorial_list.dart';
+import 'package:frontend/widgets/navigations/botnav.dart';
 
 class LangkahMelaporPages extends StatelessWidget {
   const LangkahMelaporPages ({super.key});
@@ -17,7 +19,12 @@ class LangkahMelaporPages extends StatelessWidget {
             color: Colors.black,
             size: 30.0,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => InformasiUmumPages(),), 
+            );
+          },
         ),
       ),
       body: SafeArea(
@@ -62,7 +69,12 @@ class LangkahMelaporPages extends StatelessWidget {
                   style: FilledButton.styleFrom(
                     backgroundColor: Color(0XFF1154ED),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => BottomNavigation(),), 
+                    );
+                  },
                   child: const Text(
                     'Buat Laporan',
                     style: TextStyle(
