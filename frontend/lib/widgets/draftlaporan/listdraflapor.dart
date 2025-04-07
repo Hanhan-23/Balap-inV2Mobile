@@ -14,7 +14,6 @@ class _ListDrafLaporState extends State<ListDrafLapor> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.195,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(

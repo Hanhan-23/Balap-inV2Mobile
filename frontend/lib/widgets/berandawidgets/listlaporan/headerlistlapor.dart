@@ -14,6 +14,7 @@ class _HeaderListLaporState extends State<HeaderListLapor> {
   Widget build(BuildContext context) {
     dialogFilter() {
       return showModalBottomSheet(
+        backgroundColor: Colors.white,
         isScrollControlled: true,
         context: context,
         builder: (context) => DialogFilterLaporan()

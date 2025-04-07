@@ -10,7 +10,11 @@ class ButtonDeLoadDraft extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(Color.fromRGBO(202, 213, 226, 100))
+        side: WidgetStatePropertyAll(
+          BorderSide(
+            color: Color.fromRGBO(219, 220, 221, 1)        )
+        ),
+        backgroundColor: WidgetStatePropertyAll(Colors.white)
       ),
       color: colorButton,
       icon: iconRequired,
