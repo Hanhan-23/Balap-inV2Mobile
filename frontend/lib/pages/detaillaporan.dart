@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/widgets/navigations/botnav.dart';
 import 'package:frontend/widgets/textwidget.dart';
 
 class DetailLaporanScreen extends StatelessWidget {
-  const DetailLaporanScreen({super.key});
+  final int index;
+  const DetailLaporanScreen({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    int indexDetail = index;
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => BottomNavigation()),
-            );
+            Navigator.pop(context);
           },
           icon: SvgPicture.asset(
             'assets/icons/buatlaporan/arrowleft.svg',
@@ -52,7 +50,7 @@ class DetailLaporanScreen extends StatelessWidget {
                       child: SizedBox(
                         width: double.infinity,
                         child: TextWidget(
-                          text: 'Jalan di simpang lampu merah berlubang',
+                          text: '$indexDetail Jalan di simpang lampu merah berlubang',
                           colortext: Colors.black,
                           fontsize: 20,
                           fontweight: FontWeight.w500,

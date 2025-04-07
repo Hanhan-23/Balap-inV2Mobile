@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/detaillaporan.dart';
 import 'package:frontend/widgets/berandawidgets/listlaporan/headerlistlapor.dart';
 import 'package:frontend/widgets/berandawidgets/listlaporan/listlaporan.dart';
 
@@ -26,7 +27,12 @@ class _ListLaporanBerandaState extends State<ListLaporanBeranda> {
             width: MediaQuery.of(context).size.width * 1,
             child: Column(
               spacing: 8,
-              children: List.generate(5, (index) => ListLaporan()), 
+              children: List.generate(5, (index) => InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DetailLaporanScreen(index: index)));
+                },
+                child: ListLaporan()
+              )), 
             ),
           ),
         )

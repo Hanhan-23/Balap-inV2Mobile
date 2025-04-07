@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/widgets/berandawidgets/listlaporan/listlaporan.dart';
-import 'package:frontend/widgets/navigations/botnav.dart';
 import 'package:frontend/widgets/textwidget.dart';
 
 class DetailRekomendasiScreen extends StatelessWidget {
-  const DetailRekomendasiScreen({super.key});
+  final int index;
+  const DetailRekomendasiScreen({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +13,7 @@ class DetailRekomendasiScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => BottomNavigation()),
-            );
+            Navigator.pop(context);
           },
           icon: SvgPicture.asset(
             'assets/icons/buatlaporan/arrowleft.svg',
@@ -51,7 +48,7 @@ class DetailRekomendasiScreen extends StatelessWidget {
                       child: SizedBox(
                         width: double.infinity,
                         child: TextWidget(
-                          text: 'Jalan di simpang lampu merah berlubang',
+                          text: '$index Jalan di simpang lampu merah berlubang',
                           colortext: Colors.black,
                           fontsize: 20,
                           fontweight: FontWeight.w600,

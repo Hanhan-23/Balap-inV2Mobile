@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/area_urgensi/card_urgensi.dart';
+import 'package:frontend/widgets/navigations/botnav.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:frontend/widgets/area_urgensi/filter_chip.dart';
 
@@ -17,7 +18,9 @@ class RekomendasiUrgensiPages extends StatelessWidget {
             color: Colors.black,
             size: 30.0,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavigation()));
+          },
         ),
         title: const Text(
           'Area Urgensi',
@@ -41,7 +44,7 @@ class RekomendasiUrgensiPages extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
-                  child: CardUrgensi(), // komponen kartu kamu
+                  child: CardUrgensi(indexrekomen: index), // komponen kartu kamu
                 );
               },
             ),)
