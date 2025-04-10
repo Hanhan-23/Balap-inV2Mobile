@@ -1,0 +1,34 @@
+# ====================
+# PYTHON / DJANGO
+# ====================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual envs
+venv/
+.venv/
+env/
+.env/
+*.env
+
+# Django specific
+*.log
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+*.pot
+*.pyc
+
+# VSCode / PyCharm
+.vscode/
+.idea/
+
+# OS-generated
+.DS_Store
+Thumbs.db
+
+# Jupyter (opsional)
+.ipynb_checkpoints/
