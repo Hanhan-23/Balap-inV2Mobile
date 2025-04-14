@@ -1,5 +1,6 @@
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/coach_mark/beranda_coachmark.dart';
 import 'package:frontend/pages/beranda.dart';
 import 'package:frontend/pages/buatlapor.dart';
 // import 'package:frontend/pages/cara_melapor/langkah_melapor.dart';
@@ -18,6 +19,7 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
+  GlobalKey keyCaraMelapor = GlobalKey();
   int selectedPage = 0;
   final PageController _pageController = PageController();
 
@@ -48,6 +50,15 @@ class _BottomNavigationState extends State<BottomNavigation> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showChoachMarkBeranda(context, [keyCaraMelapor]);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
@@ -60,39 +71,58 @@ class _BottomNavigationState extends State<BottomNavigation> {
         },
       ),
       bottomNavigationBar: [0, 2, 3].contains(selectedPage) ? 
-      Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border(
-            top: BorderSide(
-              color: Color.fromRGBO(202, 213, 226, 1),
-              width: 1,
+      Stack(
+        children: [
+          Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border(
+              top: BorderSide(
+                color: Color.fromRGBO(202, 213, 226, 1),
+                width: 1,
+              ),
+            ),
+          ),
+          child: Container(
+            margin: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.045),
+            child: BottomBarDefault(
+              animated: true,
+              titleStyle: TextStyle(
+                fontFamily: 'Instrument-Sans',
+                fontSize: 10,
+                fontWeight: FontWeight.w400,
+              ),
+              colorSelected: Color.fromRGBO(17, 84, 237, 1),
+              color: Color.fromRGBO(75, 87, 103, 1),
+              backgroundColor: Colors.white,
+              items: items,
+              indexSelected: selectedPage,
+              onTap: (int index) {
+                _pageController.jumpToPage(index);
+                setState(() {
+                  selectedPage = index;
+                });
+              },
             ),
           ),
         ),
-        child: Container(
-          margin: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.045),
-          child: BottomBarDefault(
-            animated: true,
-            titleStyle: TextStyle(
-              fontFamily: 'Instrument-Sans',
-              fontSize: 10,
-              fontWeight: FontWeight.w400,
+
+        Positioned(
+            bottom: 8,
+            left: MediaQuery.of(context).size.width * 0.045 + 
+                (MediaQuery.of(context).size.width * 0.91 / 4 * 3), 
+            child: IgnorePointer(
+              child: Container(
+                key: keyCaraMelapor, 
+                width: MediaQuery.of(context).size.width * 0.91 / 4,
+                height: 56,
+                color: Colors.transparent, 
+              ),
             ),
-            colorSelected: Color.fromRGBO(17, 84, 237, 1),
-            color: Color.fromRGBO(75, 87, 103, 1),
-            backgroundColor: Colors.white,
-            items: items,
-            indexSelected: selectedPage,
-            onTap: (int index) {
-              _pageController.jumpToPage(index);
-              setState(() {
-                selectedPage = index;
-              });
-            },
           ),
-        ),
+
+        ],
       )
       : null,
     );
