@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/pages/privacy_policy.dart';
+import 'package:frontend/widgets/navigations/botnav.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:frontend/pages/cara_melapor/langkah_melapor.dart';
 import 'package:frontend/widgets/cara_melapor/informasi_umum/card_list.dart';
@@ -20,10 +20,7 @@ class InformasiUmumPages extends StatelessWidget {
             size: 30.0,
           ),
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => PrivacyPolicyPages(),), 
-            );
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavigation()));
           },
         ),
       ),

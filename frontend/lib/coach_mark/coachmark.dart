@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 
-void showChoachMarkBeranda(BuildContext context, List<GlobalKey> targetKeys) {
+void showChoachMark(BuildContext context, List<GlobalKey> targetKeys, String pesan, VoidCallback onclick) {
    List<TargetFocus> targets = [
     TargetFocus(
       identify: "keyCaraMelapor",
@@ -22,7 +22,7 @@ void showChoachMarkBeranda(BuildContext context, List<GlobalKey> targetKeys) {
                       borderRadius: BorderRadius.circular(10)
                     ),
                     child: Text(
-                      "Ayo lihat bagaimana cara melapor disini",
+                      pesan,
                       style: TextStyle(
                         fontFamily: 'Instrument-Sans',
                         fontWeight: FontWeight.w600,
@@ -39,12 +39,13 @@ void showChoachMarkBeranda(BuildContext context, List<GlobalKey> targetKeys) {
   ];
  
   TutorialCoachMark(
-      onClickTarget: (p0) {
-        null;
+      hideSkip: true,
+      textSkip: '',
+      onClickTarget: (target) {
+        onclick();
       },
       targets: targets,
       colorShadow: Color.fromRGBO(202, 213, 226, 100),
-      textSkip: "SKIP",
       paddingFocus: 5,
       opacityShadow: 0.8,
     ).show(context: context);

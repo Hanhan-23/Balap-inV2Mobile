@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/coach_mark/callbackcoachmark.dart';
+import 'package:frontend/pages/buatlapor.dart';
 import 'package:frontend/pages/cara_melapor/informasi_umum.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:frontend/widgets/kustom_widget/gap_y.dart';
 import 'package:frontend/widgets/cara_melapor/langkah_pelaporan/card_tutorial_list.dart';
-import 'package:frontend/widgets/navigations/botnav.dart';
 
 class LangkahMelaporPages extends StatelessWidget {
   const LangkahMelaporPages ({super.key});
@@ -20,10 +21,7 @@ class LangkahMelaporPages extends StatelessWidget {
             size: 30.0,
           ),
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => InformasiUmumPages(),), 
-            );
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => InformasiUmumPages()));
           },
         ),
       ),
@@ -70,9 +68,10 @@ class LangkahMelaporPages extends StatelessWidget {
                     backgroundColor: Color(0XFF1154ED),
                   ),
                   onPressed: () {
+                    initCoachPenggunaLama();
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => BottomNavigation(),), 
+                      MaterialPageRoute(builder: (context) => BuatLaporanPages(),), 
                     );
                   },
                   child: const Text(

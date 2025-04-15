@@ -1,14 +1,10 @@
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/coach_mark/beranda_coachmark.dart';
+import 'package:frontend/coach_mark/callbackcoachmark.dart';
+import 'package:frontend/coach_mark/coachmark.dart';
 import 'package:frontend/pages/beranda.dart';
 import 'package:frontend/pages/buatlapor.dart';
-// import 'package:frontend/pages/cara_melapor/langkah_melapor.dart';
 import 'package:frontend/pages/cara_melapor/informasi_umum.dart';
-// import 'package:frontend/pages/detaillaporan.dart';
-// import 'package:frontend/pages/detailrekomendasi.dart';
-// import 'package:frontend/pages/notifikasi.dart';
-// import 'package:frontend/pages/privacy_policy.dart';
 import 'package:frontend/pages/rekomendasi_urgensi.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -53,8 +49,20 @@ class _BottomNavigationState extends State<BottomNavigation> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      showChoachMarkBeranda(context, [keyCaraMelapor]);
+    final cekcoachmark = checkCoachmarkPengguna();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (await cekcoachmark == true && mounted) {
+        showChoachMark(
+        context, [keyCaraMelapor], 
+        'Ayo lihat bagaimana cara melapor disini', 
+        () {
+          Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => InformasiUmumPages())
+          );
+        }
+      );
+      }
     });
   }
 
