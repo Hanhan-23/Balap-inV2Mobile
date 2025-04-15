@@ -81,6 +81,23 @@ class _DialogFilterLaporanState extends State<DialogFilterLaporan> {
                       widgetFilterChip('Sebulan Terakhir' ,1),
                       widgetFilterChip('Setahun Terakhir' ,2),
                       widgetFilterChip('Semua Periode' ,3),
+                      SizedBox(
+                        width: double.infinity,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            overlayColor: Colors.black,
+                            backgroundColor: Color.fromRGBO(17, 84, 237, 1)
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context, selectedChipIndex);
+                          }, 
+                          child: Text('Terapkan', style: TextStyle(
+                            fontFamily: 'Instrument-Sans',
+                            fontStyle: FontStyle.normal,
+                            color: Colors.white
+                          ),)
+                        ),
+                      )
                     ],
                   ),
                 )

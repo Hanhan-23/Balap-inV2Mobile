@@ -10,15 +10,30 @@ class HeaderListLapor extends StatefulWidget {
 }
 
 class _HeaderListLaporState extends State<HeaderListLapor> {
+  String berdasarkan = 'Seminggu Terakhir';
   @override
   Widget build(BuildContext context) {
-    dialogFilter() {
-      return showModalBottomSheet(
+    dialogFilter() async {
+      final filterBerdasarkan = await showModalBottomSheet(
         backgroundColor: Colors.white,
         isScrollControlled: true,
         context: context,
-        builder: (context) => DialogFilterLaporan()
+        builder: (context) => DialogFilterLaporan(),
       );
+
+      if (filterBerdasarkan != null) {
+        setState(() {
+          if (filterBerdasarkan == 0) {
+            berdasarkan = 'Seminggu Terakhir';
+          } else if (filterBerdasarkan == 1) {
+            berdasarkan = 'Sebulan Terakhir';
+          } else if (filterBerdasarkan == 2) {
+            berdasarkan = 'Setahun Terakhir';
+          } else if (filterBerdasarkan == 3) {
+            berdasarkan = 'Semua Periode';
+          }
+        });
+      }
     }
 
     return Column(
@@ -54,10 +69,10 @@ class _HeaderListLaporState extends State<HeaderListLapor> {
 
         SizedBox(
           width: MediaQuery.of(context).size.width * 1,
-          child: const Text.rich(
+          child: Text.rich(
             TextSpan(
               text: 'Diurutkan berdasarkan: ',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color.fromRGBO(98, 116, 142, 1),
                 fontFamily: 'Instrument-Sans',
                 fontSize: 14,
@@ -65,8 +80,8 @@ class _HeaderListLaporState extends State<HeaderListLapor> {
               ),
               children: <TextSpan>[
                 TextSpan(
-                  text: 'Seminggu terakhir',
-                  style: TextStyle(
+                  text: berdasarkan,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontFamily: 'Instrument-Sans',
                     fontSize: 14,
