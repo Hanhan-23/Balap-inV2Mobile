@@ -37,7 +37,7 @@ class AppBarBeranda extends StatelessWidget {
               twoBar('assets/icons/beranda/search.svg', null),
               twoBar(
                 'assets/icons/beranda/notification.svg', () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => NotifikasiPages(),), 
                 );
