@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Judulpengaduan extends StatefulWidget {
   const Judulpengaduan({super.key});
@@ -26,6 +27,9 @@ class _JudulpengaduanState extends State<Judulpengaduan> {
         SizedBox(
           height: 54,
           child: TextField(
+            inputFormatters: [
+              FilteringTextInputFormatter.deny(RegExp(r'[\n\r]'))
+            ],
             cursorColor: Color(0XFF1154ED),
             textAlignVertical: TextAlignVertical.top,
             expands: true,

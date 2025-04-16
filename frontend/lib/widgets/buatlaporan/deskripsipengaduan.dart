@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DeskripsiPengaduan extends StatefulWidget {
   const DeskripsiPengaduan({super.key});
@@ -26,6 +27,9 @@ class _DeskripsiPengaduanState extends State<DeskripsiPengaduan> {
         SizedBox(
           height: 150,
           child: TextField(
+            inputFormatters: [
+              FilteringTextInputFormatter.deny(RegExp(r'[\n\r]'))
+            ],
             cursorColor: Color(0XFF1154ED),
             textAlignVertical: TextAlignVertical.top,
             expands: true,
