@@ -24,7 +24,7 @@ class _MapBerandaState extends State<MapBeranda> {
             backgroundColor: WidgetStatePropertyAll(Colors.white),
           ),
           onPressed: () {
-            Navigator.pushReplacement(context, 
+            Navigator.push(context, 
             MaterialPageRoute(builder: (context) => PetaPersebaran()));
           },
           icon: SvgPicture.asset('assets/icons/beranda/fullmap.svg'),

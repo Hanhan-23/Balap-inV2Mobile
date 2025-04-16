@@ -17,7 +17,6 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   GlobalKey keyCaraMelapor = GlobalKey();
   int selectedPage = 0;
-  final PageController _pageController = PageController();
 
   final List<Widget> pages = [
     const BerandaPages(),
@@ -69,14 +68,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: _pageController,
+      body: IndexedStack(
+        index: selectedPage,
         children: pages,
-        onPageChanged: (index) {
-          setState(() {
-            selectedPage = index;
-          });
-        },
       ),
       bottomNavigationBar: [0, 2, 3].contains(selectedPage) ? 
       Stack(
@@ -107,7 +101,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
               items: items,
               indexSelected: selectedPage,
               onTap: (int index) {
-                _pageController.jumpToPage(index);
                 setState(() {
                   selectedPage = index;
                 });

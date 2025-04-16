@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:frontend/widgets/navigations/botnav.dart';
 
 class PetaPersebaran extends StatelessWidget {
   const PetaPersebaran({super.key});
@@ -13,10 +12,7 @@ class PetaPersebaran extends StatelessWidget {
         titleSpacing: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => BottomNavigation()),
-            );
+            Navigator.pop(context);
           },
           icon: SvgPicture.asset(
             'assets/icons/buatlaporan/arrowleft.svg',
