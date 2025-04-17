@@ -12,10 +12,13 @@ class BerandaPages extends StatefulWidget {
   State<BerandaPages> createState() => _BerandaPagesState();
 }
 
-class _BerandaPagesState extends State<BerandaPages> {
+class _BerandaPagesState extends State<BerandaPages> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true; 
+
   @override
   Widget build(BuildContext context) {
-
+    super.build(context);
     headerWidget () {
       return Column(
             children: [

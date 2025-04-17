@@ -17,6 +17,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   GlobalKey keyCaraMelapor = GlobalKey();
   int selectedPage = 0;
+  final PageController _controller = PageController();
 
   final List<Widget> pages = [
     const BerandaPages(),
@@ -44,6 +45,15 @@ class _BottomNavigationState extends State<BottomNavigation> {
     ),
   ];
 
+    void onTap(int index) {
+    if (selectedPage != index) {
+      _controller.jumpToPage(index);
+      setState(() {
+        selectedPage = index;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -68,8 +78,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: selectedPage,
+      body: PageView(
+        controller: _controller,
+        onPageChanged: onTap,
         children: pages,
       ),
       bottomNavigationBar: [0, 2, 3].contains(selectedPage) ? 
@@ -100,11 +111,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               backgroundColor: Colors.white,
               items: items,
               indexSelected: selectedPage,
-              onTap: (int index) {
-                setState(() {
-                  selectedPage = index;
-                });
-              },
+              onTap: onTap
             ),
           ),
         ),

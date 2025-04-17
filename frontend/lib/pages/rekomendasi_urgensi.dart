@@ -4,11 +4,20 @@ import 'package:frontend/widgets/navigations/botnav.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:frontend/widgets/area_urgensi/filter_chip.dart';
 
-class RekomendasiUrgensiPages extends StatelessWidget {
+class RekomendasiUrgensiPages extends StatefulWidget{
   const RekomendasiUrgensiPages({super.key});
 
   @override
+  State<RekomendasiUrgensiPages> createState() => _RekomendasiUrgensiPagesState();
+}
+
+class _RekomendasiUrgensiPagesState extends State<RekomendasiUrgensiPages> with AutomaticKeepAliveClientMixin{
+  @override
+  bool get wantKeepAlive => true; 
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

@@ -3,8 +3,20 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:frontend/widgets/Notifikasi/card_notifikasi.dart';
 import 'package:frontend/widgets/kustom_widget/gap_y.dart';
 
-class NotifikasiPages extends StatelessWidget {
+class NotifikasiPages extends StatefulWidget {
   const NotifikasiPages({super.key});
+
+  @override
+  State<NotifikasiPages> createState() => _NotifikasiPagesState();
+}
+
+class _NotifikasiPagesState extends State<NotifikasiPages> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('ini adalah halaman notiifkasi');
+  }
 
   @override
   Widget build(BuildContext context) {

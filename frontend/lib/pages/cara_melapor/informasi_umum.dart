@@ -5,11 +5,20 @@ import 'package:frontend/pages/cara_melapor/langkah_melapor.dart';
 import 'package:frontend/widgets/cara_melapor/informasi_umum/card_list.dart';
 import 'package:frontend/widgets/kustom_widget/gap_y.dart';
 
-class InformasiUmumPages extends StatelessWidget {
+class InformasiUmumPages extends StatefulWidget {
   const InformasiUmumPages ({super.key});
 
   @override
+  State<InformasiUmumPages> createState() => _InformasiUmumPagesState();
+}
+
+class _InformasiUmumPagesState extends State<InformasiUmumPages> with AutomaticKeepAliveClientMixin{
+  @override
+  bool get wantKeepAlive => true; 
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

@@ -8,11 +8,20 @@ import 'package:frontend/widgets/buatlaporan/deskripsipengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/judulpengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/nilaikerusakan.dart';
 
-class BuatLaporanPages extends StatelessWidget {
+class BuatLaporanPages extends StatefulWidget {
   const BuatLaporanPages({super.key});
 
   @override
+  State<BuatLaporanPages> createState() => _BuatLaporanPagesState();
+}
+
+class _BuatLaporanPagesState extends State<BuatLaporanPages> with AutomaticKeepAliveClientMixin{
+  @override
+  bool get wantKeepAlive => true; 
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBarBuatLapor(),
