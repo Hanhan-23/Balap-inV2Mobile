@@ -4,26 +4,43 @@ import 'package:flutter/material.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 
-void choachMarkBuatLapor(BuildContext context, List<GlobalKey> targetKeys, List<String> pesan, VoidCallback onclick) {
+void choachMarkBuatLapor(BuildContext context, List<GlobalKey> targetKeys, List<String> pesan, VoidCallback onclick, ScrollController scrollController) {
    
-   
+  double scrollValue = 30.0;
+
+  Future<void> addScrollValue(double maxScroll) async {
+    if (scrollValue + 80.0 <= maxScroll) {
+      scrollValue += 80.0;
+    } else {
+      scrollValue = maxScroll;
+    }
+  }
+
    List<TargetFocus> targets = [
-    targetFocusOn(targetKeys[0], pesan[0]),
-    targetFocusOn(targetKeys[1], pesan[1]),
-    targetFocusOn(targetKeys[2], pesan[2]),
-    targetFocusOn(targetKeys[3], pesan[3]),
-    targetFocusOn(targetKeys[4], pesan[4]),
-    targetFocusOn(targetKeys[5], pesan[5]),
-    targetFocusOn(targetKeys[6], pesan[6]),
-    targetFocusOn(targetKeys[7], pesan[7]),
-    targetFocusOn(targetKeys[8], pesan[8]),
+    targetFocusOn(targetKeys[0], pesan[0], ContentAlign.bottom),
+    targetFocusOn(targetKeys[1], pesan[1], ContentAlign.top),
+    targetFocusOn(targetKeys[2], pesan[2], ContentAlign.top),
+    targetFocusOn(targetKeys[3], pesan[3], ContentAlign.top),
+    targetFocusOn(targetKeys[4], pesan[4], ContentAlign.top),
+    targetFocusOn(targetKeys[5], pesan[5], ContentAlign.top),
+    targetFocusOn(targetKeys[6], pesan[6], ContentAlign.top),
+    targetFocusOn(targetKeys[7], pesan[7], ContentAlign.top),
+    targetFocusOn(targetKeys[8], pesan[8], ContentAlign.bottom),
   ];
  
   TutorialCoachMark(
       hideSkip: true,
       textSkip: '',
-      onClickTarget: (target) {
+      onClickTarget: (target) async {
         onclick();
+        double maxScroll = scrollController.position.maxScrollExtent;
+        if (scrollValue <= maxScroll) {
+          scrollController.animateTo(scrollValue, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+          await addScrollValue(maxScroll);
+          if (scrollValue > maxScroll) {
+            scrollValue = maxScroll; 
+          }
+        }
       },
       targets: targets,
       colorShadow: Color.fromRGBO(202, 213, 226, 100),
@@ -32,13 +49,15 @@ void choachMarkBuatLapor(BuildContext context, List<GlobalKey> targetKeys, List<
     ).show(context: context);
 }
 
-dynamic targetFocusOn(GlobalKey targetKeysOn, String pesanOn) {
+dynamic targetFocusOn(GlobalKey targetKeysOn, String pesanOn, ContentAlign contentalign) {
     return TargetFocus(
+      radius: 20,
+      shape: ShapeLightFocus.RRect,
       identify: "$targetKeysOn",
       keyTarget: targetKeysOn,
       contents: [
         TargetContent(
-            align: ContentAlign.top,
+            align: contentalign,
             builder: (context, controller) {
               return Column(
                 mainAxisSize: MainAxisSize.min,

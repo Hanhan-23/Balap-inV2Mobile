@@ -12,13 +12,6 @@ class NotifikasiPages extends StatefulWidget {
 
 class _NotifikasiPagesState extends State<NotifikasiPages> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    print('ini adalah halaman notiifkasi');
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

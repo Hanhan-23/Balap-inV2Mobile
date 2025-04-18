@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ButtonPengaduan extends StatelessWidget {
-  const ButtonPengaduan({super.key});
+  final dynamic keyKirim;
+  final dynamic keyDraft;
+  const ButtonPengaduan({super.key, required this.keyKirim, required this.keyDraft});
   
   @override
   Widget build(BuildContext context) {
@@ -42,12 +44,14 @@ class ButtonPengaduan extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
+          key: keyKirim,
           width: double.infinity,
           height: 52,
           child: buttonKirimDraft(colorKirim, colorKirim, textKirim, textColorKirim)
         ),
 
         SizedBox(
+          key: keyDraft,
           width: double.infinity,
           height: 52,
           child: buttonKirimDraft(colorDraft, borderColor, textDraft, textColorDraft)

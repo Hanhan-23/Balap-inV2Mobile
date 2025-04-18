@@ -4,7 +4,8 @@ import 'package:frontend/pages/draflapor.dart';
 import 'package:frontend/widgets/navigations/botnav.dart';
 
 class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarBuatLapor({super.key});
+  final dynamic keyDialogDraft;
+  const AppBarBuatLapor({super.key, required this.keyDialogDraft});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,7 @@ class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {
             ),
         
             IconButton(
+              key: keyDialogDraft,
               onPressed: () {
                 showModalBottomSheet(
                   isScrollControlled: true,
