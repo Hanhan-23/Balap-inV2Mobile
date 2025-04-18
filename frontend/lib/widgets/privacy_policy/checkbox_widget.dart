@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CheckboxPrivacyPolicy extends StatefulWidget {
-  const CheckboxPrivacyPolicy({super.key});
+  final ValueChanged<bool> onChanged;
+  const CheckboxPrivacyPolicy({super.key, required this.onChanged});
 
   @override
   State<CheckboxPrivacyPolicy> createState () => _CheckboxPrivacyPolicyState();
 }
 
 class _CheckboxPrivacyPolicyState extends State<CheckboxPrivacyPolicy> {
-  bool isChecked = true;
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class _CheckboxPrivacyPolicyState extends State<CheckboxPrivacyPolicy> {
         setState(() {
           isChecked = value!;
         });
+        widget.onChanged(value!); 
       },
       subtitle: const Text(
         'Lorem ipsum dolor sit amet consectetur. Eu blandit leo etiam aliquam posuere ullamcorper. Habitasse quis sollicitudin.',
