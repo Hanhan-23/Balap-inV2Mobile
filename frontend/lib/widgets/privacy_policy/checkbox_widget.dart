@@ -33,7 +33,7 @@ class _CheckboxPrivacyPolicyState extends State<CheckboxPrivacyPolicy> {
         widget.onChanged(value!); 
       },
       subtitle: const Text(
-        'Lorem ipsum dolor sit amet consectetur. Eu blandit leo etiam aliquam posuere ullamcorper. Habitasse quis sollicitudin.',
+        'Dengan melanjutkan, Anda menyetujui Kebijakan Privasi dan Syarat Penggunaan aplikasi BALAP-IN.',
         style: TextStyle(
             fontSize: 12,
             color: Color(0XFF62748E),

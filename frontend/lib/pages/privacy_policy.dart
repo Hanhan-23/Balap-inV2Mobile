@@ -50,7 +50,7 @@ class _PrivacyPolicyPagesState extends State<PrivacyPolicyPages> {
                   ),
                   GapY(16),
                   Text(
-                    'Lorem ipsum dolor sit amet consectetur. Eu blandit leo etiam aliquam posuere ullamcorper. Habitasse quis sollicitudin enim proin.',
+                    'Hadir untuk menyediakan pelaporan infrastruktur kota Batam dengan mudah dan cepat.',
                     style: TextStyle(fontSize: 16, color: Color(0XFF62748E)),
                   ),
                 ],
