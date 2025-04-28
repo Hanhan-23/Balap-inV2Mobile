@@ -1,6 +1,10 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/pages/petapersebaran.dart';
+import 'package:frontend/services/apiservicemap.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapBeranda extends StatefulWidget {
   const MapBeranda({super.key});
@@ -12,8 +16,19 @@ class MapBeranda extends StatefulWidget {
 class _MapBerandaState extends State<MapBeranda> {
   @override
   Widget build(BuildContext context) {
+
     viewMap() {
-      return Container(color: Colors.yellow);
+      return GoogleMap(
+        zoomGesturesEnabled: true,
+        zoomControlsEnabled: true,
+        mapType: MapType.hybrid,
+        initialCameraPosition: initialCameraPosition(),
+        gestureRecognizers: {
+          Factory<OneSequenceGestureRecognizer>(
+            () => EagerGestureRecognizer(),
+          ),
+        },
+      );
     }
 
     mapButton() {

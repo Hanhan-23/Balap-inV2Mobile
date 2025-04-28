@@ -1,5 +1,9 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:frontend/services/apiservicemap.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PetaPersebaran extends StatelessWidget {
   const PetaPersebaran({super.key});
@@ -39,9 +43,17 @@ class PetaPersebaran extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
 
-      body: Placeholder(
-        color: Colors.yellow,
-      ),
+      body: GoogleMap(
+        zoomGesturesEnabled: true,
+        zoomControlsEnabled: true,
+        mapType: MapType.hybrid,
+        initialCameraPosition: initialCameraPosition(),
+        gestureRecognizers: {
+          Factory<OneSequenceGestureRecognizer>(
+            () => EagerGestureRecognizer(),
+          ),
+        },
+      )
     );
   }
 }
