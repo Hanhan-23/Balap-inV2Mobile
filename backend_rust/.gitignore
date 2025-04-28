@@ -7,6 +7,7 @@
 # Rust toolchain files
 /.cargo/
 .cargo/config.toml
+.env
 
 # Rust logs or output
 *.log
