@@ -6,3 +6,7 @@ CameraPosition initialCameraPosition() {
     target: LatLng(1.118475, 104.048461)
   );
 }
+
+MinMaxZoomPreference initialMinMaxZoom() {
+  return MinMaxZoomPreference(10, null);
+}

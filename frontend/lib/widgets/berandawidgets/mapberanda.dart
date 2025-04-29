@@ -19,8 +19,14 @@ class _MapBerandaState extends State<MapBeranda> {
 
     viewMap() {
       return GoogleMap(
+        minMaxZoomPreference: initialMinMaxZoom(),
+        cameraTargetBounds: CameraTargetBounds(
+          LatLngBounds(
+            southwest: LatLng(0.565224, 103.914942), 
+            northeast: LatLng(1.2314551402831757, 104.29134516648656)
+        )),
         zoomGesturesEnabled: true,
-        zoomControlsEnabled: true,
+        zoomControlsEnabled: false,
         mapType: MapType.hybrid,
         initialCameraPosition: initialCameraPosition(),
         gestureRecognizers: {

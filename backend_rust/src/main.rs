@@ -1,20 +1,13 @@
-pub mod model;
-mod database;
+mod config;
 mod mongorepo;
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder, middleware::{{Logger}}};
-use futures::TryStreamExt;
-use mongodb::bson;
-use crate::database::init_mongo;
-use crate::model::Laporan;
-use crate::mongorepo::MongoRepo;
+mod models;
+mod routes;
+mod handlers;
 
-#[get("/laporan")]
-async fn get_laporan(db: web::Data<MongoRepo>) -> impl Responder {
-    let cursor = db.laporan_collection.find(bson::doc! {}).await.expect("Failed to find documents");
-    let docs = cursor.try_collect::<Vec<Laporan>>().await.expect("Failed to collect documents");
-    
-    HttpResponse::Ok().json(docs)
-}
+use actix_web::{web, App, HttpServer, middleware::{{Logger}}};
+use mongodb::bson;
+use crate::config::init_mongo;
+use crate::mongorepo::MongoRepo;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -36,7 +29,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap(Logger::default())
             .app_data(web::Data::new(mongorepo.clone()))
-            .service(get_laporan)
+            .configure(routes::laporanroute::init_routes)
     })
     .bind(("127.0.0.1", 8080))?
     .run()

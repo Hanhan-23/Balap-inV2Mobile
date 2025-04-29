@@ -1,7 +1,7 @@
 use mongodb::bson::oid::ObjectId;
 use mongodb::bson::Timestamp;
 use serde::{Deserialize, Serialize};
-use crate::models::peta::Peta;
+use crate::models::petamodel::Peta;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Laporan {

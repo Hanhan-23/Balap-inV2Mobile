@@ -44,6 +44,12 @@ class PetaPersebaran extends StatelessWidget {
       ),
 
       body: GoogleMap(
+        cameraTargetBounds: CameraTargetBounds(
+          LatLngBounds(
+            southwest: LatLng(0.565224, 103.914942), 
+            northeast: LatLng(1.2314551402831757, 104.29134516648656)
+        )),
+        minMaxZoomPreference: initialMinMaxZoom(),
         zoomGesturesEnabled: true,
         zoomControlsEnabled: true,
         mapType: MapType.hybrid,

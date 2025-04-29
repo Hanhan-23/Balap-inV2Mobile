@@ -1,6 +1,10 @@
 use dotenvy::dotenv;
 use mongodb::{Client, Collection};
-use crate::model::{ Masyarakat, Pemerintah, Laporan, Rekomendasi, Notifikasi};
+use crate::models::laporanmodel::Laporan;
+use crate::models::masyarakatmodel::Masyarakat;
+use crate::models::notifikasimodel::Notifikasi;
+use crate::models::pemerintahmodel::Pemerintah;
+use crate::models::rekomendasimodel::Rekomendasi;
 
 #[derive(Clone)]
 pub struct MongoRepo {
