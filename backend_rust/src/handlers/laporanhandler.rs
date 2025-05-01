@@ -1,12 +1,39 @@
-use actix_web::{web, HttpResponse, Responder};
+use actix_web::{web, FromRequest, HttpResponse, Responder};
 use futures::TryStreamExt;
-use mongodb::bson;
-use crate::models::laporanmodel::Laporan;
+use mongodb::bson::{doc};
+use mongodb::bson::oid::ObjectId;
+use crate::models::laporanmodel::{CardLaporan, DetailLaporan, Laporan};
 use crate::mongorepo::MongoRepo;
 
 pub async fn get_laporan(db: web::Data<MongoRepo>) -> impl Responder {
-    let cursor = db.laporan_collection.find(bson::doc! {}).await.expect("Failed to find documents");
+    let filter = doc! {"status": "selesai"};
+    
+    let cursor = db.laporan_collection.find(filter).await.expect("Failed to find documents");
     let docs = cursor.try_collect::<Vec<Laporan>>().await.expect("Failed to collect documents");
 
     HttpResponse::Ok().json(docs)
 }
+
+pub async fn get_card_laporan(db: web::Data<MongoRepo>) -> impl Responder {
+    let filter = doc! {"status": "selesai"};
+    
+    let cursor = db.card_laporan_collection.find(filter).await.expect("Failed to find documents");
+    let docs = cursor.try_collect::<Vec<CardLaporan>>().await.expect("Failed to collect documents");
+    
+    HttpResponse::Ok().json(docs)
+}
+
+pub async fn get_detail_laporan(db: web::Data<MongoRepo>, oid: web::Path<String>) -> impl Responder {
+    let path = oid.into_inner();
+    let obj_id = match ObjectId::parse_str(&path) {
+        Ok(oid) => oid,
+        Err(_) => return HttpResponse::BadRequest().body("Invalid ObjectId"),
+    };
+    
+    let filter = doc! {"_id": obj_id};
+    
+    let cursor = db.detail_laporan_collection.find(filter).await.expect("Failed to find documents");
+    let docs = cursor.try_collect::<Vec<DetailLaporan>>().await.expect("Failed to collect documents");
+    
+    HttpResponse::Ok().json(docs)
+} 

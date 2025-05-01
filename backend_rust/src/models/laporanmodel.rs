@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use crate::models::petamodel::Peta;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct Laporan {
+pub struct Laporan{
     #[serde(rename = "_id")]
     pub id : ObjectId,
     pub gambar: String,
@@ -17,5 +17,30 @@ pub struct Laporan {
     pub tgl_lapor: Timestamp,
     pub cluster: i64,
     pub id_masyarakat: ObjectId,
+    pub id_peta: Peta
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct CardLaporan{
+    #[serde(rename = "_id")]
+    pub id: ObjectId,
+    pub gambar: String,
+    pub jenis: String,
+    pub judul: String,
+    pub deskripsi: String,
+    pub status: String,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct DetailLaporan{
+    #[serde(rename = "_id")]
+    pub id: ObjectId,
+    pub gambar: String,
+    pub jenis: String,
+    pub judul: String,
+    pub deskripsi: String,
+    pub status: String,
+    pub cuaca: String,
+    pub tgl_lapor: Timestamp,
     pub id_peta: Peta
 }

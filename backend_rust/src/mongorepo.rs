@@ -1,6 +1,6 @@
 use dotenvy::dotenv;
 use mongodb::{Client, Collection};
-use crate::models::laporanmodel::Laporan;
+use crate::models::laporanmodel::{Laporan, CardLaporan, DetailLaporan};
 use crate::models::masyarakatmodel::Masyarakat;
 use crate::models::notifikasimodel::Notifikasi;
 use crate::models::pemerintahmodel::Pemerintah;
@@ -11,6 +11,8 @@ pub struct MongoRepo {
     pub masyarakat_collection: Collection<Masyarakat>,
     pub pemerintah_collection: Collection<Pemerintah>,
     pub laporan_collection: Collection<Laporan>,
+    pub card_laporan_collection: Collection<CardLaporan>, 
+    pub detail_laporan_collection: Collection<DetailLaporan>,
     pub rekomendasi_collection: Collection<Rekomendasi>,
     pub notifikasi_collection: Collection<Notifikasi>,
 }
@@ -23,6 +25,8 @@ impl MongoRepo {
             masyarakat_collection: db.collection("masyarakat"),
             pemerintah_collection: db.collection("pemerintah"),
             laporan_collection: db.collection("laporan"),
+            card_laporan_collection: db.collection("laporan"),
+            detail_laporan_collection: db.collection("laporan"),
             rekomendasi_collection: db.collection("rekomendasi"),
             notifikasi_collection: db.collection("notifikasi"),
         }

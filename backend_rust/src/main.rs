@@ -29,7 +29,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap(Logger::default())
             .app_data(web::Data::new(mongorepo.clone()))
-            .configure(routes::laporanroute::init_routes)
+            .configure(routes::laporanroute::laporan_routes)
     })
     .bind(("127.0.0.1", 8080))?
     .run()
