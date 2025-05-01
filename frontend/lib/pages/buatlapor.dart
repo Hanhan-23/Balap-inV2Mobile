@@ -7,6 +7,7 @@ import 'package:frontend/widgets/buatlaporan/appbarbuatlapor.dart';
 import 'package:frontend/widgets/buatlaporan/buttonpengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/cuacapengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/deskripsipengaduan.dart';
+import 'package:frontend/widgets/buatlaporan/jenispengadun.dart';
 import 'package:frontend/widgets/buatlaporan/judulpengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/nilaikerusakan.dart';
 
@@ -22,6 +23,7 @@ class _BuatLaporanPagesState extends State<BuatLaporanPages> with AutomaticKeepA
   
   GlobalKey keyInputGambar = GlobalKey();
   GlobalKey keyInputJudul = GlobalKey();
+  GlobalKey keyInputJenis = GlobalKey();
   GlobalKey keyInputDeskripsi = GlobalKey();
   GlobalKey keyInputCuaca = GlobalKey();
   GlobalKey keyInputNilaiKerusakan = GlobalKey();
@@ -45,6 +47,7 @@ class _BuatLaporanPagesState extends State<BuatLaporanPages> with AutomaticKeepA
           [
             keyInputGambar,
             keyInputJudul,
+            keyInputJenis,
             keyInputDeskripsi,
             keyInputCuaca,
             keyInputNilaiKerusakan,
@@ -56,6 +59,7 @@ class _BuatLaporanPagesState extends State<BuatLaporanPages> with AutomaticKeepA
           [
             'Foto kerusakan infrastruktur yang ingin anda laporkan disini',
             'Masukkan judul laporan anda dengan tidak melebihi 40 karakter',
+            'Pilih jenis infrastruktur yang anda ingin laporkan',
             'Masukkan Deskripsi laporan seperti kronologi atau penjelasan tambahan lainnya',
             'Pilih cuaca yang sesuai pada saat anda melapor',
             'Berapa persentase kerusakan menurut anda dari 0% sampai 100%',
@@ -95,6 +99,13 @@ class _BuatLaporanPagesState extends State<BuatLaporanPages> with AutomaticKeepA
                   width: double.infinity,
                   height: 80,
                   child: Judulpengaduan(key: keyInputJudul,)
+                ),
+
+                SizedBox(height: 14,), 
+                SizedBox(
+                  width: double.infinity,
+                  height: 78,
+                  child: JenisPengaduan(key: keyInputJenis,)
                 ),   
             
                 SizedBox(height: 14,),   

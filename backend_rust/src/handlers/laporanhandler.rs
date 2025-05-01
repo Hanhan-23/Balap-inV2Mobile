@@ -15,9 +15,20 @@ pub async fn get_laporan(db: web::Data<MongoRepo>) -> impl Responder {
 }
 
 pub async fn get_card_laporan(db: web::Data<MongoRepo>) -> impl Responder {
-    let filter = doc! {"status": "selesai"};
+    let projection = doc! {
+        "_id": 1, 
+        "gambar": 1,
+        "jenis": 1,
+        "judul": 1,
+        "deskripsi": 1,
+        "status": 1,
+    };
     
-    let cursor = db.card_laporan_collection.find(filter).await.expect("Failed to find documents");
+    let options = mongodb::options::FindOptions::builder().projection(projection).build();
+    
+    let filter = doc! {"status": "selesai"};
+
+    let cursor = db.card_laporan_collection.find(filter).with_options(options).await.expect("Failed to find documents");
     let docs = cursor.try_collect::<Vec<CardLaporan>>().await.expect("Failed to collect documents");
     
     HttpResponse::Ok().json(docs)

@@ -10,9 +10,12 @@ use crate::models::rekomendasimodel::Rekomendasi;
 pub struct MongoRepo {
     pub masyarakat_collection: Collection<Masyarakat>,
     pub pemerintah_collection: Collection<Pemerintah>,
+    
+    // laporan
     pub laporan_collection: Collection<Laporan>,
-    pub card_laporan_collection: Collection<CardLaporan>, 
+    pub card_laporan_collection: Collection<CardLaporan>,
     pub detail_laporan_collection: Collection<DetailLaporan>,
+    
     pub rekomendasi_collection: Collection<Rekomendasi>,
     pub notifikasi_collection: Collection<Notifikasi>,
 }
@@ -24,9 +27,12 @@ impl MongoRepo {
         Self {
             masyarakat_collection: db.collection("masyarakat"),
             pemerintah_collection: db.collection("pemerintah"),
+            
+            // laporan
             laporan_collection: db.collection("laporan"),
             card_laporan_collection: db.collection("laporan"),
             detail_laporan_collection: db.collection("laporan"),
+            
             rekomendasi_collection: db.collection("rekomendasi"),
             notifikasi_collection: db.collection("notifikasi"),
         }

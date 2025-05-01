@@ -25,7 +25,8 @@ void choachMarkBuatLapor(BuildContext context, List<GlobalKey> targetKeys, List<
     targetFocusOn(targetKeys[5], pesan[5], ContentAlign.top),
     targetFocusOn(targetKeys[6], pesan[6], ContentAlign.top),
     targetFocusOn(targetKeys[7], pesan[7], ContentAlign.top),
-    targetFocusOn(targetKeys[8], pesan[8], ContentAlign.bottom),
+    targetFocusOn(targetKeys[8], pesan[8], ContentAlign.top),
+    targetFocusOn(targetKeys[9], pesan[9], ContentAlign.bottom),
   ];
  
   TutorialCoachMark(
