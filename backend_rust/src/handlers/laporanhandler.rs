@@ -1,4 +1,4 @@
-use actix_web::{web, FromRequest, HttpResponse, Responder};
+use actix_web::{web, HttpResponse, Responder};
 use futures::TryStreamExt;
 use mongodb::bson::{doc};
 use mongodb::bson::oid::ObjectId;
@@ -35,6 +35,18 @@ pub async fn get_card_laporan(db: web::Data<MongoRepo>) -> impl Responder {
 }
 
 pub async fn get_detail_laporan(db: web::Data<MongoRepo>, oid: web::Path<String>) -> impl Responder {
+    let projection = doc! {
+        "id": 1,
+        "gambar": 1,
+        "jenis": 1,
+        "judul": 1,
+        "deskripsi": 1,
+        "status": 1,
+        "cuaca": 1,
+        "tgl_lapor": 1,
+        "id_peta": 1
+    };
+    
     let path = oid.into_inner();
     let obj_id = match ObjectId::parse_str(&path) {
         Ok(oid) => oid,
@@ -43,8 +55,8 @@ pub async fn get_detail_laporan(db: web::Data<MongoRepo>, oid: web::Path<String>
     
     let filter = doc! {"_id": obj_id};
     
-    let cursor = db.detail_laporan_collection.find(filter).await.expect("Failed to find documents");
+    let cursor = db.detail_laporan_collection.find(filter).projection(projection).await.expect("Failed to find documents");
     let docs = cursor.try_collect::<Vec<DetailLaporan>>().await.expect("Failed to collect documents");
     
     HttpResponse::Ok().json(docs)
-} 
+}

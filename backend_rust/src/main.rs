@@ -3,11 +3,13 @@ mod mongorepo;
 mod models;
 mod routes;
 mod handlers;
+mod utils;
 
 use actix_web::{web, App, HttpServer, middleware::{{Logger}}};
 use mongodb::bson;
 use crate::config::init_mongo;
 use crate::mongorepo::MongoRepo;
+use crate::utils::cors::cors_middleware;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -28,6 +30,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .wrap(Logger::default())
+            .wrap(cors_middleware())
             .app_data(web::Data::new(mongorepo.clone()))
             .configure(routes::laporanroute::laporan_routes)
     })
