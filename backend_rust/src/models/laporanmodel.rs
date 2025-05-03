@@ -15,7 +15,7 @@ pub struct Laporan{
     pub cuaca: String,
     pub status: String,
     pub tgl_lapor: Timestamp,
-    pub cluster: i64,
+    pub cluster: Option<i64>,
     pub id_masyarakat: ObjectId,
     pub id_peta: Peta
 }

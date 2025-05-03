@@ -33,6 +33,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(cors_middleware())
             .app_data(web::Data::new(mongorepo.clone()))
             .configure(routes::laporanroute::laporan_routes)
+            .configure(routes::rekomendasiroute::rekomendasi_routes)
     })
     .bind(("127.0.0.1", 8080))?
     .run()
