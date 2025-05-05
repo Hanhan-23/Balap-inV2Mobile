@@ -8,5 +8,3 @@ pub fn cors_middleware() -> Cors {
         .allowed_header("my-custom-header")
         .max_age(3600)
 }
-
-

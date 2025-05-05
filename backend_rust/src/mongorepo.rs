@@ -1,5 +1,6 @@
 use dotenvy::dotenv;
 use mongodb::{Client, Collection};
+use mongodb::bson::oid::ObjectId;
 use crate::models::laporanmodel::{Laporan, CardLaporan, DetailLaporan};
 use crate::models::masyarakatmodel::Masyarakat;
 use crate::models::notifikasimodel::Notifikasi;
@@ -15,6 +16,7 @@ pub struct MongoRepo {
     pub laporan_collection: Collection<Laporan>,
     pub card_laporan_collection: Collection<CardLaporan>,
     pub detail_laporan_collection: Collection<DetailLaporan>,
+    pub buat_laporan_baru_collection: Collection<Laporan>,
     
     pub rekomendasi_collection: Collection<Rekomendasi>,
     pub notifikasi_collection: Collection<Notifikasi>,
@@ -32,10 +34,33 @@ impl MongoRepo {
             laporan_collection: db.collection("laporan"),
             card_laporan_collection: db.collection("laporan"),
             detail_laporan_collection: db.collection("laporan"),
+            buat_laporan_baru_collection: db.collection("laporan"),
             
             rekomendasi_collection: db.collection("rekomendasi"),
             notifikasi_collection: db.collection("notifikasi"),
         }
+    }
+    
+    pub async fn create_new_laporan(&self, laporan: Laporan) -> Result<ObjectId, mongodb::error::Error> {
+        let new_laporan = Laporan {
+            id: ObjectId::new(),
+            gambar: laporan.gambar,
+            jenis: laporan.jenis,
+            judul: laporan.judul,
+            deskripsi: laporan.deskripsi,
+            persentase: laporan.persentase,
+            cuaca: laporan.cuaca,
+            status: laporan.status,
+            tgl_lapor: laporan.tgl_lapor,
+            cluster: laporan.cluster,
+            id_masyarakat: laporan.id_masyarakat,
+            id_peta: laporan.id_peta,
+        };
+
+        let collection = &self.buat_laporan_baru_collection;
+        let result = collection.insert_one(&new_laporan).await.expect("Failed to insert document");
+        
+        Ok(new_laporan.id)
     }
 }
 
