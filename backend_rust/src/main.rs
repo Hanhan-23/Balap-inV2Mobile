@@ -10,6 +10,10 @@ use mongodb::bson;
 use crate::config::init_mongo;
 use crate::mongorepo::MongoRepo;
 use crate::utils::cors::cors_middleware;
+use aws_sdk_s3::Client;
+use aws_config::{Region};
+use aws_config::meta::region::RegionProviderChain;
+use crate::utils::s3service::{verify_bucket};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -26,6 +30,13 @@ async fn main() -> std::io::Result<()> {
     }
 
     let mongorepo = MongoRepo::new(&init_db);
+
+    let region_provider = RegionProviderChain::first_try(Region::new("ap-southeast-1"));
+    let config = aws_config::from_env().region(region_provider).load().await;
+    let client = Client::new(&config);
+    let bucket = "balapin";
+
+    verify_bucket(&client, bucket).await.map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
     HttpServer::new(move || {
         App::new()

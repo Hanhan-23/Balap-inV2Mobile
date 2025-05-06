@@ -2,7 +2,7 @@ use actix_web::{web, HttpResponse, Responder};
 use futures::TryStreamExt;
 use mongodb::bson::{doc};
 use mongodb::bson::oid::ObjectId;
-use crate::models::laporanmodel::{CardLaporan, DetailLaporan, Laporan};
+use crate::models::laporanmodel::{CardLaporan, DetailLaporan, Laporan, LaporanBaru};
 use crate::mongorepo::MongoRepo;
 use serde_json::json;
 
@@ -62,7 +62,7 @@ pub async fn get_detail_laporan(db: web::Data<MongoRepo>, oid: web::Path<String>
     HttpResponse::Ok().json(docs)
 }
 
-pub async fn buat_laporan(db: web::Data<MongoRepo>, laporan: web::Json<Laporan>) -> impl Responder {
+pub async fn buat_laporan(db: web::Data<MongoRepo>, laporan: web::Json<LaporanBaru>) -> impl Responder {
     match db.create_new_laporan(laporan.into_inner()).await {
         Ok(id) => HttpResponse::Ok().json(json!({ 
             "id": id ,

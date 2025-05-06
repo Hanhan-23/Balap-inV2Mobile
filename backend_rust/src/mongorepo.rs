@@ -1,7 +1,6 @@
-use dotenvy::dotenv;
 use mongodb::{Client, Collection};
 use mongodb::bson::oid::ObjectId;
-use crate::models::laporanmodel::{Laporan, CardLaporan, DetailLaporan};
+use crate::models::laporanmodel::{Laporan, CardLaporan, DetailLaporan, LaporanBaru};
 use crate::models::masyarakatmodel::Masyarakat;
 use crate::models::notifikasimodel::Notifikasi;
 use crate::models::pemerintahmodel::Pemerintah;
@@ -41,7 +40,7 @@ impl MongoRepo {
         }
     }
     
-    pub async fn create_new_laporan(&self, laporan: Laporan) -> Result<ObjectId, mongodb::error::Error> {
+    pub async fn create_new_laporan(&self, laporan: LaporanBaru) -> Result<ObjectId, mongodb::error::Error> {
         let new_laporan = Laporan {
             id: ObjectId::new(),
             gambar: laporan.gambar,
@@ -58,10 +57,11 @@ impl MongoRepo {
         };
 
         let collection = &self.buat_laporan_baru_collection;
-        let result = collection.insert_one(&new_laporan).await.expect("Failed to insert document");
+        let result = collection.insert_one(&new_laporan).await;
         
-        Ok(new_laporan.id)
+        match result { 
+            Ok(_) => Ok(new_laporan.id),
+            Err(e) => Err(e).expect("Error inserting document"),
+        }
     }
 }
-
-
