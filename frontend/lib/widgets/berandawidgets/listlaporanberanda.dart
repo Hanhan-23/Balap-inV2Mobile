@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/pages/detaillaporan.dart';
+import 'package:frontend/services/apiservicelaporan.dart';
 import 'package:frontend/widgets/berandawidgets/listlaporan/headerlistlapor.dart';
 import 'package:frontend/widgets/berandawidgets/listlaporan/listlaporan.dart';
 
@@ -31,7 +32,20 @@ class _ListLaporanBerandaState extends State<ListLaporanBeranda> {
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => DetailLaporanScreen(index: index)));
                 },
-                child: ListLaporan()
+                child: FutureBuilder(
+                  future: getCardLaporan(), 
+                  builder: (context, snapshot) {
+                    var listData = snapshot.data;
+                    return ListView.builder(
+                        itemCount: listData!.length,
+                        itemBuilder: (context, index) {
+                          return ListLaporan(
+                            dataCardLaporan: listData[index],
+                        );
+                      }
+                    );
+                  }
+                )
               )), 
             ),
           ),

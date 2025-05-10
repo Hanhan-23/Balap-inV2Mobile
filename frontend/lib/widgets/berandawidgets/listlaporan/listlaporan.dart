@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/model_laporan.dart';
 
 class ListLaporan extends StatefulWidget {
-  const ListLaporan({super.key});
+  final ModelCardLaporan? dataCardLaporan;
+  const ListLaporan({super.key, required this.dataCardLaporan});
 
   @override
   State<ListLaporan> createState() => _ListLaporanState();
@@ -69,7 +71,7 @@ class _ListLaporanState extends State<ListLaporan> {
                                     left: 8,
                                     right: 8,
                                   ),
-                                  child: Text('Jalan rusak',
+                                  child: Text(widget.dataCardLaporan!.jenis.toString(),
                                     style: TextStyle(
                                       color: Color.fromRGBO(17, 84, 237, 1),
                                       fontFamily: 'Instrument-Sans',
@@ -85,7 +87,7 @@ class _ListLaporanState extends State<ListLaporan> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 1,
                         height: 20,
-                        child: Text('Jalan Simpang Kepri Berlubang',
+                        child: Text(widget.dataCardLaporan!.judul.toString(),
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'Instrument-Sans',
@@ -99,7 +101,7 @@ class _ListLaporanState extends State<ListLaporan> {
                       Expanded(
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width * 1,
-                          child: Text('Lorem ipsum dolor sit amet consectetur. Eu blandit leo etiam aliquam posuere ullamcorper asdfjashjdf akjsfhasjkf kjashfk',
+                          child: Text(widget.dataCardLaporan!.deskripsi.toString(),
                           style: TextStyle(
                               fontSize: 8,
                               fontFamily: 'Instrument-Sans',

@@ -118,7 +118,7 @@ class DetailRekomendasiScreen extends StatelessWidget {
                       child: Column(
                         children: List.generate(5, (index) => Padding(
                           padding: const EdgeInsets.only(bottom: 10),
-                          child: ListLaporan(),
+                          child: ListLaporan(dataCardLaporan: null,),
                         )),
                       ),
                     )
