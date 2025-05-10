@@ -32,7 +32,7 @@ class ModelCardLaporan {
 
   factory ModelCardLaporan.fromJson(Map<String, dynamic> json) {
     return ModelCardLaporan(
-      id: json['_id'], 
+      id: json['_id']['\$oid'],
       jenis: json['jenis'], 
       judul: json['judul'], 
       deskripsi: json['deskripsi'], 
