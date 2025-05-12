@@ -1,3 +1,5 @@
+import 'package:frontend/models/model_peta.dart';
+
 class ModelLaporan {
   final dynamic id;
   final String gambar;
@@ -38,5 +40,37 @@ class ModelCardLaporan {
       deskripsi: json['deskripsi'], 
       gambar: json['gambar']
       );
+  }
+}
+
+class ModelDetailLaporan {
+  final dynamic id;
+  final String jenis;
+  final String judul;
+  final dynamic tglLapor;
+  final String gambar;
+  final ModelPeta peta;
+  final String deskripsi;
+
+  ModelDetailLaporan({
+    required this.id,
+    required this.jenis,
+    required this.judul,
+    required this.tglLapor,
+    required this.gambar,
+    required this.peta,
+    required this.deskripsi,
+  });
+
+  factory ModelDetailLaporan.fromJson(Map<String, dynamic> json) {
+    return ModelDetailLaporan(
+      id: json['_id']['\$oid'], 
+      jenis: json['jenis'], 
+      judul: json['judul'], 
+      tglLapor: json['tgl_lapor'], 
+      gambar: json['gambar'], 
+      peta: ModelPeta.fromJson(json['id_peta']),
+      deskripsi: json['deskripsi']
+    );
   }
 }

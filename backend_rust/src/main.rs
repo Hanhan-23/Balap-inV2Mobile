@@ -19,7 +19,8 @@ use crate::utils::s3service::{verify_bucket};
 async fn main() -> std::io::Result<()> {
     dotenvy::dotenv().ok();
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
-
+    
+    // init Client Mongodb
     let init_db = init_mongo().await.expect("Failed to init mongo");
 
     let db = init_db.database("balap_in");
@@ -30,7 +31,8 @@ async fn main() -> std::io::Result<()> {
     }
 
     let mongorepo = MongoRepo::new(&init_db);
-
+    
+    //init Client aws
     let region_provider = RegionProviderChain::first_try(Region::new("ap-southeast-1"));
     let config = aws_config::from_env().region(region_provider).load().await;
     let client = Client::new(&config);

@@ -14,3 +14,15 @@ Future<List<ModelCardLaporan>> getCardLaporan() async {
     throw Exception("Failed to fetch Data");
   }
 }
+
+Future<ModelDetailLaporan> getDetailLaporan(id) async {
+  var url = Uri.parse('$service/laporan/detail/$id');
+  var response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    var jsonResponse = convert.jsonDecode(response.body);
+    return ModelDetailLaporan.fromJson(jsonResponse[0]);
+  } else {
+    throw Exception("Failed to fetch Data");
+  }
+}

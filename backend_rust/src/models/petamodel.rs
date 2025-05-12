@@ -9,5 +9,4 @@ pub struct Peta {
     pub jalan: String,
     pub latitude: f64,
     pub longitude: f64,
-    pub id_laporan: ObjectId,
 }

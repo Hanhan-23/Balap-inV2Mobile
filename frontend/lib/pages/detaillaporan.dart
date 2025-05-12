@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/models/model_laporan.dart';
+import 'package:frontend/services/apiservicelaporan.dart';
 import 'package:frontend/widgets/textwidget.dart';
 
 class DetailLaporanScreen extends StatelessWidget {
-  final int index;
-  const DetailLaporanScreen({super.key, required this.index});
+  final dynamic idIndex;
+  const DetailLaporanScreen({super.key, required this.idIndex});
 
   @override
   Widget build(BuildContext context) {
-    int indexDetail = index;
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -29,128 +29,145 @@ class DetailLaporanScreen extends StatelessWidget {
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.92,
           child: Scrollbar(
-            child: ListView(
-              children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 17),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: TextWidget(text: 'Jalan Rusak',
-                          colortext: Colors.black,
-                          fontsize: 12,
-                          fontweight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: TextWidget(
-                          text: '$indexDetail Jalan di simpang lampu merah berlubang',
-                          colortext: Colors.black,
-                          fontsize: 20,
-                          fontweight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: TextWidget(
-                          text: '12 Maret 2025 (sehari lalu)',
-                          colortext: Color.fromRGBO(98, 116, 142, 1),
-                          fontsize: 14,
-                          fontweight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 19),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        clipBehavior: Clip.hardEdge,
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height * 0.428,
-                        child: Image.asset(
-                          'assets/images/logo.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 18),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Row(
-                          spacing: 4,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Color.fromRGBO(202, 213, 226, 1),
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(11),
-                                child: SvgPicture.asset(
-                                  'assets/icons/map-pin.svg',
-                                  colorFilter: ColorFilter.mode(
-                                    Color.fromRGBO(17, 84, 237, 1),
-                                    BlendMode.srcIn,
-                                  ),
-                                ),
+            child: FutureBuilder<ModelDetailLaporan>(
+              future: getDetailLaporan(idIndex),
+              builder: (context, snapshot) {
+                var listData = snapshot.data;
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Text('Memuat detail laporan');
+                } else if (snapshot.connectionState == ConnectionState.none) {
+                  return Text('Layanan sedang nonaktif mohon maaf');
+                } else if (snapshot.connectionState == ConnectionState.done || snapshot.hasData) {
+                  return ListView.builder(
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 17),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: TextWidget(
+                                text: listData!.jenis,
+                                colortext: Colors.black,
+                                fontsize: 12,
+                                fontweight: FontWeight.w400,
                               ),
                             ),
+                          ),
 
-                            Expanded(
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: SizedBox(
+                              width: double.infinity,
                               child: TextWidget(
-                                text: 'Jl. Ahmad Yani, Kabil, Kecamatan Nongsa, Kota Batam, Kepulauan Riau 29444',
+                                text: listData.judul,
                                 colortext: Colors.black,
+                                fontsize: 20,
+                                fontweight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 12),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: TextWidget(
+                                text: '${listData.tglLapor}',
+                                colortext: Color.fromRGBO(98, 116, 142, 1),
                                 fontsize: 14,
                                 fontweight: FontWeight.w400,
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
+                          ),
 
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 18),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Divider(color: Colors.black),
-                      ),
-                    ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 19),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(24),
+                              ),
+                              clipBehavior: Clip.hardEdge,
+                              width: double.infinity,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.428,
+                              child: Image.asset(
+                                'assets/images/logo.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
 
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 18),
-                      child: TextWidget(
-                        text: 'Jalan berlubang penyebab kecelakaan motor kemarin sore dan sudah satu bulan belum diperbaiki sama sekali',
-                        colortext: Colors.black,
-                        fontsize: 14,
-                        fontweight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 18),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Row(
+                                spacing: 4,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Color.fromRGBO(202, 213, 226, 1),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(11),
+                                      child: SvgPicture.asset(
+                                        'assets/icons/map-pin.svg',
+                                        colorFilter: ColorFilter.mode(
+                                          Color.fromRGBO(17, 84, 237, 1),
+                                          BlendMode.srcIn,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  Expanded(
+                                    child: TextWidget(
+                                      text: listData.peta.alamat,
+                                      colortext: Colors.black,
+                                      fontsize: 14,
+                                      fontweight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 18),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Divider(color: Colors.black),
+                            ),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 18),
+                            child: TextWidget(
+                              text: listData.deskripsi,
+                              colortext: Colors.black,
+                              fontsize: 14,
+                              fontweight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else {
+                  return Text('Maaf kesalahan layanan');
+                }
+              },
             ),
           ),
         ),

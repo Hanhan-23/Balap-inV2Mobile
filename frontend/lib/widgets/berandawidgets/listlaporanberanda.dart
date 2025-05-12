@@ -29,40 +29,47 @@ class _ListLaporanBerandaState extends State<ListLaporanBeranda> {
             width: MediaQuery.of(context).size.width * 1,
             child: Column(
               spacing: 8,
-              children: [FutureBuilder<List<ModelCardLaporan>>(
-                future: getCardLaporan(),
-                builder: (context, snapshot) {
-                  var listData = snapshot.data;
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: listData!.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) =>
-                                      DetailLaporanScreen(index: index),
+              children: [
+                FutureBuilder<List<ModelCardLaporan>>(
+                  future: getCardLaporan(),
+                  builder: (context, snapshot) {
+                    var listData = snapshot.data;
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: listData!.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => DetailLaporanScreen(
+                                        idIndex: listData[index].id,
+                                      ),
+                                ),
+                              );
+                            },
+                            child: ListLaporan(
+                              dataCardLaporan: listData[index],
                             ),
                           );
                         },
-                        child: ListLaporan(dataCardLaporan: listData[index]),
                       );
-                    },
-                  );
-                  } else if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Text('Sedang menyediakan layanan mohon menunggu');
-                  } else if (snapshot.connectionState != ConnectionState.none) {
-                    return Text('Layanan sedang nonaktif mohon maaf');
-                  } else {
-                    return Text('Kesalahan layanan');
-                  }
-                },
-              )]
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return Text('Sedang menyediakan layanan mohon menunggu');
+                    } else if (snapshot.connectionState !=
+                        ConnectionState.none) {
+                      return Text('Layanan sedang nonaktif mohon maaf');
+                    } else {
+                      return Text('Kesalahan layanan');
+                    }
+                  },
+                ),
+              ],
             ),
           ),
         ),
