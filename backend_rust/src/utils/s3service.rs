@@ -1,7 +1,6 @@
 use aws_sdk_s3::Client;
 use std::error::Error;
 use actix_web::{HttpRequest};
-use mongodb::bson::uuid;
 
 pub async fn verify_bucket(client: &Client, bucket: &str) -> Result<(), Box<dyn Error + Send + Sync>>{
     let buckets = client.list_buckets().send().await?;
@@ -14,7 +13,7 @@ pub async fn verify_bucket(client: &Client, bucket: &str) -> Result<(), Box<dyn 
     }
 }
 
-pub async fn upload_photo(client: &Client, bucket: &str, data: Vec<u8>, req: HttpRequest) {
+pub async fn upload_photo(client: &Client, bucket: &str, data: Vec<u8>, req: HttpRequest) -> Result<String, Box<dyn Error + Send + Sync>>{
     let body = aws_sdk_s3::primitives::ByteStream::from(data);
 
     let ext = req
@@ -33,18 +32,17 @@ pub async fn upload_photo(client: &Client, bucket: &str, data: Vec<u8>, req: Htt
         _ => "application/octet-stream",
     };
 
-    let uuid = uuid::Uuid::new();
-    let key = format!("{}{}", uuid, ext);
+    let uuid = uuid::Uuid::new_v4();
+    let key = format!("{}.{}", uuid, ext);
 
-    let result = client
+    client
         .put_object()
         .bucket(bucket)
-        .key(key)
+        .key(&key)
         .body(body)
         .content_type(content_type)
         .send()
-        .await
-        .unwrap();
+        .await?;
     
-    println!("{:?}", result);
+    Ok(key)
 }
