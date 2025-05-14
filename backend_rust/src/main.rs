@@ -33,10 +33,11 @@ async fn main() -> std::io::Result<()> {
     let mongorepo = MongoRepo::new(&init_db);
     
     //init Client aws
+    let bucket_name = dotenvy::var("S3_BUCKET").expect("bucket not found");
     let region_provider = RegionProviderChain::first_try(Region::new("ap-southeast-1"));
     let config = aws_config::from_env().region(region_provider).load().await;
     let client = Client::new(&config);
-    let bucket = "balapin";
+    let bucket = &bucket_name.to_string();
 
     verify_bucket(&client, bucket).await.map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 

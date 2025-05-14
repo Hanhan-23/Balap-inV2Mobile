@@ -13,8 +13,9 @@ pub async fn verify_bucket(client: &Client, bucket: &str) -> Result<(), Box<dyn 
     }
 }
 
-pub async fn upload_photo(client: &Client, bucket: &str, data: Vec<u8>, req: HttpRequest) -> Result<String, Box<dyn Error + Send + Sync>>{
+pub async fn upload_photo(client: &Client, data: Vec<u8>, req: HttpRequest) -> Result<String, Box<dyn Error + Send + Sync>>{
     let body = aws_sdk_s3::primitives::ByteStream::from(data);
+    let bucket = dotenvy::var("S3_BUCKET").expect("S3_BUCKET not found");
 
     let ext = req
         .headers()
@@ -37,7 +38,7 @@ pub async fn upload_photo(client: &Client, bucket: &str, data: Vec<u8>, req: Htt
 
     client
         .put_object()
-        .bucket(bucket)
+        .bucket(bucket.as_str())
         .key(&key)
         .body(body)
         .content_type(content_type)

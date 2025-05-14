@@ -1,4 +1,5 @@
-use actix_web::{web, HttpResponse, Responder};
+use actix_web::{web, HttpResponse, Responder, HttpRequest};
+use aws_sdk_s3::Client;
 use futures::TryStreamExt;
 use mongodb::bson::{doc};
 use mongodb::bson::oid::ObjectId;

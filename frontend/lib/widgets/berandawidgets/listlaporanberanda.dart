@@ -52,8 +52,11 @@ class _ListLaporanBerandaState extends State<ListLaporanBeranda> {
                                 ),
                               );
                             },
-                            child: ListLaporan(
-                              dataCardLaporan: listData[index],
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: ListLaporan(
+                                dataCardLaporan: listData[index],
+                              ),
                             ),
                           );
                         },
