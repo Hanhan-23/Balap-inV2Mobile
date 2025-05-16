@@ -5,6 +5,7 @@ mod routes;
 mod handlers;
 mod utils;
 
+use std::sync::Arc;
 use actix_web::{web, App, HttpServer, middleware::{{Logger}}};
 use mongodb::bson;
 use crate::config::init_mongo;
@@ -13,6 +14,7 @@ use crate::utils::cors::cors_middleware;
 use aws_sdk_s3::Client;
 use aws_config::{Region};
 use aws_config::meta::region::RegionProviderChain;
+use crate::models::app_state::AppState;
 use crate::utils::s3service::{verify_bucket};
 
 #[actix_web::main]
@@ -41,10 +43,16 @@ async fn main() -> std::io::Result<()> {
 
     verify_bucket(&client, bucket).await.map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
+    let app_state = Arc::new(AppState {
+        s3_client: client.clone(),
+        bucket_name: bucket_name.clone(),
+    });
+
     HttpServer::new(move || {
         App::new()
             .wrap(Logger::default())
             .wrap(cors_middleware())
+            .app_data(web::Data::new(app_state.clone()))
             .app_data(web::Data::new(mongorepo.clone()))
             .configure(routes::laporanroute::laporan_routes)
             .configure(routes::rekomendasiroute::rekomendasi_routes)

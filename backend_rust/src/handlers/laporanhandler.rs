@@ -1,11 +1,14 @@
+use std::sync::Arc;
+use actix_multipart::Multipart;
 use actix_web::{web, HttpResponse, Responder, HttpRequest};
-use aws_sdk_s3::Client;
-use futures::TryStreamExt;
+use futures::{StreamExt, TryStreamExt};
 use mongodb::bson::{doc};
 use mongodb::bson::oid::ObjectId;
 use crate::models::laporanmodel::{CardLaporan, DetailLaporan, Laporan, LaporanBaru};
 use crate::mongorepo::MongoRepo;
 use serde_json::json;
+use crate::models::app_state::AppState;
+use crate::utils::s3service::upload_photo;
 
 pub async fn get_laporan(db: web::Data<MongoRepo>) -> impl Responder {
     let filter = doc! {"status": "selesai"};
@@ -70,6 +73,30 @@ pub async fn buat_laporan(db: web::Data<MongoRepo>, laporan: web::Json<LaporanBa
             "status": "success"
         })),
         Err(_) => HttpResponse::InternalServerError().json(json!({
+            "status": "failed"
+        }))
+    }
+}
+
+pub async fn upload_gambar(state: web::Data<Arc<AppState>>, req: HttpRequest, mut payload: Multipart) -> impl Responder {
+    if let Some(item) = payload.next().await {
+        let mut field = item.unwrap();
+        let mut data = Vec::new();
+        
+        while let Some(chunk) = field.next().await {
+            data.extend_from_slice(&chunk.unwrap());
+        }
+        
+        match upload_photo(data, req.clone(), state.clone()).await { 
+            Ok(key) => HttpResponse::Ok().json(json!({
+                "key": key
+            })),
+            Err(_) => HttpResponse::InternalServerError().json(json!({
+                "status": "failed"
+            }))
+        }
+    } else {
+        HttpResponse::InternalServerError().json(json!({
             "status": "failed"
         }))
     }

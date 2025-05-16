@@ -1,6 +1,8 @@
 use aws_sdk_s3::Client;
 use std::error::Error;
-use actix_web::{HttpRequest};
+use std::sync::Arc;
+use actix_web::{web, HttpRequest};
+use crate::models::app_state::AppState;
 
 pub async fn verify_bucket(client: &Client, bucket: &str) -> Result<(), Box<dyn Error + Send + Sync>>{
     let buckets = client.list_buckets().send().await?;
@@ -13,9 +15,10 @@ pub async fn verify_bucket(client: &Client, bucket: &str) -> Result<(), Box<dyn 
     }
 }
 
-pub async fn upload_photo(client: &Client, data: Vec<u8>, req: HttpRequest) -> Result<String, Box<dyn Error + Send + Sync>>{
+pub async fn upload_photo(data: Vec<u8>, req: HttpRequest, state: web::Data<Arc<AppState>>) -> Result<String, Box<dyn Error + Send + Sync>>{
     let body = aws_sdk_s3::primitives::ByteStream::from(data);
-    let bucket = dotenvy::var("S3_BUCKET").expect("S3_BUCKET not found");
+    let bucket = &state.bucket_name;
+    let client = &state.s3_client;
 
     let ext = req
         .headers()
