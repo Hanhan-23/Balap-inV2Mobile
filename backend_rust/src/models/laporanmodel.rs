@@ -42,7 +42,7 @@ pub struct DetailLaporan{
     pub deskripsi: String,
     pub status: String,
     pub cuaca: String,
-    pub tgl_lapor: Timestamp,
+    pub tgl_lapor: DateTime,
     pub id_peta: Peta
 }
 
@@ -57,4 +57,14 @@ pub struct LaporanBaru{
     pub cluster: Option<i64>,
     pub id_masyarakat: ObjectId,
     pub id_peta: Peta
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct LaporanCardRekomendasi{
+    #[serde(rename = "_id")]
+    pub id: ObjectId,
+    pub gambar: String,
+    pub jenis: String,
+    pub judul: String,
+    pub id_peta: Peta,
 }

@@ -1,7 +1,7 @@
 use mongodb::{Client, Collection};
 use mongodb::bson::DateTime;
 use mongodb::bson::oid::ObjectId;
-use crate::models::laporanmodel::{Laporan, CardLaporan, DetailLaporan, LaporanBaru};
+use crate::models::laporanmodel::{Laporan, CardLaporan, DetailLaporan, LaporanBaru, LaporanCardRekomendasi};
 use crate::models::masyarakatmodel::Masyarakat;
 use crate::models::notifikasimodel::Notifikasi;
 use crate::models::pemerintahmodel::Pemerintah;
@@ -16,6 +16,7 @@ pub struct MongoRepo {
     pub card_laporan_collection: Collection<CardLaporan>,
     pub detail_laporan_collection: Collection<DetailLaporan>,
     pub buat_laporan_baru_collection: Collection<Laporan>,
+    pub laporan_card_rekomendasi: Collection<LaporanCardRekomendasi>,
     
     pub rekomendasi_collection: Collection<Rekomendasi>,
     pub notifikasi_collection: Collection<Notifikasi>,
@@ -34,6 +35,7 @@ impl MongoRepo {
             card_laporan_collection: db.collection("laporan"),
             detail_laporan_collection: db.collection("laporan"),
             buat_laporan_baru_collection: db.collection("laporan"),
+            laporan_card_rekomendasi: db.collection("laporan"),
             
             rekomendasi_collection: db.collection("rekomendasi"),
             notifikasi_collection: db.collection("notifikasi"),
