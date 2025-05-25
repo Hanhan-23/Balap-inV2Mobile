@@ -1,11 +1,11 @@
 use mongodb::{Client, Collection};
+use mongodb::bson::DateTime;
 use mongodb::bson::oid::ObjectId;
 use crate::models::laporanmodel::{Laporan, CardLaporan, DetailLaporan, LaporanBaru};
 use crate::models::masyarakatmodel::Masyarakat;
 use crate::models::notifikasimodel::Notifikasi;
 use crate::models::pemerintahmodel::Pemerintah;
 use crate::models::rekomendasimodel::Rekomendasi;
-
 #[derive(Clone)]
 pub struct MongoRepo {
     pub masyarakat_collection: Collection<Masyarakat>,
@@ -43,14 +43,14 @@ impl MongoRepo {
     pub async fn create_new_laporan(&self, laporan: LaporanBaru) -> Result<ObjectId, mongodb::error::Error> {
         let new_laporan = Laporan {
             id: ObjectId::new(),
-            gambar: laporan.gambar,
+            gambar: format!("https://balapin.s3.amazonaws.com/"),
             jenis: laporan.jenis,
             judul: laporan.judul,
             deskripsi: laporan.deskripsi,
             persentase: laporan.persentase,
             cuaca: laporan.cuaca,
             status: laporan.status,
-            tgl_lapor: laporan.tgl_lapor,
+            tgl_lapor: DateTime::now(),
             cluster: laporan.cluster,
             id_masyarakat: laporan.id_masyarakat,
             id_peta: laporan.id_peta,
