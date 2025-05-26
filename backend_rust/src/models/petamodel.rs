@@ -10,3 +10,8 @@ pub struct Peta {
     pub latitude: f64,
     pub longitude: f64,
 }
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct PetaCardRekomendasi {
+    pub alamat: String,
+}

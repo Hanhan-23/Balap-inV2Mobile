@@ -13,16 +13,3 @@ pub struct Rekomendasi{
     pub tgl_rekom: DateTime,
     pub id_laporan: Vec<ObjectId>,
 }
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct RekomendasiCard{
-    #[serde(rename = "_id")]
-    pub id: ObjectId,
-    pub status_urgent: String,
-    pub status_rekom: String,
-    pub tgl_rekom: DateTime,
-    pub gambar: String,
-    pub judul: String,
-    pub jenis: String,
-    pub alamat: String,
-}
