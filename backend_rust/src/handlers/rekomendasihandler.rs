@@ -2,7 +2,7 @@ use actix_web::{web, HttpResponse, Responder};
 use futures::TryStreamExt;
 use mongodb::bson::{doc};
 use serde_json::json;
-use crate::models::rekomendasimodel::Rekomendasi;
+use crate::models::rekomendasimodel::{Rekomendasi, SortQuery};
 use crate::mongorepo::MongoRepo;
 
 pub async fn get_rekomendasi(db: web::Data<MongoRepo>) -> impl Responder{
@@ -12,7 +12,7 @@ pub async fn get_rekomendasi(db: web::Data<MongoRepo>) -> impl Responder{
     HttpResponse::Ok().json(docs)
 }
 
-pub async fn get_rekomendasi_card(db: web::Data<MongoRepo>) -> impl Responder{
+pub async fn get_rekomendasi_card(db: web::Data<MongoRepo>, query: web::Query<SortQuery>) -> impl Responder{
     let cursor = db.rekomendasi_collection.find(doc! {}).await.expect("Failed to find rekomendasi");
     let docs = cursor.try_collect::<Vec<Rekomendasi>>().await.expect("Failed to collect rekomendasi");
     
@@ -34,6 +34,28 @@ pub async fn get_rekomendasi_card(db: web::Data<MongoRepo>) -> impl Responder{
                 }));
             }
         }
+    }
+
+    let order = query.sort.as_deref().unwrap_or("asc");
+    println!("{}", order);
+    if order == "asc" {
+        result.sort_by(
+            |a, b| {
+                a["tingkat_urgent"]
+                    .as_f64()
+                    .partial_cmp(&b["tingkat_urgent"].as_f64())
+                    .unwrap_or(std::cmp::Ordering::Equal)
+            }
+        )
+    } else if order == "desc" {
+        result.sort_by(
+            |a, b| {
+                b["tingkat_urgent"]
+                    .as_f64()
+                    .partial_cmp(&a["tingkat_urgent"].as_f64())
+                    .unwrap_or(std::cmp::Ordering::Equal)
+            }
+        )
     }
     
     HttpResponse::Ok().json(result)

@@ -13,3 +13,8 @@ pub struct Rekomendasi{
     pub tgl_rekom: DateTime,
     pub id_laporan: Vec<ObjectId>,
 }
+
+#[derive(Deserialize)]
+pub struct SortQuery {
+    pub sort: Option<String>,
+}
