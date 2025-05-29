@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/model_laporan.dart';
 import 'package:frontend/pages/detaillaporan.dart';
-import 'package:frontend/services/apiservicelaporan.dart';
 import 'package:frontend/widgets/berandawidgets/listlaporan/headerlistlapor.dart';
 import 'package:frontend/widgets/berandawidgets/listlaporan/listlaporan.dart';
 
 class ListLaporanBeranda extends StatefulWidget {
-  const ListLaporanBeranda({super.key});
+  final Future<List<ModelCardLaporan>> laporanFuture;
+  
+  const ListLaporanBeranda({super.key, required this.laporanFuture});
 
   @override
   State<ListLaporanBeranda> createState() => _ListLaporanBerandaState();
@@ -31,7 +32,7 @@ class _ListLaporanBerandaState extends State<ListLaporanBeranda> {
               spacing: 8,
               children: [
                 FutureBuilder<List<ModelCardLaporan>>(
-                  future: getCardLaporan(),
+                  future: widget.laporanFuture, 
                   builder: (context, snapshot) {
                     var listData = snapshot.data;
                     if (snapshot.connectionState == ConnectionState.done) {

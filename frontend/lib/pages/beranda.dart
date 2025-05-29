@@ -4,6 +4,8 @@ import 'package:frontend/widgets/berandawidgets/analisisberanda.dart';
 import 'package:frontend/widgets/berandawidgets/appbarberanda.dart';
 import 'package:frontend/widgets/berandawidgets/mapberanda.dart';
 import 'package:frontend/widgets/berandawidgets/listlaporanberanda.dart';
+import 'package:frontend/models/model_laporan.dart';
+import 'package:frontend/services/apiservicelaporan.dart';
 
 class BerandaPages extends StatefulWidget {
   const BerandaPages({super.key});
@@ -14,46 +16,55 @@ class BerandaPages extends StatefulWidget {
 
 class _BerandaPagesState extends State<BerandaPages> with AutomaticKeepAliveClientMixin {
   @override
-  bool get wantKeepAlive => true; 
+  bool get wantKeepAlive => true;
+  
+  late Future<List<ModelCardLaporan>> _laporanFuture;
+  
+  @override
+  void initState() {
+    super.initState();
+    _laporanFuture = getCardLaporan();
+  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    headerWidget () {
+    
+    headerWidget() {
       return Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white
-                ),
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
-              Container(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white
+            ),
+            height: MediaQuery.of(context).size.height * 0.01,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white
+            ),
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.35,
+            child: MapBeranda(),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 14, bottom: 24),
+              child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white
                 ),
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.35,
-                child: MapBeranda(),
+                height: MediaQuery.of(context).size.height * 0.18,
+                child: AnalisisBeranda(laporanFuture: _laporanFuture), 
               ),
-              Container(
-                decoration: BoxDecoration(
-                      color: Colors.white
-                    ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 14, bottom: 24),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white
-                    ),
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height * 0.18,
-                    child: AnalisisBeranda(),
-                  ),
-                ),
-              ),
-            ],
-          );
+            ),
+          ),
+        ],
+      );
     }
 
     return Scaffold(
@@ -83,7 +94,7 @@ class _BerandaPagesState extends State<BerandaPages> with AutomaticKeepAliveClie
               ),
               headerWidget: headerWidget(), 
               body: [
-                ListLaporanBeranda(),
+                ListLaporanBeranda(laporanFuture: _laporanFuture), 
               ],
             ),
           )
