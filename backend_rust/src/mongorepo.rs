@@ -1,7 +1,5 @@
 use mongodb::{Client, Collection};
-use mongodb::bson::DateTime;
-use mongodb::bson::oid::ObjectId;
-use crate::models::laporanmodel::{Laporan, CardLaporan, DetailLaporan, LaporanBaru, LaporanCardRekomendasi};
+use crate::models::laporanmodel::{Laporan, CardLaporan, DetailLaporan, LaporanCardRekomendasi};
 use crate::models::masyarakatmodel::Masyarakat;
 use crate::models::notifikasimodel::Notifikasi;
 use crate::models::pemerintahmodel::Pemerintah;
@@ -39,31 +37,6 @@ impl MongoRepo {
             
             rekomendasi_collection: db.collection("rekomendasi"),
             notifikasi_collection: db.collection("notifikasi"),
-        }
-    }
-    
-    pub async fn create_new_laporan(&self, laporan: LaporanBaru) -> Result<ObjectId, mongodb::error::Error> {
-        let new_laporan = Laporan {
-            id: ObjectId::new(),
-            gambar: format!("https://balapin.s3.amazonaws.com/"),
-            jenis: laporan.jenis,
-            judul: laporan.judul,
-            deskripsi: laporan.deskripsi,
-            persentase: laporan.persentase,
-            cuaca: laporan.cuaca,
-            status: laporan.status,
-            tgl_lapor: DateTime::now(),
-            cluster: laporan.cluster,
-            id_masyarakat: laporan.id_masyarakat,
-            id_peta: laporan.id_peta,
-        };
-
-        let collection = &self.buat_laporan_baru_collection;
-        let result = collection.insert_one(&new_laporan).await;
-        
-        match result { 
-            Ok(_) => Ok(new_laporan.id),
-            Err(e) => Err(e).expect("Error inserting document"),
         }
     }
 }

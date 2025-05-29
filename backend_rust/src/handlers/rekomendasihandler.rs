@@ -1,6 +1,7 @@
 use actix_web::{web, HttpResponse, Responder};
 use futures::TryStreamExt;
 use mongodb::bson::{doc};
+use mongodb::bson::oid::ObjectId;
 use serde_json::json;
 use crate::models::rekomendasimodel::{Rekomendasi, SortQuery};
 use crate::mongorepo::MongoRepo;
@@ -37,7 +38,6 @@ pub async fn get_rekomendasi_card(db: web::Data<MongoRepo>, query: web::Query<So
     }
 
     let order = query.sort.as_deref().unwrap_or("asc");
-    println!("{}", order);
     if order == "asc" {
         result.sort_by(
             |a, b| {
@@ -59,4 +59,44 @@ pub async fn get_rekomendasi_card(db: web::Data<MongoRepo>, query: web::Query<So
     }
     
     HttpResponse::Ok().json(result)
+}
+
+pub async fn get_detail_rekomendasi(
+    db: web::Data<MongoRepo>,
+    oid: web::Path<String>
+) -> impl Responder {
+    let path = oid.into_inner();
+    let obj_id = match ObjectId::parse_str(&path) {
+        Ok(oid) => oid,
+        Err(_) => return HttpResponse::BadRequest().body("Invalid ObjectId"),
+    };
+
+    let filter = doc! { "_id": obj_id };
+    let rekom = db.rekomendasi_collection.find_one(filter).await.expect("Failed to find rekomendasi");
+
+    if let Some(rekom) = rekom {
+        let laporan_ids = &rekom.id_laporan;
+
+        let filter_laporan = doc! { "_id": { "$in": laporan_ids } };
+        let mut cursor = db.card_laporan_collection.find(filter_laporan).await.expect("Failed to find laporan");
+
+        let mut laporan_list = Vec::new();
+        while let Some(doc) = cursor.try_next().await.expect("Failed to read laporan cursor") {
+            laporan_list.push(doc);
+        }
+
+        let result = json!({
+            "rekomendasi_id": rekom.id,
+            "status_urgent": rekom.status_urgent,
+            "tingkat_urgent": rekom.tingkat_urgent,
+            "status_rekom": rekom.status_rekom,
+            "tgl_rekom": rekom.tgl_rekom,
+            "jumlah_laporan": rekom.jumlah_laporan,
+            "laporan_list": laporan_list
+        });
+
+        HttpResponse::Ok().json(result)
+    } else {
+        HttpResponse::NotFound().body("Rekomendasi not found")
+    }
 }

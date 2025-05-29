@@ -1,5 +1,5 @@
 use actix_web::{web};
-use crate::handlers::laporanhandler::{buat_laporan, get_card_laporan, get_detail_laporan, get_laporan, upload_laporan_gambar};
+use crate::handlers::laporanhandler::{get_card_laporan, get_detail_laporan, get_laporan, upload_laporan_gambar};
 
 pub fn laporan_routes(cfg: &mut web::ServiceConfig) {
     cfg.service(
@@ -10,7 +10,6 @@ pub fn laporan_routes(cfg: &mut web::ServiceConfig) {
                 "/detail/{id}",
                 web::get().to(get_detail_laporan),
             )
-            .route("buat", web::post().to(buat_laporan))
             .route("uploadlaporan", web::post().to(upload_laporan_gambar))
     );
 }

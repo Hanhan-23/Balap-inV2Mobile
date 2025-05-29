@@ -66,18 +66,6 @@ pub async fn get_detail_laporan(db: web::Data<MongoRepo>, oid: web::Path<String>
     HttpResponse::Ok().json(docs)
 }
 
-pub async fn buat_laporan(db: web::Data<MongoRepo>, laporan: web::Json<LaporanBaru>) -> impl Responder {
-    match db.create_new_laporan(laporan.into_inner()).await {
-        Ok(id) => HttpResponse::Ok().json(json!({ 
-            "id": id ,
-            "status": "success"
-        })),
-        Err(_) => HttpResponse::InternalServerError().json(json!({
-            "status": "failed"
-        }))
-    }
-}
-
 pub async fn upload_laporan_gambar(
     state: web::Data<Arc<AppState>>,
     db: web::Data<MongoRepo>,
