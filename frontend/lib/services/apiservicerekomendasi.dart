@@ -14,3 +14,15 @@ Future<List<ModelCardRekomendasi>> getCardRekomendasi(String sort) async {
     throw Exception("Failed fetch data rekomendasi");
   }
 }
+
+Future<ModelDetailRekomendasi> getDetailRekomendasi(dynamic id) async {
+  var url = Uri.parse('$service/rekomendasi/detail/$id');
+  var response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    var responseJson = convert.jsonDecode(response.body) as Map<String, dynamic>;
+    return ModelDetailRekomendasi.fromJson(responseJson);
+  } else {
+    throw Exception("Failed to fetch Data");
+  }
+}

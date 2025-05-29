@@ -3,7 +3,9 @@ import 'package:chips_choice/chips_choice.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class FilterUrgensi extends StatefulWidget {
-  const FilterUrgensi({super.key});
+  final Function(String) onChanged;
+
+  const FilterUrgensi({super.key, required this.onChanged});
 
   @override
   State<FilterUrgensi> createState() => _FilterUrgensiState();
@@ -20,7 +22,6 @@ class _FilterUrgensiState extends State<FilterUrgensi> {
       physics: const BouncingScrollPhysics(),
       child: Row(
         children: [
-          // Tombol Urutkan Berdasarkan
           TextButton.icon(
             style: TextButton.styleFrom(
               shape: StadiumBorder(
@@ -29,10 +30,10 @@ class _FilterUrgensiState extends State<FilterUrgensi> {
             ),
             onPressed: () {},
             icon: PhosphorIcon(
-            PhosphorIconsLight.slidersHorizontal,
-            color: Colors.black,
-            size: 16.0,
-          ),
+              PhosphorIconsLight.slidersHorizontal,
+              color: Colors.black,
+              size: 16.0,
+            ),
             label: Text(
               'Urutkan berdasarkan',
               style: TextStyle(color: Colors.black),
@@ -42,7 +43,12 @@ class _FilterUrgensiState extends State<FilterUrgensi> {
           // Chips
           ChipsChoice<int>.single(
             value: selected,
-            onChanged: (val) => setState(() => selected = val),
+            onChanged: (val) {
+              setState(() => selected = val);
+              // Panggil callback ke parent
+              final order = (val == 0) ? 'desc' : 'asc';
+              widget.onChanged(order);
+            },
             choiceItems: C2Choice.listFrom<int, String>(
               source: urutanOpsi,
               value: (i, v) => i,
@@ -62,3 +68,4 @@ class _FilterUrgensiState extends State<FilterUrgensi> {
     );
   }
 }
+

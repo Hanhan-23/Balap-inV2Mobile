@@ -18,6 +18,7 @@ class _RekomendasiUrgensiPagesState extends State<RekomendasiUrgensiPages>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+  String _order = 'desc';
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +54,18 @@ class _RekomendasiUrgensiPagesState extends State<RekomendasiUrgensiPages>
         ),
         child: Column(
           children: [
-            FilterUrgensi(),
+            FilterUrgensi(
+              onChanged: (order) {
+                setState(() {
+                  _order = order;
+                });
+              },
+            ),
 
             // List scrollable card
             Expanded(
               child: FutureBuilder<List<ModelCardRekomendasi>>(
-                future: getCardRekomendasi('desc'),
+                future: getCardRekomendasi(_order),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     var listData = snapshot.data;

@@ -1,3 +1,5 @@
+import 'package:frontend/models/model_laporan.dart';
+
 class ModelCardRekomendasi {
   final dynamic id;
   final String statusUrgent;
@@ -46,6 +48,37 @@ class ModelCardLaporanRekomendasi {
       jenis: json['jenis'], 
       judul: json['judul'], 
       alamat: json['id_peta']['alamat']
+    );
+  }
+}
+
+class ModelDetailRekomendasi {
+  final dynamic id;
+  final String statusUrgent;
+  final double tingkatUrgent;
+  final String statusRekom;
+  final int jumlahLaporan;
+  final List<ModelCardLaporan> laporanList;
+
+  ModelDetailRekomendasi({
+    required this.id,
+    required this.statusUrgent,
+    required this.tingkatUrgent,
+    required this.statusRekom,
+    required this.jumlahLaporan,
+    required this.laporanList,
+  });
+
+  factory ModelDetailRekomendasi.fromJson(Map<String, dynamic>json) {
+    return ModelDetailRekomendasi(
+      id: json['rekomendasi_id']['\$oid'], 
+      statusUrgent: json['status_urgent'], 
+      tingkatUrgent: json['tingkat_urgent'], 
+      statusRekom: json['status_rekom'], 
+      jumlahLaporan: json['jumlah_laporan'], 
+      laporanList: (json['laporan_list'] as List<dynamic>)
+        .map((e) => ModelCardLaporan.fromJson(e))
+        .toList(),
     );
   }
 }

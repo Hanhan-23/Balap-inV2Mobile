@@ -27,13 +27,21 @@ class _CardUrgensiState extends State<CardUrgensi> {
 
     final dataStatus = widget.indexrekomen.statusUrgent;
     String statusUrgent = '';
+    Color warnaUrgent = Color.fromRGBO(202, 213, 226, 1); 
+    Color teksUrgent = Colors.black;
 
     if (dataStatus == 'tinggi') {
       statusUrgent = 'Tinggi';
+      warnaUrgent = Color.fromRGBO(255, 201, 201, 100);
+      teksUrgent = Color.fromRGBO(231, 0, 11, 100);
     } else if (dataStatus == 'sedang') {
       statusUrgent = 'Sedang';
+      warnaUrgent = Color.fromRGBO(255, 240, 133, 100);
+      teksUrgent = Color.fromRGBO(240, 177, 0, 100);
     } else if (dataStatus == 'rendah') {
       statusUrgent = 'Rendah';
+      warnaUrgent = Color.fromRGBO(164, 244, 207, 100);
+      teksUrgent = Color.fromRGBO(0, 153, 102, 100);
     } else {
       statusUrgent = 'Tidak Dikenali';
     }
@@ -41,7 +49,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
     return 
     InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailRekomendasiScreen(index: null)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailRekomendasiScreen(index: widget.indexrekomen.id, alamat: widget.indexrekomen.idLaporan.alamat)));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -139,7 +147,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(100),
-                                      color: Color.fromRGBO(255, 201, 201, 100)
+                                      color: warnaUrgent
                                     ),
                                     child:
                                       Padding(
@@ -151,7 +159,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
                                         ),
                                         child: Text(statusUrgent,
                                           style: TextStyle(
-                                            color: Color.fromRGBO(231, 0, 11, 100),
+                                            color: teksUrgent,
                                             fontFamily: 'Instrument-Sans',
                                             fontSize: 10,
                                             fontWeight: FontWeight.w400
