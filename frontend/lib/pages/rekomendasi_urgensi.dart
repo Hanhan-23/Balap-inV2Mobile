@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/model_rekomendasi.dart';
+import 'package:frontend/services/apiservicerekomendasi.dart';
 import 'package:frontend/widgets/area_urgensi/card_urgensi.dart';
 import 'package:frontend/widgets/navigations/botnav.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:frontend/widgets/area_urgensi/filter_chip.dart';
 
-class RekomendasiUrgensiPages extends StatefulWidget{
+class RekomendasiUrgensiPages extends StatefulWidget {
   const RekomendasiUrgensiPages({super.key});
 
   @override
-  State<RekomendasiUrgensiPages> createState() => _RekomendasiUrgensiPagesState();
+  State<RekomendasiUrgensiPages> createState() =>
+      _RekomendasiUrgensiPagesState();
 }
 
-class _RekomendasiUrgensiPagesState extends State<RekomendasiUrgensiPages> with AutomaticKeepAliveClientMixin{
+class _RekomendasiUrgensiPagesState extends State<RekomendasiUrgensiPages>
+    with AutomaticKeepAliveClientMixin {
   @override
-  bool get wantKeepAlive => true; 
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,10 @@ class _RekomendasiUrgensiPagesState extends State<RekomendasiUrgensiPages> with 
             size: 30.0,
           ),
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavigation()));
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => BottomNavigation()),
+            );
           },
         ),
         title: const Text(
@@ -40,26 +47,48 @@ class _RekomendasiUrgensiPagesState extends State<RekomendasiUrgensiPages> with 
           ),
         ),
       ),
-      body: Padding(padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.045),  
-      child: Column(
-        children: [
-          FilterUrgensi(),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.045,
+        ),
+        child: Column(
+          children: [
+            FilterUrgensi(),
 
-          // List scrollable card
-          Expanded(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: 10, // ganti sesuai jumlah datamu
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: CardUrgensi(indexrekomen: index), // komponen kartu kamu
-                );
-              },
-            ),)
-        ],
+            // List scrollable card
+            Expanded(
+              child: FutureBuilder<List<ModelCardRekomendasi>>(
+                future: getCardRekomendasi('desc'),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    var listData = snapshot.data;
+
+                    return ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: listData!.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: CardUrgensi(
+                            indexrekomen: listData[index],
+                          ), // komponen kartu kamu
+                        );
+                      },
+                    );
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return Text('Sedang menyediakan layanan mohon menunggu');
+                  } else if (snapshot.connectionState != ConnectionState.none) {
+                    return Text('Layanan sedang nonaktif mohon maaf');
+                  } else {
+                    return Text('Kesalahan layanan');
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
       ),
-      )
     );
   }
 }

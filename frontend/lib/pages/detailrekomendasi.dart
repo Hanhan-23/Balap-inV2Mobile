@@ -4,7 +4,7 @@ import 'package:frontend/widgets/berandawidgets/listlaporan/listlaporan.dart';
 import 'package:frontend/widgets/textwidget.dart';
 
 class DetailRekomendasiScreen extends StatelessWidget {
-  final int index;
+  final int? index;
   const DetailRekomendasiScreen({super.key, required this.index});
 
   @override

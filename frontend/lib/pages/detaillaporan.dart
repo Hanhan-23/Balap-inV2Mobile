@@ -41,6 +41,17 @@ class DetailLaporanScreen extends StatelessWidget {
                   return ListView.builder(
                     itemCount: 1,
                     itemBuilder: (context, index) {
+                      final dataJenis = listData!.jenis;
+                      String jenislaporan = '';
+
+                      if (dataJenis == 'jalan') {
+                        jenislaporan = 'Jalan Rusak';
+                      } else if (dataJenis == 'lampu_jalan') {
+                        jenislaporan = 'Lampu Jalan';
+                      } else if (dataJenis == 'jembatan') {
+                        jenislaporan = 'Jembatan Rusak';
+                      }
+
                       return Column(
                         children: [
                           Padding(
@@ -48,7 +59,7 @@ class DetailLaporanScreen extends StatelessWidget {
                             child: SizedBox(
                               width: double.infinity,
                               child: TextWidget(
-                                text: listData!.jenis,
+                                text: jenislaporan,
                                 colortext: Colors.black,
                                 fontsize: 12,
                                 fontweight: FontWeight.w400,

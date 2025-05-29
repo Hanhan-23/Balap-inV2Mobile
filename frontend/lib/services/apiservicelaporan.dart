@@ -4,7 +4,7 @@ import 'dart:convert' as convert;
 import 'package:frontend/models/model_laporan.dart';
 
 Future<List<ModelCardLaporan>> getCardLaporan() async {
-  var url = Uri.parse('$service/laporan/cardlaporan');
+  var url = Uri.parse('$service/laporan/cards');
   var response = await http.get(url);
   
   if (response.statusCode == 200) {

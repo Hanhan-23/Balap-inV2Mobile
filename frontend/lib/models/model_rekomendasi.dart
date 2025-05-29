@@ -1,0 +1,51 @@
+class ModelCardRekomendasi {
+  final dynamic id;
+  final String statusUrgent;
+  final double tingkatUrgent;
+  final String statusRekom;
+  final ModelCardLaporanRekomendasi idLaporan;
+
+  ModelCardRekomendasi({
+    required this.id,
+    required this.statusUrgent,
+    required this.tingkatUrgent,
+    required this.statusRekom,
+    required this.idLaporan,
+  });
+
+  factory ModelCardRekomendasi.fromJson(Map<String, dynamic> json) {
+    return ModelCardRekomendasi(
+      id: json['rekomendasi_id']['\$oid'],
+      statusUrgent: json['status_urgent'],
+      tingkatUrgent: json['tingkat_urgent'],
+      statusRekom: json['status_rekom'],
+      idLaporan: ModelCardLaporanRekomendasi.fromJson(json['id_laporan'])
+    );
+  }
+}
+
+class ModelCardLaporanRekomendasi {
+  final dynamic id;
+  final String gambar;
+  final String jenis;
+  final String judul;
+  final String alamat;
+
+  ModelCardLaporanRekomendasi({
+    required this.id,
+    required this.gambar,
+    required this.jenis,
+    required this.judul,
+    required this.alamat,
+  });
+
+  factory ModelCardLaporanRekomendasi.fromJson(Map<String, dynamic> json) {
+    return ModelCardLaporanRekomendasi(
+      id: json['_id']['\$oid'], 
+      gambar: json['gambar'], 
+      jenis: json['jenis'], 
+      judul: json['judul'], 
+      alamat: json['id_peta']['alamat']
+    );
+  }
+}

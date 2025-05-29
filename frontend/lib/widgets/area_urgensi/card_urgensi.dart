@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/model_rekomendasi.dart';
 import 'package:frontend/pages/detailrekomendasi.dart';
 
 class CardUrgensi extends StatefulWidget {
-  final int indexrekomen;
+  final ModelCardRekomendasi indexrekomen;
   const CardUrgensi({super.key, required this.indexrekomen});
 
   @override
@@ -13,10 +14,34 @@ class _CardUrgensiState extends State<CardUrgensi> {
 
   @override
   Widget build(BuildContext context) {
+    final dataJenis = widget.indexrekomen.idLaporan.jenis;
+    String jenislaporan = '';
+
+    if (dataJenis == 'jalan') {
+      jenislaporan = 'Jalan Rusak';
+    } else if (dataJenis == 'lampu_jalan') {
+      jenislaporan = 'Lampu Jalan';
+    } else if (dataJenis == 'jembatan') {
+      jenislaporan = 'Jembatan Rusak';
+    }
+
+    final dataStatus = widget.indexrekomen.statusUrgent;
+    String statusUrgent = '';
+
+    if (dataStatus == 'tinggi') {
+      statusUrgent = 'Tinggi';
+    } else if (dataStatus == 'sedang') {
+      statusUrgent = 'Sedang';
+    } else if (dataStatus == 'rendah') {
+      statusUrgent = 'Rendah';
+    } else {
+      statusUrgent = 'Tidak Dikenali';
+    }
+
     return 
     InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailRekomendasiScreen(index: widget.indexrekomen)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailRekomendasiScreen(index: null)));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -62,7 +87,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 1,
                           height: 20,
-                          child: Text('Jalan Simpang Kepri Berlubang',
+                          child: Text(widget.indexrekomen.idLaporan.judul,
                           style: TextStyle(
                               fontSize: 16,
                               fontFamily: 'Instrument-Sans',
@@ -93,7 +118,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
                                           left: 8,
                                           right: 8,
                                         ),
-                                        child: Text('Jalan rusak',
+                                        child: Text(jenislaporan,
                                           style: TextStyle(
                                             color: Color.fromRGBO(17, 84, 237, 1),
                                             fontFamily: 'Instrument-Sans',
@@ -124,7 +149,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
                                           left: 8,
                                           right: 8,
                                         ),
-                                        child: Text('Tinggi',
+                                        child: Text(statusUrgent,
                                           style: TextStyle(
                                             color: Color.fromRGBO(231, 0, 11, 100),
                                             fontFamily: 'Instrument-Sans',
@@ -143,7 +168,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
                         Expanded(
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width * 1,
-                            child: Text('Lorem ipsum dolor sit amet consectetur. Eu blandit leo etiam aliquam posuere...',
+                            child: Text(widget.indexrekomen.idLaporan.alamat,
                             style: TextStyle(
                                 fontSize: 8,
                                 fontFamily: 'Instrument-Sans',
