@@ -1,7 +1,7 @@
 use mongodb::{Client, Collection};
 use crate::models::laporanmodel::{Laporan, CardLaporan, DetailLaporan, LaporanCardRekomendasi};
 use crate::models::masyarakatmodel::Masyarakat;
-use crate::models::notifikasimodel::Notifikasi;
+use crate::models::notifikasimodel::{Notifikasi, RekomendasiNotifikasi};
 use crate::models::pemerintahmodel::Pemerintah;
 use crate::models::rekomendasimodel::Rekomendasi;
 #[derive(Clone)]
@@ -17,7 +17,10 @@ pub struct MongoRepo {
     pub laporan_card_rekomendasi: Collection<LaporanCardRekomendasi>,
     
     pub rekomendasi_collection: Collection<Rekomendasi>,
+    
+    // notifikasi
     pub notifikasi_collection: Collection<Notifikasi>,
+    pub notifikasi_rekomendasi_collection: Collection<RekomendasiNotifikasi>,
 }
 
 impl MongoRepo {
@@ -36,7 +39,10 @@ impl MongoRepo {
             laporan_card_rekomendasi: db.collection("laporan"),
             
             rekomendasi_collection: db.collection("rekomendasi"),
+            
+            // notifikasi
             notifikasi_collection: db.collection("notifikasi"),
+            notifikasi_rekomendasi_collection: db.collection("rekomendasi"),
         }
     }
 }
