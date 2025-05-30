@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:frontend/models/model_laporan.dart';
 import 'package:frontend/services/apiservicelaporan.dart';
 import 'package:frontend/widgets/parsebsondate.dart';
+import 'package:frontend/widgets/parsetimeago.dart';
 import 'package:frontend/widgets/textwidget.dart';
 
 class DetailLaporanScreen extends StatelessWidget {
@@ -86,7 +87,7 @@ class DetailLaporanScreen extends StatelessWidget {
                             child: SizedBox(
                               width: double.infinity,
                               child: TextWidget(
-                                text: parsebsondate('${listData.tglLapor}'),
+                                text: '${parsebsondate(listData.tglLapor)} (${parsetimeago(listData.tglLapor)})',
                                 colortext: Color.fromRGBO(98, 116, 142, 1),
                                 fontsize: 14,
                                 fontweight: FontWeight.w400,

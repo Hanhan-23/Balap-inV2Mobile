@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/model_notifikasi.dart';
+import 'package:frontend/widgets/parsetimeago.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:frontend/widgets/kustom_widget/gap_x.dart';
 import 'package:frontend/widgets/kustom_widget/gap_y.dart';
@@ -81,7 +82,7 @@ class CardNotifikasi extends StatelessWidget {
                     ),
                     GapX(4),
                     Text(
-                      '${data.tglNotif} 2 menit lalu',
+                      parsetimeago(data.tglNotif),
                       style: TextStyle(
                         color: Color(0XFF62748E),
                         fontSize: 12,

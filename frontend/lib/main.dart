@@ -3,9 +3,11 @@ import 'package:frontend/callback/callbackpenggunabaru.dart';
 import 'package:frontend/pages/privacy_policy.dart';
 import 'package:frontend/widgets/navigations/botnav.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_time_ago/get_time_ago.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  GetTimeAgo.setDefaultLocale('id');
   final cekpengguna = await checkPenggunaBaru();
   runApp(MyApp(cekpengguna: cekpengguna,));
 }
