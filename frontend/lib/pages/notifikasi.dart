@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/model_notifikasi.dart';
+import 'package:frontend/services/apiservicenotifikasi.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:frontend/widgets/Notifikasi/card_notifikasi.dart';
-import 'package:frontend/widgets/kustom_widget/gap_y.dart';
 
 class NotifikasiPages extends StatefulWidget {
   const NotifikasiPages({super.key});
@@ -11,6 +12,15 @@ class NotifikasiPages extends StatefulWidget {
 }
 
 class _NotifikasiPagesState extends State<NotifikasiPages> {
+
+  late Future<List<ModelNotifikasi>> _futurenotifikasi;
+
+  @override
+  void initState() {
+    super.initState();
+    _futurenotifikasi = getCardNotifikasi();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,23 +50,30 @@ class _NotifikasiPagesState extends State<NotifikasiPages> {
               Padding(padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.045),  
       child:
           // List scrollable card
-        ListView(
-          padding: EdgeInsets.only(top: 24,),
-          physics: const BouncingScrollPhysics(),
-            children: [
-                CardNotifikasi(),
-                GapY(12),
-                CardNotifikasi(),
-                GapY(12),
-                CardNotifikasi(),
-                GapY(12),
-                CardNotifikasi(),
-                GapY(12),
-                CardNotifikasi(),
-                GapY(12),
-                CardNotifikasi(),
-              ],
-            ),
+        FutureBuilder(
+          future: _futurenotifikasi, 
+          builder: (context, snapshot) {
+            var listData = snapshot.data;
+            if (snapshot.connectionState == ConnectionState.done) {
+              return ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: listData!.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(top: 0, bottom: 14),
+                    child: CardNotifikasi(data: listData[index]),
+                  );
+                },
+              );
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text('Sedang menyediakan layanan mohon menunggu');
+            } else if (snapshot.connectionState != ConnectionState.none) {
+              return Text('Layanan sedang nonaktif mohon maaf');
+            } else {
+              return Text('Kesalahan layanan');
+            }
+          }
+        )
         ),
       )
     );

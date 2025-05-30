@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/model_notifikasi.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:frontend/widgets/kustom_widget/gap_x.dart';
 import 'package:frontend/widgets/kustom_widget/gap_y.dart';
 
 class CardNotifikasi extends StatelessWidget {
-  const CardNotifikasi ({super.key});
+  final ModelNotifikasi data;
+  const CardNotifikasi ({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class CardNotifikasi extends StatelessWidget {
               children: [
                 // title
                 Text(
-                  'Jalan di simpang lampu merah berlubang',
+                  '${data.jalan} menjadi sorotan!',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -62,7 +64,7 @@ class CardNotifikasi extends StatelessWidget {
                 // description
                 GapY(8),
                 Text(
-                  'Perubahan status pada Jalan Jenderal Ahmad Yani menjadi prioritas tinggi, ayo pantau perkembangannya!',
+                  data.pesan,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.normal,
