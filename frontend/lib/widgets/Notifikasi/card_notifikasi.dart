@@ -81,7 +81,7 @@ class CardNotifikasi extends StatelessWidget {
                     ),
                     GapX(4),
                     Text(
-                      '2 menit lalu',
+                      '${data.tglNotif} 2 menit lalu',
                       style: TextStyle(
                         color: Color(0XFF62748E),
                         fontSize: 12,

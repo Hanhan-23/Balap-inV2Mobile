@@ -67,7 +67,7 @@ class ModelDetailLaporan {
       id: json['_id']['\$oid'], 
       jenis: json['jenis'], 
       judul: json['judul'], 
-      tglLapor: json['tgl_lapor'], 
+      tglLapor: json['tgl_lapor']['\$date']['\$numberLong'], 
       gambar: json['gambar'], 
       peta: ModelPeta.fromJson(json['id_peta']),
       deskripsi: json['deskripsi']

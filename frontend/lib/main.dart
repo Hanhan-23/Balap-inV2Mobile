@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/callback/callbackpenggunabaru.dart';
 import 'package:frontend/pages/privacy_policy.dart';
 import 'package:frontend/widgets/navigations/botnav.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,15 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(17, 84, 237, 1)),
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('in'),
+        Locale('en'),
+      ],
       home: cekpengguna ? const PrivacyPolicyPages() : const BottomNavigation(),
     );
   }
