@@ -1,5 +1,4 @@
 use mongodb::bson::oid::ObjectId;
-use mongodb::bson::Timestamp;
 use serde::{Deserialize, Serialize};
 use crate::models::petamodel::{Peta, PetaCardRekomendasi};
 use mongodb::bson::DateTime;
@@ -30,6 +29,7 @@ pub struct CardLaporan{
     pub judul: String,
     pub deskripsi: String,
     pub status: String,
+    pub tgl_lapor: DateTime,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

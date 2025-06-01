@@ -23,13 +23,15 @@ class ModelCardLaporan {
   final String judul;
   final String deskripsi;
   final String gambar;
+  final dynamic tglLapor;
 
   ModelCardLaporan({
     required this.id,
     required this.jenis,
     required this.judul,
     required this.deskripsi,
-    required this.gambar
+    required this.gambar,
+    required this.tglLapor,
   });
 
   factory ModelCardLaporan.fromJson(Map<String, dynamic> json) {
@@ -38,7 +40,8 @@ class ModelCardLaporan {
       jenis: json['jenis'], 
       judul: json['judul'], 
       deskripsi: json['deskripsi'], 
-      gambar: json['gambar']
+      gambar: json['gambar'],
+      tglLapor: json['tgl_lapor']['\$date']['\$numberLong']
       );
   }
 }

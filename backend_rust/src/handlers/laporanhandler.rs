@@ -27,6 +27,7 @@ pub async fn get_card_laporan(db: web::Data<MongoRepo>) -> impl Responder {
         "judul": 1,
         "deskripsi": 1,
         "status": 1,
+        "tgl_lapor": 1,
     };
 
     let options = mongodb::options::FindOptions::builder().projection(projection).build();

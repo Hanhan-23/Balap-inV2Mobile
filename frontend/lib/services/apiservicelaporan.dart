@@ -9,7 +9,7 @@ Future<List<ModelCardLaporan>> getCardLaporan() async {
   
   if (response.statusCode == 200) {
     var jsonResponse = convert.jsonDecode(response.body) as List;
-    return jsonResponse.map((e) => ModelCardLaporan.fromJson(e)).toList();
+    return jsonResponse.map((e) => ModelCardLaporan.fromJson(e)).toList().reversed.toList();
   } else {
     throw Exception("Failed to fetch Data");
   }

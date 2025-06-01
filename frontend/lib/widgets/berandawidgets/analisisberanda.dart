@@ -104,7 +104,6 @@ class _AnalisisBerandaState extends State<AnalisisBeranda> {
 
           jumlahLaporan = data.length.toString();
 
-          // Hitung jumlah per jenis
           final jenisCount = <String, int>{};
 
           for (var laporan in data) {
