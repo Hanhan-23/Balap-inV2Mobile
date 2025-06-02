@@ -23,7 +23,7 @@ class _BerandaPagesState extends State<BerandaPages> with AutomaticKeepAliveClie
   @override
   void initState() {
     super.initState();
-    _laporanFuture = getCardLaporan();
+    _laporanFuture = getCardLaporan(4, null);
   }
 
   @override

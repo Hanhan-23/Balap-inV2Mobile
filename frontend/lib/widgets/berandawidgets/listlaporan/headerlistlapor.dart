@@ -23,13 +23,13 @@ class _HeaderListLaporState extends State<HeaderListLapor> {
 
       if (filterBerdasarkan != null) {
         setState(() {
-          if (filterBerdasarkan == 0) {
+          if (filterBerdasarkan == 1) {
             berdasarkan = 'Seminggu Terakhir';
-          } else if (filterBerdasarkan == 1) {
-            berdasarkan = 'Sebulan Terakhir';
           } else if (filterBerdasarkan == 2) {
-            berdasarkan = 'Setahun Terakhir';
+            berdasarkan = 'Sebulan Terakhir';
           } else if (filterBerdasarkan == 3) {
+            berdasarkan = 'Setahun Terakhir';
+          } else if (filterBerdasarkan == 4) {
             berdasarkan = 'Semua Periode';
           }
         });

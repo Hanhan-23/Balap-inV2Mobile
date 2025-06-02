@@ -2,13 +2,13 @@ use std::sync::Arc;
 use actix_multipart::Multipart;
 use actix_web::{web, HttpResponse, Responder, HttpRequest};
 use futures::{StreamExt, TryStreamExt};
-use crate::models::laporanmodel::{CardLaporan, DetailLaporan, Laporan, LaporanBaru};
+use crate::models::laporanmodel::{CardLaporan, DetailLaporan, Laporan, LaporanBaru, SortCardLaporan};
 use crate::mongorepo::MongoRepo;
 use serde_json::json;
 use crate::models::app_state::AppState;
 use crate::utils::s3service::upload_photo;
-use chrono::Utc;
-use mongodb::bson::{doc, oid::ObjectId, DateTime as BsonDateTime};
+use chrono::{Duration, Utc};
+use mongodb::bson::{doc, Regex, oid::ObjectId, DateTime as BsonDateTime};
 
 pub async fn get_laporan(db: web::Data<MongoRepo>) -> impl Responder {
     let filter = doc! {"status": "selesai"};
@@ -19,9 +19,45 @@ pub async fn get_laporan(db: web::Data<MongoRepo>) -> impl Responder {
     HttpResponse::Ok().json(docs)
 }
 
-pub async fn get_card_laporan(db: web::Data<MongoRepo>) -> impl Responder {
+pub async fn get_card_laporan(
+    db: web::Data<MongoRepo>,
+    query: web::Query<SortCardLaporan>,
+) -> impl Responder {
+    let mut filter = doc! {
+        "status": "selesai"
+    };
+    
+    if let Some(period) = query.period {
+        let now = Utc::now();
+
+        let start_time = match period {
+            1 => Some(now - Duration::days(7)),  
+            2 => Some(now - Duration::days(30)),    
+            3 => Some(now - Duration::days(365)), 
+            _ => None,                           
+        };
+
+        if let Some(start) = start_time {
+            let start_bson = BsonDateTime::from_millis(start.timestamp_millis());
+            filter.insert("tgl_lapor", doc! { "$gte": start_bson });
+        }
+    }
+    
+    if let Some(search_term) = &query.search {
+        let regex = Regex {
+            pattern: format!(".*{}.*", regex::escape(search_term)),
+            options: "i".to_string(), 
+        };
+
+        filter.insert("$or", vec![
+            doc! { "jenis": { "$regex": regex.clone() } },
+            doc! { "judul": { "$regex": regex.clone() } },
+            doc! { "deskripsi": { "$regex": regex.clone() } },
+        ]);
+    }
+
     let projection = doc! {
-        "_id": 1, 
+        "_id": 1,
         "gambar": 1,
         "jenis": 1,
         "judul": 1,
@@ -30,12 +66,18 @@ pub async fn get_card_laporan(db: web::Data<MongoRepo>) -> impl Responder {
         "tgl_lapor": 1,
     };
 
-    let options = mongodb::options::FindOptions::builder().projection(projection).build();
+    let cursor = db
+        .card_laporan_collection
+        .find(filter)
+        .projection(projection)
+        .sort(doc! { "tgl_lapor": -1 }) // urutkan terbaru dulu
+        .await
+        .expect("Failed to find documents");
 
-    let filter = doc! {"status": "selesai"};
-
-    let cursor = db.card_laporan_collection.find(filter).with_options(options).await.expect("Failed to find documents");
-    let docs = cursor.try_collect::<Vec<CardLaporan>>().await.expect("Failed to collect documents");
+    let docs = cursor
+        .try_collect::<Vec<CardLaporan>>()
+        .await
+        .expect("Failed to collect documents");
 
     HttpResponse::Ok().json(docs)
 }
