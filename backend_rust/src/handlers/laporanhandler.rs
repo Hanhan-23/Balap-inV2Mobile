@@ -31,9 +31,9 @@ pub async fn get_card_laporan(
         let now = Utc::now();
 
         let start_time = match period {
-            1 => Some(now - Duration::days(7)),  
-            2 => Some(now - Duration::days(30)),    
-            3 => Some(now - Duration::days(365)), 
+            0 => Some(now - Duration::days(7)),  
+            1 => Some(now - Duration::days(30)),    
+            2 => Some(now - Duration::days(365)), 
             _ => None,                           
         };
 

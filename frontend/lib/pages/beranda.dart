@@ -15,6 +15,8 @@ class BerandaPages extends StatefulWidget {
 }
 
 class _BerandaPagesState extends State<BerandaPages> with AutomaticKeepAliveClientMixin {
+  int berdasarkan = 0;
+
   @override
   bool get wantKeepAlive => true;
   
@@ -23,7 +25,7 @@ class _BerandaPagesState extends State<BerandaPages> with AutomaticKeepAliveClie
   @override
   void initState() {
     super.initState();
-    _laporanFuture = getCardLaporan(4, null);
+    _laporanFuture = getCardLaporan(berdasarkan, null);
   }
 
   @override
@@ -94,7 +96,12 @@ class _BerandaPagesState extends State<BerandaPages> with AutomaticKeepAliveClie
               ),
               headerWidget: headerWidget(), 
               body: [
-                ListLaporanBeranda(laporanFuture: _laporanFuture), 
+                ListLaporanBeranda(laporanFuture: _laporanFuture, filterindex: (int filterBerdasarkan) {
+                  setState(() {
+                    berdasarkan = filterBerdasarkan;
+                    _laporanFuture = getCardLaporan(berdasarkan, null);
+                  });
+                },), 
               ],
             ),
           )

@@ -3,7 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:frontend/widgets/berandawidgets/listlaporan/dialogfilterlap.dart';
 
 class HeaderListLapor extends StatefulWidget {
-  const HeaderListLapor({super.key});
+  final Function(int) onFilterChanged;
+  const HeaderListLapor({super.key, required this.onFilterChanged});
 
   @override
   State<HeaderListLapor> createState() => _HeaderListLaporState();
@@ -23,16 +24,18 @@ class _HeaderListLaporState extends State<HeaderListLapor> {
 
       if (filterBerdasarkan != null) {
         setState(() {
-          if (filterBerdasarkan == 1) {
+          if (filterBerdasarkan == 0) {
             berdasarkan = 'Seminggu Terakhir';
-          } else if (filterBerdasarkan == 2) {
+          } else if (filterBerdasarkan == 1) {
             berdasarkan = 'Sebulan Terakhir';
-          } else if (filterBerdasarkan == 3) {
+          } else if (filterBerdasarkan == 2) {
             berdasarkan = 'Setahun Terakhir';
-          } else if (filterBerdasarkan == 4) {
+          } else if (filterBerdasarkan == 3) {
             berdasarkan = 'Semua Periode';
           }
         });
+
+        widget.onFilterChanged(filterBerdasarkan);
       }
     }
 

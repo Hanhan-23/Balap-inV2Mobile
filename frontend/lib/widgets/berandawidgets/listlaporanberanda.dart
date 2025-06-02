@@ -5,9 +5,10 @@ import 'package:frontend/widgets/berandawidgets/listlaporan/headerlistlapor.dart
 import 'package:frontend/widgets/berandawidgets/listlaporan/listlaporan.dart';
 
 class ListLaporanBeranda extends StatefulWidget {
+  final Function(int) filterindex;
   final Future<List<ModelCardLaporan>> laporanFuture;
   
-  const ListLaporanBeranda({super.key, required this.laporanFuture});
+  const ListLaporanBeranda({super.key, required this.laporanFuture, required this.filterindex});
 
   @override
   State<ListLaporanBeranda> createState() => _ListLaporanBerandaState();
@@ -21,7 +22,11 @@ class _ListLaporanBerandaState extends State<ListLaporanBeranda> {
         SizedBox(
           width: MediaQuery.of(context).size.width * 1,
           height: MediaQuery.of(context).size.height * 0.08,
-          child: HeaderListLapor(),
+          child: HeaderListLapor(onFilterChanged: (int filter) {
+            setState(() {
+              widget.filterindex(filter);
+            });
+          },),
         ),
         SizedBox(height: 14),
         Padding(
