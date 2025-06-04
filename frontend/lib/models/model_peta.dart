@@ -23,3 +23,26 @@ class ModelPeta {
     );
   }
 }
+
+class ModelBuatPeta {
+  final String alamat;
+  final String jalan;
+  final double latitude;
+  final double longitude;
+
+  ModelBuatPeta ({
+    required this.alamat,
+    required this.jalan,
+    required this.latitude,
+    required this.longitude
+  });
+
+  factory ModelBuatPeta.fromJson(Map<String, dynamic> json) {
+    return ModelBuatPeta(
+      alamat: json['alamat'], 
+      jalan: json['jalan'], 
+      latitude: json['latitude'], 
+      longitude: json['longitude']
+    );
+  }
+}

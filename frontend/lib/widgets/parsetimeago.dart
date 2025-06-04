@@ -13,9 +13,9 @@ String parsetimeago(String dates) {
 
   if (difference.inDays > 365) {
     return 'Lebih dari setahun yang lalu';
-  } else if (difference.inDays > 32) {
+  } else if (difference.inDays > 30) {
     return 'Lebih dari sebulan yang lalu';
-  } else if (difference.inDays > 8) {
+  } else if (difference.inDays > 7) {
     return 'Lebih dari seminggu yang lalu';
   }
 

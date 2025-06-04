@@ -1,20 +1,53 @@
 import 'package:frontend/models/model_peta.dart';
 
-class ModelLaporan {
-  final dynamic id;
+class ModelBuatLaporFinal {
+  final ModelBuatLaporan laporan;
   final String gambar;
 
-  ModelLaporan ({
-    required this.id,
+  ModelBuatLaporFinal ({
+    required this.laporan,
     required this.gambar,
   });
 
-  factory ModelLaporan.fromJson(Map<String, dynamic> json) {
-    return ModelLaporan(
-      id: json['_id'], 
-      gambar: json['gambar']
+  factory ModelBuatLaporFinal.fromJson(Map<dynamic, dynamic> json) {
+    return ModelBuatLaporFinal(
+      laporan: json['laporan'], 
+      gambar: json['gambar'],
     );}
+}
 
+class ModelBuatLaporan {
+  final String judul;
+  final String jenis;
+  final String deskripsi;
+  final String cuaca;
+  final String persentase;
+  final dynamic idMasyarakat;
+  final ModelBuatPeta idPeta;
+  final String status;
+
+  ModelBuatLaporan ({
+    required this.judul,
+    required this.jenis,
+    required this.deskripsi,
+    required this.cuaca,
+    required this.persentase,
+    required this.idMasyarakat,
+    required this.idPeta,
+    required this.status,
+  });
+
+  factory ModelBuatLaporan.fromJson(Map<String, dynamic> json) {
+    return ModelBuatLaporan(
+      judul: json['judul'],
+      jenis: json['jenis'],
+      deskripsi: json['deskripsi'],
+      cuaca: json['cuaca'],
+      persentase: json['persentase'],
+      idMasyarakat: json['id_masyarakat'],
+      idPeta: json['id_peta'],
+      status: json['status'],
+    );}
 }
 
 class ModelCardLaporan {

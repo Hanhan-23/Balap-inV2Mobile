@@ -1,7 +1,7 @@
 use actix_web::cookie::time::format_description::modifier::Period;
 use mongodb::bson::oid::ObjectId;
 use serde::{Deserialize, Serialize};
-use crate::models::petamodel::{Peta, PetaCardRekomendasi};
+use crate::models::petamodel::{Peta, PetaBaru, PetaCardRekomendasi};
 use mongodb::bson::DateTime;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -57,7 +57,7 @@ pub struct LaporanBaru{
     pub status: String,
     pub cluster: Option<i64>,
     pub id_masyarakat: ObjectId,
-    pub id_peta: Peta
+    pub id_peta: PetaBaru
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

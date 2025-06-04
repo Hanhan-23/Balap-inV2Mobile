@@ -9,6 +9,7 @@ use crate::models::app_state::AppState;
 use crate::utils::s3service::upload_photo;
 use chrono::{Duration, Utc};
 use mongodb::bson::{doc, Regex, oid::ObjectId, DateTime as BsonDateTime};
+use crate::models::petamodel::Peta;
 
 pub async fn get_laporan(db: web::Data<MongoRepo>) -> impl Responder {
     let filter = doc! {"status": "selesai"};
@@ -70,7 +71,7 @@ pub async fn get_card_laporan(
         .card_laporan_collection
         .find(filter)
         .projection(projection)
-        .sort(doc! { "tgl_lapor": -1 }) // urutkan terbaru dulu
+        .sort(doc! { "tgl_lapor": -1 }) 
         .await
         .expect("Failed to find documents");
 
@@ -170,16 +171,22 @@ pub async fn upload_laporan_gambar(
     let new_laporan = Laporan {
         id: ObjectId::new(),
         gambar: format!("https://balapin.s3.amazonaws.com/{}", key),
-        jenis: laporan.jenis,
         judul: laporan.judul,
+        jenis: laporan.jenis,
         deskripsi: laporan.deskripsi,
-        persentase: laporan.persentase,
         cuaca: laporan.cuaca,
+        persentase: laporan.persentase,
         status: laporan.status,
         tgl_lapor: BsonDateTime::from_millis(Utc::now().timestamp_millis()),
         cluster: laporan.cluster,
         id_masyarakat: laporan.id_masyarakat,
-        id_peta: laporan.id_peta,
+        id_peta: Peta {
+            id: ObjectId::new(),
+            alamat: laporan.id_peta.alamat,
+            jalan: laporan.id_peta.jalan,
+            latitude: laporan.id_peta.latitude,
+            longitude: laporan.id_peta.longitude,
+        },
     };
 
     let result = db.laporan_collection.insert_one(&new_laporan).await;

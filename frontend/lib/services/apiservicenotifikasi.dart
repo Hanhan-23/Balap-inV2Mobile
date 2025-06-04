@@ -10,7 +10,7 @@ Future<List<ModelNotifikasi>> getCardNotifikasi() async {
 
   if (response.statusCode == 200) {
     var responseJson = jsonDecode(response.body) as List;
-    return responseJson.map((e) => ModelNotifikasi.fromJson(e)).toList().reversed.toList();
+    return responseJson.map((e) => ModelNotifikasi.fromJson(e)).toList();
   } else {
     throw Exception("Failed fetch data rekomendasi");
   }

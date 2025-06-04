@@ -9,6 +9,8 @@ class DeskripsiPengaduan extends StatefulWidget {
 }
 
 class _DeskripsiPengaduanState extends State<DeskripsiPengaduan> {
+  final TextEditingController deskripsiController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,6 +29,7 @@ class _DeskripsiPengaduanState extends State<DeskripsiPengaduan> {
         SizedBox(
           height: 150,
           child: TextField(
+            controller: deskripsiController,
             inputFormatters: [
               FilteringTextInputFormatter.deny(RegExp(r'[\n\r]'))
             ],

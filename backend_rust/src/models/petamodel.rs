@@ -15,3 +15,11 @@ pub struct Peta {
 pub struct PetaCardRekomendasi {
     pub alamat: String,
 }
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct PetaBaru {
+    pub alamat: String,
+    pub jalan: String,
+    pub latitude: f64,
+    pub longitude: f64,
+}
