@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/widgets/buatlaporan/pickermap.dart';
 
-class AlamatPengaduan extends StatelessWidget {
+class AlamatPengaduan extends StatefulWidget {
   const AlamatPengaduan({super.key});
+
+  @override
+  State<AlamatPengaduan> createState() => _AlamatPengaduanState();
+}
+
+class _AlamatPengaduanState extends State<AlamatPengaduan> {
+  String? selectedAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +32,11 @@ class AlamatPengaduan extends StatelessWidget {
 
 
             GestureDetector(
-              onTap: () {
-                null;
+              onTap: () async {
+                final address = await pickerMap(context);
+                setState(() {
+                  selectedAddress = address.toString();
+                });
               },
               child: Row(
                 spacing: 5,
@@ -68,7 +79,7 @@ class AlamatPengaduan extends StatelessWidget {
             ),
             decoration: InputDecoration(
               counterText: '',
-              hintText: 'Jl. Ahmad Yani, Kabil, Kecamatan Nongsa, Kota Batam, Kepulauan Riau 29444',
+              hintText: selectedAddress ?? 'Pilih lokasi infrastruktur',
               hintStyle: TextStyle(
                 fontFamily: 'Instrument-Sans',
                 fontWeight: FontWeight.w400,

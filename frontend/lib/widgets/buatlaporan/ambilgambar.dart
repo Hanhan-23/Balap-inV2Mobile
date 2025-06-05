@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:frontend/widgets/buatlaporan/showambilgambar.dart';
 
 class AmbilGambar extends StatelessWidget {
   const AmbilGambar({super.key});
@@ -28,7 +29,7 @@ class AmbilGambar extends StatelessWidget {
                   height: 48,
                   child: FloatingActionButton(
                     onPressed: () {
-                    null;
+                    showModalAmbilGambar(context);
                   },
                   backgroundColor: Colors.white,
                   child: Padding(
