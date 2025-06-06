@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-Future showModalAmbilGambar(context) {
+Future<void> showModalAmbilGambar(BuildContext context, Function(XFile?) onImagePicked) async {
+  final picker = ImagePicker();
+
   return showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
@@ -17,29 +20,30 @@ Future showModalAmbilGambar(context) {
         ),
         actions: [
           CupertinoActionSheetAction(
-            onPressed: () {},
-            child: Text(
-              'Kamera',
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'Instrument-Sans',
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            onPressed: () async {
+              final image = await picker.pickImage(source: ImageSource.camera);
+              Navigator.pop(context);
+              onImagePicked(image);
+            },
+            child: const Text('Kamera', style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'Instrument-Sans',
+              fontSize: 17,
+              fontWeight: FontWeight.w500,
+            ),),
           ),
-
           CupertinoActionSheetAction(
-            onPressed: () {},
-            child: Text(
-              'Galeri',
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'Instrument-Sans',
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            onPressed: () async {
+              final image = await picker.pickImage(source: ImageSource.gallery);
+              Navigator.pop(context); 
+              onImagePicked(image);
+            },
+            child: const Text('Galeri', style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'Instrument-Sans',
+              fontSize: 17,
+              fontWeight: FontWeight.w500,
+            ),),
           ),
         ],
       );

@@ -15,7 +15,6 @@ Future<String> geocodelocation(pickedLocation) async {
   
   final jsonResponse = convert.jsonDecode(response.body) as Map<String, dynamic>;
   final results = jsonResponse['results'] as List;
-  print(results);
   
   if (results.isNotEmpty) {
     final formattedAddress = results[0]['formatted_address'];
