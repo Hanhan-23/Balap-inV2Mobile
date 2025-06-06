@@ -39,7 +39,8 @@ class DetailLaporanScreen extends StatelessWidget {
                   return Text('Memuat detail laporan');
                 } else if (snapshot.connectionState == ConnectionState.none) {
                   return Text('Layanan sedang nonaktif mohon maaf');
-                } else if (snapshot.connectionState == ConnectionState.done || snapshot.hasData) {
+                } else if (snapshot.connectionState == ConnectionState.done ||
+                    snapshot.hasData) {
                   return ListView.builder(
                     itemCount: 1,
                     itemBuilder: (context, index) {
@@ -87,7 +88,8 @@ class DetailLaporanScreen extends StatelessWidget {
                             child: SizedBox(
                               width: double.infinity,
                               child: TextWidget(
-                                text: '${parsebsondate(listData.tglLapor)} (${parsetimeago(listData.tglLapor)})',
+                                text:
+                                    '${parsebsondate(listData.tglLapor)} (${parsetimeago(listData.tglLapor)})',
                                 colortext: Color.fromRGBO(98, 116, 142, 1),
                                 fontsize: 14,
                                 fontweight: FontWeight.w400,
@@ -105,8 +107,31 @@ class DetailLaporanScreen extends StatelessWidget {
                               width: double.infinity,
                               height:
                                   MediaQuery.of(context).size.height * 0.428,
-                              child: Image.asset(
-                                'assets/images/logo.png',
+                              child: Image.network(
+                                listData.gambar,
+                                loadingBuilder: (
+                                  context,
+                                  child,
+                                  loadingProgress,
+                                ) {
+                                  return loadingProgress == null
+                                      ? child
+                                      : CircularProgressIndicator();
+                                },
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Center(
+                                    child: Text(
+                                      textAlign: TextAlign.center,
+                                      'Gambar tidak tersedia di layanan',
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(17, 84, 237, 1),
+                                        fontFamily: 'Instrument-Sans',
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  );
+                                },
                                 fit: BoxFit.cover,
                               ),
                             ),

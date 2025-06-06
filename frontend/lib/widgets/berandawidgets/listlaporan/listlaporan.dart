@@ -10,10 +10,8 @@ class ListLaporan extends StatefulWidget {
 }
 
 class _ListLaporanState extends State<ListLaporan> {
-  
   @override
   Widget build(BuildContext context) {
-
     final dataJenis = widget.dataCardLaporan!.jenis;
     String jenislaporan = '';
 
@@ -48,7 +46,29 @@ class _ListLaporanState extends State<ListLaporan> {
               clipBehavior: Clip.hardEdge,
               width: 104,
               height: 104,
-              child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
+              child: Image.network(
+                widget.dataCardLaporan!.gambar,
+                loadingBuilder: (context, child, loadingProgress) {
+                  return loadingProgress == null
+                      ? child
+                      : CircularProgressIndicator();
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return Center(
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      'Gambar tidak tersedia di layanan',
+                      style: TextStyle(
+                        color: Color.fromRGBO(17, 84, 237, 1),
+                        fontFamily: 'Instrument-Sans',
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  );
+                },
+                fit: BoxFit.cover,
+              ),
             ),
             SizedBox(width: 10),
             Expanded(
@@ -75,7 +95,8 @@ class _ListLaporanState extends State<ListLaporan> {
                               left: 8,
                               right: 8,
                             ),
-                            child: Text( jenislaporan,
+                            child: Text(
+                              jenislaporan,
                               style: TextStyle(
                                 color: Color.fromRGBO(17, 84, 237, 1),
                                 fontFamily: 'Instrument-Sans',
