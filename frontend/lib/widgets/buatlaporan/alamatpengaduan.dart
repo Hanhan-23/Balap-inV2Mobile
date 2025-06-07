@@ -35,7 +35,9 @@ class _AlamatPengaduanState extends State<AlamatPengaduan> {
               onTap: () async {
                 final address = await pickerMap(context);
                 setState(() {
-                  selectedAddress = address.toString();
+                  if (address != null) {
+                    selectedAddress = address.toString();
+                  }
                 });
               },
               child: Row(

@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:frontend/provider/laporan_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:frontend/widgets/buatlaporan/showambilgambar.dart';
+import 'package:provider/provider.dart';
 
 class AmbilGambar extends StatefulWidget {
   const AmbilGambar({super.key});
@@ -17,6 +19,8 @@ class _AmbilGambarState extends State<AmbilGambar> {
 
   @override
   Widget build(BuildContext context) {
+    final laporanprovider = Provider.of<LaporanProvider>(context, listen: false);
+
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.42,
       child: ClipRRect(
@@ -49,6 +53,8 @@ class _AmbilGambarState extends State<AmbilGambar> {
                         setState(() {
                           pickedImage = image;
                         });
+
+                        laporanprovider.setGambar(File(image.path));
                       }
                     });
                   },

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/provider/laporan_provider.dart';
+import 'package:provider/provider.dart';
 
 class DeskripsiPengaduan extends StatefulWidget {
   const DeskripsiPengaduan({super.key});
@@ -10,6 +12,14 @@ class DeskripsiPengaduan extends StatefulWidget {
 
 class _DeskripsiPengaduanState extends State<DeskripsiPengaduan> {
   final TextEditingController deskripsiController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    deskripsiController.addListener(() {
+      context.read<LaporanProvider>().setDeskripsi(deskripsiController.text);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

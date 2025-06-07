@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/provider/laporan_provider.dart';
+import 'package:provider/provider.dart';
 
 class JenisPengaduan extends StatefulWidget {
   const JenisPengaduan({super.key});
@@ -9,11 +11,13 @@ class JenisPengaduan extends StatefulWidget {
 
 const List<String> listJenis = <String>['Jalan', 'Lampu Jalan', 'Jembatan'];
 
-String? selectedJenis;
 
 class _JenisPengaduanState extends State<JenisPengaduan> {
   @override
   Widget build(BuildContext context) {
+    final laporanprovider = context.watch<LaporanProvider>();
+    final selectedJenis = laporanprovider.jenis;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,10 +82,10 @@ class _JenisPengaduanState extends State<JenisPengaduan> {
 
             ),
             value: selectedJenis,
-            onChanged: (String? listJenis) {
-              setState(() {
-                selectedJenis = listJenis;
-              });
+            onChanged: (value) {
+              if (value != null) {
+                context.read<LaporanProvider>().setJenis(value);
+              }
             },
             items: listJenis.map<DropdownMenuItem<String>>((String listJenis) {
               return DropdownMenuItem<String>(

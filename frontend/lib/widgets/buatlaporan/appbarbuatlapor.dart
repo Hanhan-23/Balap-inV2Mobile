@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/pages/draflapor.dart';
+import 'package:frontend/provider/laporan_provider.dart';
 import 'package:frontend/widgets/navigations/botnav.dart';
+import 'package:provider/provider.dart';
 
 class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {
   final dynamic keyDialogDraft;
@@ -9,6 +11,8 @@ class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final laporanprovider = context.watch<LaporanProvider>();
+
     return AppBar(
       centerTitle: true,
       titleSpacing: 0,
@@ -18,6 +22,7 @@ class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {
             context,
             MaterialPageRoute(builder: (context) => BottomNavigation()),
           );
+          laporanprovider.clearLaporan();
         }, icon: SvgPicture.asset('assets/icons/buatlaporan/arrowleft.svg',
         width: 32,
         height: 32,)

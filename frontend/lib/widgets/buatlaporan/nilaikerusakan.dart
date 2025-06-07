@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/provider/laporan_provider.dart';
+import 'package:provider/provider.dart';
 
 class NilaiKerusakan extends StatefulWidget {
   const NilaiKerusakan({super.key});
@@ -71,6 +73,7 @@ class _NilaiKerusakanState extends State<NilaiKerusakan> {
                     setState(() {
                       _currentSliderValue = value;
                     });
+                    context.read<LaporanProvider>().setNilaiKerusakan(value);
                   },
                 ),
               ),

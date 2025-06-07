@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/callback/callbackpenggunabaru.dart';
 import 'package:frontend/pages/privacy_policy.dart';
+import 'package:frontend/provider/laporan_provider.dart';
 import 'package:frontend/widgets/navigations/botnav.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_time_ago/get_time_ago.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GetTimeAgo.setDefaultLocale('id');
   final cekpengguna = await checkPenggunaBaru();
-  runApp(MyApp(cekpengguna: cekpengguna,));
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => LaporanProvider(),
+      child: MyApp(cekpengguna: cekpengguna),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,17 +31,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Instrument-Sans',
         scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(17, 84, 237, 1)),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color.fromRGBO(17, 84, 237, 1),
+        ),
       ),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
-        Locale('in'),
-        Locale('en'),
-      ],
+      supportedLocales: [Locale('in'), Locale('en')],
       home: cekpengguna ? const PrivacyPolicyPages() : const BottomNavigation(),
     );
   }

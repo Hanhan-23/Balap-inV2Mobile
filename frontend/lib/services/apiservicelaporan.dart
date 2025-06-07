@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:frontend/services/service.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:frontend/models/model_laporan.dart';
@@ -32,4 +35,15 @@ Future<ModelDetailLaporan> getDetailLaporan(id) async {
   } else {
     throw Exception("Failed to fetch Data");
   }
+}
+
+
+Future buatLapor(File? gambar,String? judul, String? jenis, String? deskripsi, String? cuaca, double? nilaikerusakan, LatLng? pickedLocation) async {
+  print(gambar);
+  print(judul);
+  print(jenis);
+  print(deskripsi);
+  print(cuaca);
+  print(nilaikerusakan);
+  print(pickedLocation);
 }

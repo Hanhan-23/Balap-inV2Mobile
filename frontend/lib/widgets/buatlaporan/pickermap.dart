@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/provider/laporan_provider.dart';
 import 'package:frontend/services/apiservicemap.dart';
 import 'package:frontend/services/geocodmaps.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
 Future pickerMap(BuildContext context) {
   LatLng? pickedLocation;
@@ -95,6 +97,7 @@ Future pickerMap(BuildContext context) {
                                 onPressed: () {
                                   final alamat = geocodelocation(pickedLocation);
                                   Navigator.pop(context, alamat);
+                                  context.read<LaporanProvider>().setPickedLocation(pickedLocation);
                                 },
                                 child: Text(
                                   "Pilih Lokasi Ini",

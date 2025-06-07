@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/provider/laporan_provider.dart';
+import 'package:provider/provider.dart';
 
 class Judulpengaduan extends StatefulWidget {
   const Judulpengaduan({super.key});
@@ -10,6 +12,14 @@ class Judulpengaduan extends StatefulWidget {
 
 class _JudulpengaduanState extends State<Judulpengaduan> {
   final TextEditingController judulController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    judulController.addListener(() {
+      context.read<LaporanProvider>().setJudul(judulController.text);
+    });
+  }
   
   @override
   Widget build(BuildContext context) {
