@@ -3,7 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend/pages/notifikasi.dart';
 
 class AppBarBeranda extends StatelessWidget {
-  const AppBarBeranda({super.key});
+  final Function(bool) searchberanda;
+  final bool isSearchVisible;
+  const AppBarBeranda({super.key, required this.searchberanda, required this.isSearchVisible});
 
   twoBar(asset, action) {
     return InkWell(
@@ -34,7 +36,9 @@ class AppBarBeranda extends StatelessWidget {
         SizedBox(
           child: Row(
             children: [
-              twoBar('assets/icons/beranda/search.svg', null),
+              twoBar('assets/icons/beranda/search.svg', () => (
+                searchberanda(!isSearchVisible)
+              )),
               twoBar(
                 'assets/icons/beranda/notification.svg', () {
                 Navigator.push(

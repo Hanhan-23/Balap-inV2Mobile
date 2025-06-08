@@ -6,6 +6,7 @@ import 'package:frontend/widgets/berandawidgets/mapberanda.dart';
 import 'package:frontend/widgets/berandawidgets/listlaporanberanda.dart';
 import 'package:frontend/models/model_laporan.dart';
 import 'package:frontend/services/apiservicelaporan.dart';
+import 'package:frontend/widgets/berandawidgets/searchberanda.dart';
 
 class BerandaPages extends StatefulWidget {
   const BerandaPages({super.key});
@@ -14,54 +15,48 @@ class BerandaPages extends StatefulWidget {
   State<BerandaPages> createState() => _BerandaPagesState();
 }
 
-class _BerandaPagesState extends State<BerandaPages> with AutomaticKeepAliveClientMixin {
+class _BerandaPagesState extends State<BerandaPages>
+    with AutomaticKeepAliveClientMixin {
   int berdasarkan = 0;
+  String? searchinput;
+  bool searchberanda = false;
 
   @override
   bool get wantKeepAlive => true;
-  
+
   late Future<List<ModelCardLaporan>> _laporanFuture;
-  
+
   @override
   void initState() {
     super.initState();
-    _laporanFuture = getCardLaporan(berdasarkan, null);
+    _laporanFuture = getCardLaporan(berdasarkan, searchinput);
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    
     headerWidget() {
       return Column(
         children: [
           Container(
-            decoration: BoxDecoration(
-              color: Colors.white
-            ),
+            decoration: BoxDecoration(color: Colors.white),
             height: MediaQuery.of(context).size.height * 0.01,
           ),
           Container(
-            decoration: BoxDecoration(
-              color: Colors.white
-            ),
+            decoration: BoxDecoration(color: Colors.white),
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.35,
             child: MapBeranda(),
           ),
           Container(
-            decoration: BoxDecoration(
-              color: Colors.white
-            ),
+            decoration: BoxDecoration(color: Colors.white),
             child: Padding(
               padding: const EdgeInsets.only(top: 14, bottom: 24),
               child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white
-                ),
+                decoration: BoxDecoration(color: Colors.white),
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.18,
-                child: AnalisisBeranda(laporanFuture: _laporanFuture), 
+                child: AnalisisBeranda(laporanFuture: _laporanFuture),
               ),
             ),
           ),
@@ -74,39 +69,72 @@ class _BerandaPagesState extends State<BerandaPages> with AutomaticKeepAliveClie
       appBar: AppBar(
         title: SizedBox(
           height: MediaQuery.of(context).size.height * 0.06,
-          child: AppBarBeranda()
+          child: AppBarBeranda(searchberanda: (bool searchBeranda) {
+            setState(() {
+              searchberanda = searchBeranda;
+            });
+          }, isSearchVisible: searchberanda,),
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.045),
-          child: Scrollbar(
-            radius: Radius.circular(100),
-            child: DraggableHome(
-              centerTitle: true,
-              appBarColor: Colors.white,
-              headerExpandedHeight: 0.6,
-              title: Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(75, 87, 103, 1),
-                  borderRadius: BorderRadius.circular(20)
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.045,
+              ),
+              child: Scrollbar(
+                radius: Radius.circular(100),
+                child: DraggableHome(
+                  centerTitle: true,
+                  appBarColor: Colors.white,
+                  headerExpandedHeight: 0.6,
+                  title: Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(75, 87, 103, 1),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  headerWidget: headerWidget(),
+                  body: [
+                    ListLaporanBeranda(
+                      laporanFuture: _laporanFuture,
+                      filterindex: (int filterBerdasarkan) {
+                        setState(() {
+                          berdasarkan = filterBerdasarkan;
+                          searchinput = searchinput;
+                          _laporanFuture = getCardLaporan(berdasarkan, searchinput);
+                        });
+                      },
+                    ),
+                  ],
                 ),
               ),
-              headerWidget: headerWidget(), 
-              body: [
-                ListLaporanBeranda(laporanFuture: _laporanFuture, filterindex: (int filterBerdasarkan) {
-                  setState(() {
-                    berdasarkan = filterBerdasarkan;
-                    _laporanFuture = getCardLaporan(berdasarkan, null);
-                  });
-                },), 
-              ],
             ),
-          )
+
+            if (searchberanda == true)
+              Positioned(
+                top: -2 * MediaQuery.of(context).padding.top + kToolbarHeight,
+                width: MediaQuery.of(context).size.width * 1,
+                height: 45,
+                child: Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  child: Searchberanda(searchinput: (String value) {
+                    setState(() {
+                      searchinput = value;
+                      _laporanFuture = getCardLaporan(berdasarkan, searchinput);
+                    });
+                  },),
+                ),
+              ),
+
+          ],
         ),
-      )
+      ),
     );
   }
 }
