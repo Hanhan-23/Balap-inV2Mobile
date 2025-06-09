@@ -79,7 +79,9 @@ class ButtonPengaduan extends StatelessWidget {
               );
 
               if (isValid) {
-                await buatLapor(
+                dialogCallbackBuatLapor(context, 'proses');
+
+                final buatlapor = await buatLapor(
                   laporanProvider.gambar,
                   laporanProvider.judul,
                   laporanProvider.jenis,
@@ -88,6 +90,10 @@ class ButtonPengaduan extends StatelessWidget {
                   laporanProvider.nilaikerusakan,
                   laporanProvider.pickedLocation,
                 );
+
+                Navigator.of(context).pop();
+
+                dialogCallbackBuatLapor(context, buatlapor);
               } else {
                 dialogCallbackBuatLapor(context, 'tidak_lengkap');
               }

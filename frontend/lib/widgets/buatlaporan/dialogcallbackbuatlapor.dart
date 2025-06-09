@@ -52,6 +52,7 @@ Future dialogCallbackBuatLapor(BuildContext context, String typeDialog) {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
+              if (typeDialog != 'proses')
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop();

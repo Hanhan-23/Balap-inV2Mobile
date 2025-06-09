@@ -129,20 +129,20 @@ Future buatLapor(
         var jsonDecodeBody = convert.jsonDecode(body);
 
         if (jsonDecodeBody['status'] == 'success') {
-          return true;
+          return 'berhasil';
         } else if (jsonDecodeBody['status'] == 'failed') {
-          return false;
+          return 'gagal';
         }
       } else if (response.statusCode == 400) {
-        return false;
+        return 'gagal';
       }
     } catch (e) {
-      return 'terjadi kesalahan: $e';
+      return 'gagal';
     } finally {
       client.close();
     }
   } else {
-    Exception('Laporan tidak lengkap');
+    return 'gagal';
   }
 }
 
