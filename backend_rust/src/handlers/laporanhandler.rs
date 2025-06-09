@@ -198,7 +198,7 @@ pub async fn upload_laporan_gambar(
             "gambar": new_laporan.gambar
         })),
         Err(_) => HttpResponse::InternalServerError().json(json!({
-            "status": "failed to insert"
+            "status": "failed"
         })),
     }
 }

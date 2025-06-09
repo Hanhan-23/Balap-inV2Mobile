@@ -23,3 +23,33 @@ Future<String> geocodelocation(pickedLocation) async {
     return 'Tidak ada alamat';
   }
 }
+
+Future<String> geocodejalan(LatLng pickedLocation) async {
+  LatLng latLng = pickedLocation;
+  double lat = latLng.latitude;
+  double lng = latLng.longitude;
+
+  final url = Uri.parse(
+    'https://nominatim.openstreetmap.org/reverse?lat=$lat&lon=$lng&format=json',
+  );
+
+  final response = await http.get(
+    url,
+    headers: {
+      'User-Agent': 'FlutterApp',
+    },
+  );
+
+  if (response.statusCode == 200) {
+    final jsonResponse = convert.jsonDecode(response.body) as Map<String, dynamic>;
+    final address = jsonResponse['address'];
+
+    if (address != null && address['road'] != null) {
+      return address['road']; 
+    } else {
+      return 'Alamat jalan tidak ditemukan';
+    }
+  } else {
+    return 'Alamat jalan tidak ada';
+  }
+}
