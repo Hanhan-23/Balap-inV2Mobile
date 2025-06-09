@@ -52,6 +52,7 @@ dependencies:
   provider: ^6.1.5
   mime: ^2.0.0
   lottie: ^3.3.1
+  uuid: ^4.5.1
 
 dev_dependencies:
   flutter_test:
@@ -97,6 +98,7 @@ flutter:
     - assets/icons/dialog/failedanimation.json
     - assets/icons/dialog/processanimation.json
     - assets/icons/dialog/draftanimation.json
+    - assets/icons/dialog/deletedraftanim.json
 
   fonts:
     - family: CustomIconsBotNav

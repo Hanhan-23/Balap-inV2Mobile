@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 
-class ListDrafLapor extends StatefulWidget {
-  final int indexlaporan;
+class ListDrafLapor extends StatelessWidget {
+  final dynamic indexlaporan;
   final Color colorSelected;
-  const ListDrafLapor({super.key, required this.indexlaporan, required this.colorSelected});
-
-  @override
-  State<ListDrafLapor> createState() => _ListDrafLaporState();
-}
-
-class _ListDrafLaporState extends State<ListDrafLapor> {
+  final bool isSelected;
+  
+  const ListDrafLapor({
+    super.key,
+    required this.indexlaporan,
+    required this.colorSelected,
+    required this.isSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
+    String? jenis; 
+    if (indexlaporan['jenis'] == 'Jalan') {
+      jenis = 'Jalan Rusak';
+    } else if (indexlaporan['jenis'] == 'Lampu Jalan') {
+      jenis = 'Lampu Jalan';
+    } else if (indexlaporan['jenis'] == 'Jembatan') {
+      jenis = 'Jembatan';
+    } 
+
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
@@ -25,7 +35,7 @@ class _ListDrafLaporState extends State<ListDrafLapor> {
         ],
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(width: 1, color: widget.colorSelected),
+        border: Border.all(width: 1, color: colorSelected),
       ),
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -64,7 +74,7 @@ class _ListDrafLaporState extends State<ListDrafLapor> {
                               right: 8,
                             ),
                             child: Text(
-                              'Tidak ada jenis',
+                              jenis ?? 'Tidak ada jenis',
                               style: TextStyle(
                                 color: Color.fromRGBO(17, 84, 237, 1),
                                 fontFamily: 'Instrument-Sans',
@@ -81,7 +91,8 @@ class _ListDrafLaporState extends State<ListDrafLapor> {
                       width: MediaQuery.of(context).size.width * 1,
                       height: 20,
                       child: Text(
-                        'Jalan Simpang Kepri Berlubang',
+                        indexlaporan['judul'] ??
+                            'Jalan Simpang Kepri Berlubang',
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'Instrument-Sans',
@@ -96,7 +107,7 @@ class _ListDrafLaporState extends State<ListDrafLapor> {
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * 1,
                         child: Text(
-                          'Tidak ada deskripsi',
+                          indexlaporan['deskripsi'] ?? 'Tidak ada deskripsi',
                           style: TextStyle(
                             fontSize: 8,
                             fontFamily: 'Instrument-Sans',

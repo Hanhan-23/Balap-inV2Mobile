@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/provider/laporan_provider.dart';
 import 'package:frontend/services/apiservicelaporan.dart';
+import 'package:frontend/services/draftservices.dart';
 import 'package:provider/provider.dart';
 import 'dialogcallbackbuatlapor.dart';
 
@@ -122,15 +123,19 @@ class ButtonPengaduan extends StatelessWidget {
               );
 
               if (isValid) {
-                await buatLapor(
-                  laporanProvider.gambar,
-                  laporanProvider.judul,
-                  laporanProvider.jenis,
-                  laporanProvider.deskripsi,
-                  laporanProvider.cuaca,
-                  laporanProvider.nilaikerusakan,
-                  laporanProvider.pickedLocation,
+                final draf = await simpanDrafLaporan(
+                  gambar: laporanProvider.gambar,
+                  judul: laporanProvider.judul,
+                  jenis: laporanProvider.jenis,
+                  deskripsi: laporanProvider.deskripsi,
+                  cuaca: laporanProvider.cuaca,
+                  nilaikerusakan: laporanProvider.nilaikerusakan,
+                  pickedLocation: laporanProvider.pickedLocation,
                 );
+
+                if (draf == 'draf') {
+                  dialogCallbackBuatLapor(context, 'draf');
+                }
               } else {
                 dialogCallbackBuatLapor(context, 'isi_draf');
               }

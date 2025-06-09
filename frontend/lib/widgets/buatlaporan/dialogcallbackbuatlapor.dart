@@ -22,6 +22,9 @@ Future dialogCallbackBuatLapor(BuildContext context, String typeDialog) {
   } else if (typeDialog == 'isi_draf') {
     iconAnimation = 'assets/icons/dialog/alertanimation.json';
     pesan = 'Isi minimal satu kolom untuk menyimpan';
+  } else if (typeDialog == 'del_draf') {
+    iconAnimation = 'assets/icons/dialog/deletedraftanim.json';
+    pesan = 'Draf berhasil dihapus';
   } 
 
   return showDialog(
@@ -39,6 +42,7 @@ Future dialogCallbackBuatLapor(BuildContext context, String typeDialog) {
                 iconAnimation,
                 width: 100,
                 height: 100,
+                fit: BoxFit.contain
               ),
               const SizedBox(height: 16),
               Text(

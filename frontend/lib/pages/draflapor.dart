@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/services/draftservices.dart';
+import 'package:frontend/widgets/buatlaporan/dialogcallbackbuatlapor.dart';
 import 'package:frontend/widgets/draftlaporan/buttondeload.dart';
 import 'package:frontend/widgets/draftlaporan/listdraflapor.dart';
 
@@ -11,71 +13,108 @@ class DrafLaporScreen extends StatefulWidget {
 
 class _DrafLaporScreenState extends State<DrafLaporScreen> {
   int? selectedIndex;
-  Color colorSelected = Color.fromRGBO(17, 84, 237, 1);
-  Color colorNotSelected = Color.fromRGBO(202, 213, 226, 1);
+  Color colorSelected = const Color.fromRGBO(17, 84, 237, 1);
+  Color colorNotSelected = const Color.fromRGBO(202, 213, 226, 1);
+  dynamic selectedId;
 
-  void handleSelected(index) {
+  late Future<List<Map<String, dynamic>>> futureDraf;
+
+  @override
+  void initState() {
+    super.initState();
+    futureDraf = ambilSemuaDrafLaporan(); 
+  }
+
+  void handleSelected(int index, List<Map<String, dynamic>> daftarDraf) {
     setState(() {
       selectedIndex = index;
+      selectedId = daftarDraf[index]['id'];
     });
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {   
     return Center(
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.92,
         child: Column(
-          spacing: 10,
           children: [
             Container(
-              padding: EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.only(top: 16),
               alignment: Alignment.topCenter,
               child: Container(
                 alignment: AlignmentDirectional.centerStart,
                 width: MediaQuery.of(context).size.width * 0.2,
                 height: 5,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(202, 213, 226, 1),
+                  color: const Color.fromRGBO(202, 213, 226, 1),
                   borderRadius: BorderRadius.circular(200),
                 ),
               ),
             ),
 
+            const SizedBox(height: 12),
+
             selectedIndex == null
                 ? textDrlaporanda()
                 : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    butdel(), 
-                    textDrlaporanda(), 
-                    butload()
-                  ],
-                ),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [butdel(
+                      () async {
+                        final hapus = await hapusDrafLaporan(selectedId);
+                        if (hapus == true) {
+                          dialogCallbackBuatLapor(context, 'del_draf');
+                        }
+                        setState(() {
+                          futureDraf = ambilSemuaDrafLaporan(); 
+                          selectedIndex = null;
+                        });
+                      }
+                    ), textDrlaporanda(), butload()],
+                  ),
+
+            const SizedBox(height: 12),
 
             Expanded(
-              child: Scrollbar(
-                radius: Radius.circular(100),
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: GestureDetector(
-                        onTap: () {
-                          handleSelected(index);
-                        },
-                        child: ListDrafLapor(
-                          indexlaporan: index,
-                          colorSelected:
-                              index == selectedIndex
+              child: FutureBuilder<List<Map<String, dynamic>>>(
+                future: futureDraf,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(
+                      child: Text("Belum ada draf tersimpan"),
+                    );
+                  }
+
+                  final daftarDraf = snapshot.data!;
+
+                  return Scrollbar(
+                    radius: const Radius.circular(100),
+                    child: ListView.builder(
+                      itemCount: daftarDraf.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: GestureDetector(
+                            onTap: () {
+                              handleSelected(index, daftarDraf);
+                            },
+                            child: ListDrafLapor(
+                              indexlaporan: daftarDraf[index],
+                              colorSelected: index == selectedIndex
                                   ? colorSelected
                                   : colorNotSelected,
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                              isSelected: index == selectedIndex,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ),
           ],
@@ -83,31 +122,31 @@ class _DrafLaporScreenState extends State<DrafLaporScreen> {
       ),
     );
   }
-}
 
-butload() {
-  return ButtonDeLoadDraft(
-    iconRequired: Icon(Icons.check),
-    colorButton: Colors.green,
-    onPress: null,
-  );
-}
+  Widget butload() {
+    return ButtonDeLoadDraft(
+      iconRequired: const Icon(Icons.check),
+      colorButton: Colors.green,
+      onPress: null
+    );
+  }
 
-butdel() {
+Widget butdel(VoidCallback onpress) { 
   return ButtonDeLoadDraft(
-    iconRequired: Icon(Icons.delete),
+    iconRequired: const Icon(Icons.delete),
     colorButton: const Color.fromARGB(255, 207, 36, 24),
-    onPress: null,
+    onPress: onpress
   );
 }
 
-textDrlaporanda() {
-  return Text(
-    'Draf laporan anda',
-    style: TextStyle(
-      fontFamily: 'Instrument-Sans',
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-    ),
-  );
+  Widget textDrlaporanda() {
+    return const Text(
+      'Draf laporan anda',
+      style: TextStyle(
+        fontFamily: 'Instrument-Sans',
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+    );
+  }
 }
