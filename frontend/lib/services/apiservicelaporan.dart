@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:frontend/services/geocodmaps.dart';
 import 'package:frontend/services/service.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -43,7 +42,7 @@ Future<ModelDetailLaporan> getDetailLaporan(id) async {
 }
 
 Future buatLapor(
-  File? gambar,
+  String? gambar,
   String? judul,
   String? jenis,
   String? deskripsi,
@@ -105,7 +104,7 @@ Future buatLapor(
 
       var request = http.MultipartRequest('POST', url);
 
-      final mimeType = lookupMimeType(gambar!.path);
+      final mimeType = lookupMimeType(gambar!);
       if (mimeType == null ||
           !(mimeType == 'image/png' ||
               mimeType == 'image/jpeg' ||
@@ -116,7 +115,7 @@ Future buatLapor(
       }
 
       request.files.add(
-        await http.MultipartFile.fromPath('gambar', gambar.path),
+        await http.MultipartFile.fromPath('gambar', gambar),
       );
 
       request.fields['laporan'] = convert.jsonEncode(laporanJson);
@@ -147,7 +146,7 @@ Future buatLapor(
 }
 
 Future<bool> handleLaporan(
-  File? gambar,
+  String? gambar,
   String? judul,
   String? jenis,
   String? deskripsi,
@@ -177,7 +176,7 @@ Future<bool> handleLaporan(
 }
 
 Future<bool> handleDraftLaporan(
-  File? gambar,
+  String? gambar,
   String? judul,
   String? jenis,
   String? deskripsi,

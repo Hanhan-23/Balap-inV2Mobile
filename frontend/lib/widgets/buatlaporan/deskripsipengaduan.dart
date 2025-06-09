@@ -12,17 +12,9 @@ class DeskripsiPengaduan extends StatefulWidget {
 
 class _DeskripsiPengaduanState extends State<DeskripsiPengaduan> {
   final TextEditingController deskripsiController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    deskripsiController.addListener(() {
-      context.read<LaporanProvider>().setDeskripsi(deskripsiController.text);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final laporanProvider = context.watch<LaporanProvider>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +31,7 @@ class _DeskripsiPengaduanState extends State<DeskripsiPengaduan> {
         SizedBox(
           height: 150,
           child: TextField(
-            controller: deskripsiController,
+            controller: laporanProvider.deskripsiController,
             inputFormatters: [
               FilteringTextInputFormatter.deny(RegExp(r'[\n\r]'))
             ],

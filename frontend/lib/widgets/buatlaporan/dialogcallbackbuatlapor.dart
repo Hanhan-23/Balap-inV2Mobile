@@ -25,6 +25,9 @@ Future dialogCallbackBuatLapor(BuildContext context, String typeDialog) {
   } else if (typeDialog == 'del_draf') {
     iconAnimation = 'assets/icons/dialog/deletedraftanim.json';
     pesan = 'Draf berhasil dihapus';
+  } else if (typeDialog == 'load_draf') {
+    iconAnimation = 'assets/icons/dialog/loaddrafanim.json';
+    pesan = 'Draf anda berhasil diambil';
   } 
 
   return showDialog(

@@ -95,6 +95,8 @@ class ButtonPengaduan extends StatelessWidget {
                 Navigator.of(context).pop();
 
                 dialogCallbackBuatLapor(context, buatlapor);
+
+                laporanProvider.clearLaporan();
               } else {
                 dialogCallbackBuatLapor(context, 'tidak_lengkap');
               }
@@ -135,6 +137,8 @@ class ButtonPengaduan extends StatelessWidget {
 
                 if (draf == 'draf') {
                   dialogCallbackBuatLapor(context, 'draf');
+
+                  laporanProvider.clearLaporan();
                 }
               } else {
                 dialogCallbackBuatLapor(context, 'isi_draf');

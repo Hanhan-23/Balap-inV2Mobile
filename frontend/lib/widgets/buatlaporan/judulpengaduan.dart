@@ -14,15 +14,8 @@ class _JudulpengaduanState extends State<Judulpengaduan> {
   final TextEditingController judulController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    judulController.addListener(() {
-      context.read<LaporanProvider>().setJudul(judulController.text);
-    });
-  }
-  
-  @override
   Widget build(BuildContext context) {
+    final laporanProvider = context.watch<LaporanProvider>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +32,7 @@ class _JudulpengaduanState extends State<Judulpengaduan> {
         SizedBox(
           height: 54,
           child: TextField(
-            controller: judulController,
+            controller: laporanProvider.judulController,
             inputFormatters: [
               FilteringTextInputFormatter.deny(RegExp(r'[\n\r]'))
             ],

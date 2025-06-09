@@ -7,7 +7,7 @@ import 'package:frontend/widgets/buatlaporan/appbarbuatlapor.dart';
 import 'package:frontend/widgets/buatlaporan/buttonpengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/cuacapengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/deskripsipengaduan.dart';
-import 'package:frontend/widgets/buatlaporan/jenispengadun.dart';
+import 'package:frontend/widgets/buatlaporan/jenispengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/judulpengaduan.dart';
 import 'package:frontend/widgets/buatlaporan/nilaikerusakan.dart';
 

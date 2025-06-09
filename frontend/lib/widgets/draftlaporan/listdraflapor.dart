@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class ListDrafLapor extends StatelessWidget {
   final dynamic indexlaporan;
   final Color colorSelected;
   final bool isSelected;
-  
+
   const ListDrafLapor({
     super.key,
     required this.indexlaporan,
@@ -14,14 +16,17 @@ class ListDrafLapor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? jenis; 
+    String? pickedImage;
+    pickedImage = indexlaporan['gambar'];
+
+    String? jenis;
     if (indexlaporan['jenis'] == 'Jalan') {
       jenis = 'Jalan Rusak';
     } else if (indexlaporan['jenis'] == 'Lampu Jalan') {
       jenis = 'Lampu Jalan';
     } else if (indexlaporan['jenis'] == 'Jembatan') {
       jenis = 'Jembatan';
-    } 
+    }
 
     return Container(
       decoration: BoxDecoration(
@@ -46,7 +51,13 @@ class ListDrafLapor extends StatelessWidget {
               clipBehavior: Clip.hardEdge,
               width: 104,
               height: 104,
-              child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
+              child:
+                  pickedImage != null
+                      ? Image.file(File(pickedImage), fit: BoxFit.cover)
+                      : Image.asset(
+                        'assets/images/logo.png',
+                        fit: BoxFit.cover,
+                      ),
             ),
             SizedBox(width: 10),
             Expanded(
@@ -74,7 +85,9 @@ class ListDrafLapor extends StatelessWidget {
                               right: 8,
                             ),
                             child: Text(
-                              jenis ?? 'Tidak ada jenis',
+                              (jenis == null || jenis.isEmpty)
+                                  ? 'Tidak ada jenis'
+                                  : jenis,
                               style: TextStyle(
                                 color: Color.fromRGBO(17, 84, 237, 1),
                                 fontFamily: 'Instrument-Sans',
@@ -91,8 +104,10 @@ class ListDrafLapor extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 1,
                       height: 20,
                       child: Text(
-                        indexlaporan['judul'] ??
-                            'Jalan Simpang Kepri Berlubang',
+                        (indexlaporan['judul'] == null ||
+                                indexlaporan['judul'].isEmpty)
+                            ? 'Tidak ada judul'
+                            : indexlaporan['judul'],
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'Instrument-Sans',
@@ -107,7 +122,10 @@ class ListDrafLapor extends StatelessWidget {
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * 1,
                         child: Text(
-                          indexlaporan['deskripsi'] ?? 'Tidak ada deskripsi',
+                          (indexlaporan['deskripsi'] == null ||
+                                  indexlaporan['deskripsi'].isEmpty)
+                              ? 'Tidak ada deskripsi'
+                              : indexlaporan['deskripsi'],
                           style: TextStyle(
                             fontSize: 8,
                             fontFamily: 'Instrument-Sans',

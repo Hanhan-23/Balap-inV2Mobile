@@ -99,6 +99,7 @@ flutter:
     - assets/icons/dialog/processanimation.json
     - assets/icons/dialog/draftanimation.json
     - assets/icons/dialog/deletedraftanim.json
+    - assets/icons/dialog/loaddrafanim.json
 
   fonts:
     - family: CustomIconsBotNav

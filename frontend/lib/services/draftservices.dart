@@ -1,12 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 Future<dynamic>simpanDrafLaporan({
-  required File? gambar,
+  required String? gambar,
   required String? judul,
   required String? jenis,
   required String? deskripsi,
@@ -17,9 +16,14 @@ Future<dynamic>simpanDrafLaporan({
   final prefs = await SharedPreferences.getInstance();
   final List<String> daftarDraf = prefs.getStringList('daftar_draf') ?? [];
 
+  String? gambarPath;
+  if (gambar != null) {
+    gambarPath = gambar;
+  }
+
   final drafBaru = {
     "id": const Uuid().v4(),
-    "gambar": gambar,
+    "gambar": gambarPath,
     "judul": judul,
     "jenis": jenis,
     "deskripsi": deskripsi,
