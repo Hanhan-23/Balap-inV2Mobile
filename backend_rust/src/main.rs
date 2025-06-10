@@ -5,6 +5,7 @@ mod routes;
 mod handlers;
 mod utils;
 
+use std::env;
 use std::sync::Arc;
 use actix_web::{web, App, HttpServer, middleware::{{Logger}}};
 use mongodb::bson;
@@ -21,9 +22,10 @@ use crate::utils::s3service::{verify_bucket};
 async fn main() -> std::io::Result<()> {
     dotenvy::dotenv().ok();
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
+    let uri = env::var("MONGODB_URI").expect("MONGODB_URI must be set");
     
     // init Client Mongodb
-    let init_db = init_mongo().await.expect("Failed to init mongo");
+    let init_db = init_mongo(uri).await.expect("Failed to init mongo");
 
     let db = init_db.database("balap_in");
     if db.run_command(bson::doc! {"ping": 1}).await.is_ok() {

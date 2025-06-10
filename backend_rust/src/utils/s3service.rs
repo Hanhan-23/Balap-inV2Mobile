@@ -1,7 +1,7 @@
 use aws_sdk_s3::Client;
 use std::error::Error;
 use std::sync::Arc;
-use actix_web::{web, HttpRequest};
+use actix_web::{web};
 use crate::models::app_state::AppState;
 
 pub async fn verify_bucket(client: &Client, bucket: &str) -> Result<(), Box<dyn Error + Send + Sync>>{
