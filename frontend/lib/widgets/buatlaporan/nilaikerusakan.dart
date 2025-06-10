@@ -10,10 +10,12 @@ class NilaiKerusakan extends StatefulWidget {
 }
   
 class _NilaiKerusakanState extends State<NilaiKerusakan> {
-  double _currentSliderValue = 0.0;
+
   
   @override
   Widget build(BuildContext context) {
+    final laporanprovider = context.watch<LaporanProvider>();
+    double? _currentSliderValue = laporanprovider.nilaikerusakan;
      return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +66,7 @@ class _NilaiKerusakanState extends State<NilaiKerusakan> {
                   inactiveTickMarkColor: Color.fromRGBO(102, 112, 133, 1),
                 ),
                 child: Slider(
-                  value: _currentSliderValue,
+                  value: _currentSliderValue!,
                   min: 0.0,
                   max: 1.0,
                   divisions: 5,

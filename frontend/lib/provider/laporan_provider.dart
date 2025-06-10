@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -49,7 +51,7 @@ class LaporanProvider with ChangeNotifier {
     _gambar = null;
     _jenis = null;
     _cuaca = null;
-    _nilaikerusakan = null;
+    _nilaikerusakan = 0.0;
     _pickedLocation = null;
 
     judulController.clear();
@@ -57,4 +59,35 @@ class LaporanProvider with ChangeNotifier {
 
     notifyListeners();
   }
+
+void loadDrafProvider(Map<String, dynamic> draf) {
+  _gambar = draf['gambar'];
+  judulController.text = draf['judul'] ?? '';
+  _jenis = draf['jenis'];
+  deskripsiController.text = draf['deskripsi'] ?? '';
+  _cuaca = draf['cuaca'];
+  _nilaikerusakan = (draf['nilaikerusakan'] ?? 0.0).toDouble();
+
+  final location = draf['pickedLocation'];
+  if (location != null) {
+    List<dynamic> locationList;
+
+    if (location is String) {
+      locationList = jsonDecode(location);
+    } else {
+      locationList = location;
+    }
+
+    if (locationList.length == 2) {
+      _pickedLocation = LatLng(locationList[0], locationList[1]);
+    } else {
+      _pickedLocation = null;
+    }
+  } else {
+    _pickedLocation = null;
+  }
+
+  notifyListeners();
+}
+
 }

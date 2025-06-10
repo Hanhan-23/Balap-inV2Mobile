@@ -61,3 +61,20 @@ Future hapusDrafLaporan(String id) async {
   return true;
 }
 
+Future loadDrafLaporan(String id) async {
+  final prefs = await SharedPreferences.getInstance();
+  final List<String> daftarDraf = prefs.getStringList('daftar_draf') ?? [];
+
+    try {
+    final draf = daftarDraf
+        .map((drafJson) => json.decode(drafJson) as Map<String, dynamic>)
+        .firstWhere((draf) => draf['id'] == id, orElse: () => {});
+
+    if (draf.isEmpty) return null;
+
+    return draf;
+  } catch (e) {
+    return null;
+  }
+}
+

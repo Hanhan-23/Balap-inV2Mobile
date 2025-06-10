@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/provider/laporan_provider.dart';
 import 'package:frontend/services/draftservices.dart';
 import 'package:frontend/widgets/buatlaporan/dialogcallbackbuatlapor.dart';
 import 'package:frontend/widgets/draftlaporan/buttondeload.dart';
 import 'package:frontend/widgets/draftlaporan/listdraflapor.dart';
+import 'package:provider/provider.dart';
 
 class DrafLaporScreen extends StatefulWidget {
   const DrafLaporScreen({super.key});
@@ -22,7 +24,7 @@ class _DrafLaporScreenState extends State<DrafLaporScreen> {
   @override
   void initState() {
     super.initState();
-    futureDraf = ambilSemuaDrafLaporan(); 
+    futureDraf = ambilSemuaDrafLaporan();
   }
 
   void handleSelected(int index, List<Map<String, dynamic>> daftarDraf) {
@@ -33,7 +35,7 @@ class _DrafLaporScreenState extends State<DrafLaporScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {   
+  Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.92,
@@ -58,20 +60,33 @@ class _DrafLaporScreenState extends State<DrafLaporScreen> {
             selectedIndex == null
                 ? textDrlaporanda()
                 : Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [butdel(
-                      () async {
-                        final hapus = await hapusDrafLaporan(selectedId);
-                        if (hapus == true) {
-                          dialogCallbackBuatLapor(context, 'del_draf');
-                        }
-                        setState(() {
-                          futureDraf = ambilSemuaDrafLaporan(); 
-                          selectedIndex = null;
-                        });
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    butdel(() async {
+                      final hapus = await hapusDrafLaporan(selectedId);
+                      if (hapus == true) {
+                        dialogCallbackBuatLapor(context, 'del_draf');
                       }
-                    ), textDrlaporanda(), butload()],
-                  ),
+                      setState(() {
+                        futureDraf = ambilSemuaDrafLaporan();
+                        selectedIndex = null;
+                      });
+                    }),
+                    textDrlaporanda(),
+                    butload(() async {
+                      final draf = await loadDrafLaporan(selectedId);
+                      if (draf != null) {
+                        final provider = Provider.of<LaporanProvider>(
+                          context,
+                          listen: false,
+                        );
+                        provider.loadDrafProvider(draf);
+                        Navigator.pop(context);
+                        dialogCallbackBuatLapor(context, 'load_draf');
+                      }
+                    }),
+                  ],
+                ),
 
             const SizedBox(height: 12),
 
@@ -104,9 +119,10 @@ class _DrafLaporScreenState extends State<DrafLaporScreen> {
                             },
                             child: ListDrafLapor(
                               indexlaporan: daftarDraf[index],
-                              colorSelected: index == selectedIndex
-                                  ? colorSelected
-                                  : colorNotSelected,
+                              colorSelected:
+                                  index == selectedIndex
+                                      ? colorSelected
+                                      : colorNotSelected,
                               isSelected: index == selectedIndex,
                             ),
                           ),
@@ -123,21 +139,21 @@ class _DrafLaporScreenState extends State<DrafLaporScreen> {
     );
   }
 
-  Widget butload() {
+  Widget butload(VoidCallback onpress) {
     return ButtonDeLoadDraft(
       iconRequired: const Icon(Icons.check),
       colorButton: Colors.green,
-      onPress: null
+      onPress: onpress,
     );
   }
 
-Widget butdel(VoidCallback onpress) { 
-  return ButtonDeLoadDraft(
-    iconRequired: const Icon(Icons.delete),
-    colorButton: const Color.fromARGB(255, 207, 36, 24),
-    onPress: onpress
-  );
-}
+  Widget butdel(VoidCallback onpress) {
+    return ButtonDeLoadDraft(
+      iconRequired: const Icon(Icons.delete),
+      colorButton: const Color.fromARGB(255, 207, 36, 24),
+      onPress: onpress,
+    );
+  }
 
   Widget textDrlaporanda() {
     return const Text(

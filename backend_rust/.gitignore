@@ -18,3 +18,6 @@
 *.swp
 *.swo
 *~
+/target
+.shuttle*
+Secrets*.toml
