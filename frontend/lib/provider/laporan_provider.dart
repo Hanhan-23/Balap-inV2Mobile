@@ -7,7 +7,7 @@ class LaporanProvider with ChangeNotifier {
   String? _gambar;
   String? _jenis;
   String? _cuaca;
-  double? _nilaikerusakan;
+  double _nilaikerusakan = 0.0;
   LatLng? _pickedLocation;
 
   // Controller untuk text input
