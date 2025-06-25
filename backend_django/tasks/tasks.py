@@ -36,11 +36,11 @@ def clustering():
         print("=== MEMULAI PROSES CLUSTERING ===")
         
         # Langkah 1: Ambil semua ID laporan yang sudah ada di rekomendasi dengan status_rekom = "selesai"
-        # PERBAIKAN: Menggunakan field 'laporan' bukan 'id_laporan'
+        # PERBAIKAN: Menggunakan field 'id_laporan' yang benar
         pipeline_selesai = [
             {"$match": {"status_rekom": "selesai"}},
-            {"$unwind": "$laporan"},  # Unwind field 'laporan'
-            {"$group": {"_id": None, "id_laporan_selesai": {"$addToSet": "$laporan"}}}  # Kumpulkan dari field 'laporan'
+            {"$unwind": "$id_laporan"},  # Unwind field 'id_laporan'
+            {"$group": {"_id": None, "id_laporan_selesai": {"$addToSet": "$id_laporan"}}}  # Kumpulkan dari field 'id_laporan'
         ]
        
         result_selesai = list(rekomendasi_collection.aggregate(pipeline_selesai))
@@ -296,11 +296,11 @@ def check_clustering_status():
     try:
         print("=== STATUS CLUSTERING ===")
         
-        # PERBAIKAN: Cek laporan dengan status_rekom selesai menggunakan field 'laporan'
+        # PERBAIKAN: Cek laporan dengan status_rekom selesai menggunakan field 'id_laporan'
         pipeline_selesai = [
             {"$match": {"status_rekom": "selesai"}},
-            {"$unwind": "$laporan"},
-            {"$group": {"_id": None, "id_laporan_selesai": {"$addToSet": "$laporan"}}}
+            {"$unwind": "$id_laporan"},
+            {"$group": {"_id": None, "id_laporan_selesai": {"$addToSet": "$id_laporan"}}}
         ]
        
         result_selesai = list(rekomendasi_collection.aggregate(pipeline_selesai))
@@ -364,7 +364,7 @@ def check_clustering_status():
         # TAMBAHAN: Cek detail rekomendasi
         print(f"\n=== DETAIL REKOMENDASI ===")
         rekomendasi_pipeline = [
-            {"$group": {"_id": "$status_rekom", "count": {"$sum": 1}, "total_laporan": {"$sum": {"$size": "$laporan"}}}},
+            {"$group": {"_id": "$status_rekom", "count": {"$sum": 1}, "total_laporan": {"$sum": {"$size": "$id_laporan"}}}},
             {"$sort": {"count": -1}}
         ]
         rekom_detail = list(rekomendasi_collection.aggregate(rekomendasi_pipeline))
@@ -440,8 +440,8 @@ def debug_laporan():
         for i, rekom in enumerate(sample_rekom, 1):
             print(f"  {i}. ID: {rekom['_id']}")
             print(f"     Status: {rekom.get('status_rekom', 'None')}")
-            print(f"     Laporan: {rekom.get('laporan', [])}")
-            print(f"     Jumlah laporan: {len(rekom.get('laporan', []))}")
+            print(f"     ID Laporan: {rekom.get('id_laporan', [])}")
+            print(f"     Jumlah laporan: {len(rekom.get('id_laporan', []))}")
         
         # Sample laporan untuk debug
         sample_laporan = list(laporan_collection.find({}).limit(3))
