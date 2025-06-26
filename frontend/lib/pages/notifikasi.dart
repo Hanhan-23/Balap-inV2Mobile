@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/model_notifikasi.dart';
-import 'package:frontend/services/apiservicenotifikasi.dart';
+import 'package:balapin/models/model_notifikasi.dart';
+import 'package:balapin/services/apiservicenotifikasi.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:frontend/widgets/Notifikasi/card_notifikasi.dart';
+import 'package:balapin/widgets/Notifikasi/card_notifikasi.dart';
 
 class NotifikasiPages extends StatefulWidget {
   const NotifikasiPages({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/pages/draflapor.dart';
-import 'package:frontend/provider/laporan_provider.dart';
-import 'package:frontend/widgets/navigations/botnav.dart';
+import 'package:balapin/pages/draflapor.dart';
+import 'package:balapin/provider/laporan_provider.dart';
+import 'package:balapin/widgets/navigations/botnav.dart';
 import 'package:provider/provider.dart';
 
 class AppBarBuatLapor extends StatelessWidget implements PreferredSizeWidget {

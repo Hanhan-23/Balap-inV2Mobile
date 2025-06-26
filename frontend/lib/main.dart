@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/callback/callbackpenggunabaru.dart';
-import 'package:frontend/pages/privacy_policy.dart';
-import 'package:frontend/provider/laporan_provider.dart';
-import 'package:frontend/widgets/navigations/botnav.dart';
+import 'package:balapin/callback/callbackpenggunabaru.dart';
+import 'package:balapin/pages/privacy_policy.dart';
+import 'package:balapin/provider/laporan_provider.dart';
+import 'package:balapin/widgets/navigations/botnav.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_time_ago/get_time_ago.dart';
 import 'package:provider/provider.dart';

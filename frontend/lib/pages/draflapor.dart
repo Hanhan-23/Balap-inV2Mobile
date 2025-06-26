@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/provider/laporan_provider.dart';
-import 'package:frontend/services/draftservices.dart';
-import 'package:frontend/widgets/buatlaporan/dialogcallbackbuatlapor.dart';
-import 'package:frontend/widgets/draftlaporan/buttondeload.dart';
-import 'package:frontend/widgets/draftlaporan/listdraflapor.dart';
+import 'package:balapin/provider/laporan_provider.dart';
+import 'package:balapin/services/draftservices.dart';
+import 'package:balapin/widgets/buatlaporan/dialogcallbackbuatlapor.dart';
+import 'package:balapin/widgets/draftlaporan/buttondeload.dart';
+import 'package:balapin/widgets/draftlaporan/listdraflapor.dart';
 import 'package:provider/provider.dart';
 
 class DrafLaporScreen extends StatefulWidget {

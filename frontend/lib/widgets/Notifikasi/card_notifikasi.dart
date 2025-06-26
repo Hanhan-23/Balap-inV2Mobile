@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/model_notifikasi.dart';
-import 'package:frontend/widgets/parsetimeago.dart';
+import 'package:balapin/models/model_notifikasi.dart';
+import 'package:balapin/widgets/parsetimeago.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:frontend/widgets/kustom_widget/gap_x.dart';
-import 'package:frontend/widgets/kustom_widget/gap_y.dart';
+import 'package:balapin/widgets/kustom_widget/gap_x.dart';
+import 'package:balapin/widgets/kustom_widget/gap_y.dart';
 
 class CardNotifikasi extends StatelessWidget {
   final ModelNotifikasi data;

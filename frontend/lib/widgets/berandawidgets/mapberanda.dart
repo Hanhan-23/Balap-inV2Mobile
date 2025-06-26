@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/pages/petapersebaran.dart';
-import 'package:frontend/services/apiservicemap.dart';
+import 'package:balapin/pages/petapersebaran.dart';
+import 'package:balapin/services/apiservicemap.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapBeranda extends StatefulWidget {

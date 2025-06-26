@@ -1,4 +1,4 @@
-import 'package:frontend/models/model_laporan.dart';
+import 'package:balapin/models/model_laporan.dart';
 
 class ModelCardRekomendasi {
   final dynamic id;

@@ -1,4 +1,4 @@
-import 'package:frontend/models/model_peta.dart';
+import 'package:balapin/models/model_peta.dart';
 
 class ModelCardLaporan {
   final dynamic id;

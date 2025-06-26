@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:frontend/widgets/kustom_widget/gap_x.dart';
-import 'package:frontend/widgets/kustom_widget/gap_y.dart';
+import 'package:balapin/widgets/kustom_widget/gap_x.dart';
+import 'package:balapin/widgets/kustom_widget/gap_y.dart';
 
 class CardList extends StatelessWidget{
   const CardList ({super.key});

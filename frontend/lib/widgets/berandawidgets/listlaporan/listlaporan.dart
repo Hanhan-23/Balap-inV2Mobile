@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/model_laporan.dart';
+import 'package:balapin/models/model_laporan.dart';
 
 class ListLaporan extends StatefulWidget {
   final ModelCardLaporan? dataCardLaporan;

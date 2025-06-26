@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/provider/laporan_provider.dart';
+import 'package:balapin/provider/laporan_provider.dart';
 import 'package:provider/provider.dart';
 
 class NilaiKerusakan extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/model_rekomendasi.dart';
-import 'package:frontend/pages/detailrekomendasi.dart';
+import 'package:balapin/models/model_rekomendasi.dart';
+import 'package:balapin/pages/detailrekomendasi.dart';
 
 class CardUrgensi extends StatefulWidget {
   final ModelCardRekomendasi indexrekomen;

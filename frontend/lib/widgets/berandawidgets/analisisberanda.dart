@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/models/model_laporan.dart';
+import 'package:balapin/models/model_laporan.dart';
 
 class AnalisisBeranda extends StatefulWidget {
   final Future<List<ModelCardLaporan>> laporanFuture;

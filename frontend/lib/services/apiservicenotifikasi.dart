@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:frontend/models/model_notifikasi.dart';
-import 'package:frontend/services/service.dart';
+import 'package:balapin/models/model_notifikasi.dart';
+import 'package:balapin/services/service.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<ModelNotifikasi>> getCardNotifikasi() async {

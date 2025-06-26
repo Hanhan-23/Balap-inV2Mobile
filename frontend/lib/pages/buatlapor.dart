@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/callback/callbackbuatlaporan.dart';
-import 'package:frontend/coach_mark/coachmarkbuatlapor.dart';
-import 'package:frontend/widgets/buatlaporan/alamatpengaduan.dart';
-import 'package:frontend/widgets/buatlaporan/ambilgambar.dart';
-import 'package:frontend/widgets/buatlaporan/appbarbuatlapor.dart';
-import 'package:frontend/widgets/buatlaporan/buttonpengaduan.dart';
-import 'package:frontend/widgets/buatlaporan/cuacapengaduan.dart';
-import 'package:frontend/widgets/buatlaporan/deskripsipengaduan.dart';
-import 'package:frontend/widgets/buatlaporan/jenispengaduan.dart';
-import 'package:frontend/widgets/buatlaporan/judulpengaduan.dart';
-import 'package:frontend/widgets/buatlaporan/nilaikerusakan.dart';
+import 'package:balapin/callback/callbackbuatlaporan.dart';
+import 'package:balapin/coach_mark/coachmarkbuatlapor.dart';
+import 'package:balapin/widgets/buatlaporan/alamatpengaduan.dart';
+import 'package:balapin/widgets/buatlaporan/ambilgambar.dart';
+import 'package:balapin/widgets/buatlaporan/appbarbuatlapor.dart';
+import 'package:balapin/widgets/buatlaporan/buttonpengaduan.dart';
+import 'package:balapin/widgets/buatlaporan/cuacapengaduan.dart';
+import 'package:balapin/widgets/buatlaporan/deskripsipengaduan.dart';
+import 'package:balapin/widgets/buatlaporan/jenispengaduan.dart';
+import 'package:balapin/widgets/buatlaporan/judulpengaduan.dart';
+import 'package:balapin/widgets/buatlaporan/nilaikerusakan.dart';
 
 class BuatLaporanPages extends StatefulWidget {
   const BuatLaporanPages({super.key});

@@ -1,9 +1,9 @@
-import 'package:frontend/services/geocodmaps.dart';
-import 'package:frontend/services/service.dart';
+import 'package:balapin/services/geocodmaps.dart';
+import 'package:balapin/services/service.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import 'package:frontend/models/model_laporan.dart';
+import 'package:balapin/models/model_laporan.dart';
 import 'package:mime/mime.dart';
 
 Future<List<ModelCardLaporan>> getCardLaporan(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/kustom_widget/gap_x.dart';
-import 'package:frontend/widgets/kustom_widget/gap_y.dart';
+import 'package:balapin/widgets/kustom_widget/gap_x.dart';
+import 'package:balapin/widgets/kustom_widget/gap_y.dart';
 
 class CardTutorialList extends StatelessWidget{
   const CardTutorialList ({super.key});

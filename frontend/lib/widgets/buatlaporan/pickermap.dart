@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/provider/laporan_provider.dart';
-import 'package:frontend/services/apiservicemap.dart';
-import 'package:frontend/services/geocodmaps.dart';
+import 'package:balapin/provider/laporan_provider.dart';
+import 'package:balapin/services/apiservicemap.dart';
+import 'package:balapin/services/geocodmaps.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 

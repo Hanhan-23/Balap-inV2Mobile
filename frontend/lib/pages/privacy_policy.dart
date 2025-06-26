@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/callback/callbackpenggunabaru.dart';
-import 'package:frontend/widgets/navigations/botnav.dart';
-import 'package:frontend/widgets/privacy_policy/checkbox_widget.dart';
-import 'package:frontend/widgets/kustom_widget/gap_y.dart';
+import 'package:balapin/callback/callbackpenggunabaru.dart';
+import 'package:balapin/widgets/navigations/botnav.dart';
+import 'package:balapin/widgets/privacy_policy/checkbox_widget.dart';
+import 'package:balapin/widgets/kustom_widget/gap_y.dart';
 
 class PrivacyPolicyPages extends StatefulWidget {
   const PrivacyPolicyPages({super.key});

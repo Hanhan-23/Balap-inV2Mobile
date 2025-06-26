@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:frontend/provider/laporan_provider.dart';
-import 'package:frontend/widgets/buatlaporan/showambilgambar.dart';
+import 'package:balapin/provider/laporan_provider.dart';
+import 'package:balapin/widgets/buatlaporan/showambilgambar.dart';
 import 'package:provider/provider.dart';
 
 class AmbilGambar extends StatelessWidget {

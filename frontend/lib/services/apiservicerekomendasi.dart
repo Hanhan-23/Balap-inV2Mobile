@@ -1,5 +1,5 @@
-import 'package:frontend/models/model_rekomendasi.dart';
-import 'package:frontend/services/service.dart';
+import 'package:balapin/models/model_rekomendasi.dart';
+import 'package:balapin/services/service.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 

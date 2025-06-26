@@ -1,4 +1,4 @@
-import 'package:frontend/services/getmapskey.dart';
+import 'package:balapin/services/getmapskey.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;

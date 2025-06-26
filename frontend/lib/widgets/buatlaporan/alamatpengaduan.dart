@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/widgets/buatlaporan/pickermap.dart';
+import 'package:balapin/widgets/buatlaporan/pickermap.dart';
 
 class AlamatPengaduan extends StatefulWidget {
   const AlamatPengaduan({super.key});

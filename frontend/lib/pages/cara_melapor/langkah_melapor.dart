@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/coach_mark/callbackcoachmark.dart';
-import 'package:frontend/pages/buatlapor.dart';
-import 'package:frontend/pages/cara_melapor/informasi_umum.dart';
+import 'package:balapin/coach_mark/callbackcoachmark.dart';
+import 'package:balapin/pages/buatlapor.dart';
+import 'package:balapin/pages/cara_melapor/informasi_umum.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:frontend/widgets/kustom_widget/gap_y.dart';
-import 'package:frontend/widgets/cara_melapor/langkah_pelaporan/card_tutorial_list.dart';
+import 'package:balapin/widgets/kustom_widget/gap_y.dart';
+import 'package:balapin/widgets/cara_melapor/langkah_pelaporan/card_tutorial_list.dart';
 
 class LangkahMelaporPages extends StatelessWidget {
   const LangkahMelaporPages ({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/provider/laporan_provider.dart';
-import 'package:frontend/services/apiservicelaporan.dart';
-import 'package:frontend/services/draftservices.dart';
+import 'package:balapin/provider/laporan_provider.dart';
+import 'package:balapin/services/apiservicelaporan.dart';
+import 'package:balapin/services/draftservices.dart';
 import 'package:provider/provider.dart';
 import 'dialogcallbackbuatlapor.dart';
 

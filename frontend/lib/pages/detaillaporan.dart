@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/models/model_laporan.dart';
-import 'package:frontend/services/apiservicelaporan.dart';
-import 'package:frontend/widgets/parsebsondate.dart';
-import 'package:frontend/widgets/parsetimeago.dart';
-import 'package:frontend/widgets/textwidget.dart';
+import 'package:balapin/models/model_laporan.dart';
+import 'package:balapin/services/apiservicelaporan.dart';
+import 'package:balapin/widgets/parsebsondate.dart';
+import 'package:balapin/widgets/parsetimeago.dart';
+import 'package:balapin/widgets/textwidget.dart';
 
 class DetailLaporanScreen extends StatelessWidget {
   final dynamic idIndex;

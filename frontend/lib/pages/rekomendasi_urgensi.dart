@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/model_rekomendasi.dart';
-import 'package:frontend/services/apiservicerekomendasi.dart';
-import 'package:frontend/widgets/area_urgensi/card_urgensi.dart';
-import 'package:frontend/widgets/navigations/botnav.dart';
+import 'package:balapin/models/model_rekomendasi.dart';
+import 'package:balapin/services/apiservicerekomendasi.dart';
+import 'package:balapin/widgets/area_urgensi/card_urgensi.dart';
+import 'package:balapin/widgets/navigations/botnav.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:frontend/widgets/area_urgensi/filter_chip.dart';
+import 'package:balapin/widgets/area_urgensi/filter_chip.dart';
 
 class RekomendasiUrgensiPages extends StatefulWidget {
   const RekomendasiUrgensiPages({super.key});

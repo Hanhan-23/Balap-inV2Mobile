@@ -1,12 +1,12 @@
 import 'package:draggable_home/draggable_home.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/berandawidgets/analisisberanda.dart';
-import 'package:frontend/widgets/berandawidgets/appbarberanda.dart';
-import 'package:frontend/widgets/berandawidgets/mapberanda.dart';
-import 'package:frontend/widgets/berandawidgets/listlaporanberanda.dart';
-import 'package:frontend/models/model_laporan.dart';
-import 'package:frontend/services/apiservicelaporan.dart';
-import 'package:frontend/widgets/berandawidgets/searchberanda.dart';
+import 'package:balapin/widgets/berandawidgets/analisisberanda.dart';
+import 'package:balapin/widgets/berandawidgets/appbarberanda.dart';
+import 'package:balapin/widgets/berandawidgets/mapberanda.dart';
+import 'package:balapin/widgets/berandawidgets/listlaporanberanda.dart';
+import 'package:balapin/models/model_laporan.dart';
+import 'package:balapin/services/apiservicelaporan.dart';
+import 'package:balapin/widgets/berandawidgets/searchberanda.dart';
 
 class BerandaPages extends StatefulWidget {
   const BerandaPages({super.key});

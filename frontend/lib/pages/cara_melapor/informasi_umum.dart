@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/navigations/botnav.dart';
+import 'package:balapin/widgets/navigations/botnav.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:frontend/pages/cara_melapor/langkah_melapor.dart';
-import 'package:frontend/widgets/cara_melapor/informasi_umum/card_list.dart';
-import 'package:frontend/widgets/kustom_widget/gap_y.dart';
+import 'package:balapin/pages/cara_melapor/langkah_melapor.dart';
+import 'package:balapin/widgets/cara_melapor/informasi_umum/card_list.dart';
+import 'package:balapin/widgets/kustom_widget/gap_y.dart';
 
 class InformasiUmumPages extends StatefulWidget {
   const InformasiUmumPages ({super.key});

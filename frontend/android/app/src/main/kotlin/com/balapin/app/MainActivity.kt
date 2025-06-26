@@ -1,5 +1,5 @@
-// android/app/src/main/kotlin/com/example/frontend/MainActivity.kt
-package com.example.frontend
+// android/app/src/main/kotlin/com/balapin/app/MainActivity.kt
+package com.balapin.app
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -7,7 +7,7 @@ import io.flutter.plugin.common.MethodChannel
 import android.content.pm.PackageManager
 
 class MainActivity : FlutterActivity() {
-    private val CHANNEL = "com.example.frontend/api_key"
+    private val CHANNEL = "com.balapin.app/api_key"
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)

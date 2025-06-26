@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/model_laporan.dart';
-import 'package:frontend/pages/detaillaporan.dart';
-import 'package:frontend/widgets/berandawidgets/listlaporan/headerlistlapor.dart';
-import 'package:frontend/widgets/berandawidgets/listlaporan/listlaporan.dart';
+import 'package:balapin/models/model_laporan.dart';
+import 'package:balapin/pages/detaillaporan.dart';
+import 'package:balapin/widgets/berandawidgets/listlaporan/headerlistlapor.dart';
+import 'package:balapin/widgets/berandawidgets/listlaporan/listlaporan.dart';
 
 class ListLaporanBeranda extends StatefulWidget {
   final Function(int) filterindex;

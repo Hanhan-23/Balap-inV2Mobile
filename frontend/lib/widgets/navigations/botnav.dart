@@ -1,11 +1,11 @@
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/coach_mark/callbackcoachmark.dart';
-import 'package:frontend/coach_mark/coachmark.dart';
-import 'package:frontend/pages/beranda.dart';
-import 'package:frontend/pages/buatlapor.dart';
-import 'package:frontend/pages/cara_melapor/informasi_umum.dart';
-import 'package:frontend/pages/rekomendasi_urgensi.dart';
+import 'package:balapin/coach_mark/callbackcoachmark.dart';
+import 'package:balapin/coach_mark/coachmark.dart';
+import 'package:balapin/pages/beranda.dart';
+import 'package:balapin/pages/buatlapor.dart';
+import 'package:balapin/pages/cara_melapor/informasi_umum.dart';
+import 'package:balapin/pages/rekomendasi_urgensi.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});

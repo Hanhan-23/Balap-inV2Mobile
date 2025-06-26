@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/models/model_rekomendasi.dart';
-import 'package:frontend/pages/detaillaporan.dart';
-import 'package:frontend/services/apiservicerekomendasi.dart';
-import 'package:frontend/widgets/berandawidgets/listlaporan/listlaporan.dart';
-import 'package:frontend/widgets/textwidget.dart';
+import 'package:balapin/models/model_rekomendasi.dart';
+import 'package:balapin/pages/detaillaporan.dart';
+import 'package:balapin/services/apiservicerekomendasi.dart';
+import 'package:balapin/widgets/berandawidgets/listlaporan/listlaporan.dart';
+import 'package:balapin/widgets/textwidget.dart';
 
 class DetailRekomendasiScreen extends StatelessWidget {
   final dynamic index;
