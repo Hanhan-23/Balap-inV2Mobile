@@ -1,4 +1,8 @@
+import 'package:balapin/models/model_peta.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:balapin/services/service.dart';
+import 'dart:convert' as convert;
 
 CameraPosition initialCameraPosition() {
   return CameraPosition(
@@ -9,4 +13,16 @@ CameraPosition initialCameraPosition() {
 
 MinMaxZoomPreference initialMinMaxZoom() {
   return MinMaxZoomPreference(10, null);
+}
+
+Future<List<ModelRekomendasiPeta>> markerMapApi() async {
+  var url = Uri.parse('$service/rekomendasi/peta');
+  var response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    var responseJson = convert.jsonDecode(response.body) as List;
+    return responseJson.map((e) => ModelRekomendasiPeta.fromJson(e)).toList();
+  } else {
+    throw Exception("Failed to fetch Data");
+  }
 }

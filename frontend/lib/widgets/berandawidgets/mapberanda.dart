@@ -23,16 +23,31 @@ class _MapBerandaState extends State<MapBeranda> {
     _addMarkers();
   }
 
-  void _addMarkers() {
-    markers.add(
-      Marker(
-        markerId: MarkerId("marker1"),
-        position: LatLng(1.1193094237028431, 104.04850845799535), // Ganti dengan koordinat kamu
-        infoWindow: InfoWindow(title: "Judul Marker", snippet: "Keterangan"),
-      ),
-    );
+  void _addMarkers() async {
+    final data = await markerMapApi();
 
-    setState(() {}); 
+    final List<Marker> apiMarkers = data.map((item) {
+      double hue = BitmapDescriptor.hueBlue;
+
+      if (item.statusUrgent == 'tinggi') {
+        hue = BitmapDescriptor.hueRed;
+      } else if (item.statusUrgent == 'sedang') {
+        hue = BitmapDescriptor.hueYellow;
+      } else if (item.statusUrgent == 'rendah') {
+        hue = BitmapDescriptor.hueGreen;
+      }
+
+      return Marker(
+        markerId: MarkerId(item.idRekomendasi.toString()),
+        position: LatLng(item.latitude, item.longitude),
+        infoWindow: InfoWindow(title: item.judul, snippet: item.alamat),
+        icon: BitmapDescriptor.defaultMarkerWithHue(hue)
+      );
+    }).toList();
+
+    setState(() {
+      markers.addAll(apiMarkers);
+    }); 
   }
 
   @override
@@ -69,7 +84,7 @@ class _MapBerandaState extends State<MapBeranda> {
           ),
           onPressed: () {
             Navigator.push(context, 
-            MaterialPageRoute(builder: (context) => PetaPersebaran()));
+            MaterialPageRoute(builder: (context) => PetaPersebaran(markers: markers,)));
           },
           icon: SvgPicture.asset('assets/icons/beranda/fullmap.svg'),
         ),

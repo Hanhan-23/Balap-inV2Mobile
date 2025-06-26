@@ -6,7 +6,8 @@ import 'package:balapin/services/apiservicemap.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PetaPersebaran extends StatelessWidget {
-  const PetaPersebaran({super.key});
+  final dynamic markers;
+  const PetaPersebaran({super.key, required this.markers});
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,9 @@ class PetaPersebaran extends StatelessWidget {
       ),
 
       body: GoogleMap(
+        markers: markers,
+        myLocationButtonEnabled: true,
+        myLocationEnabled: true,
         cameraTargetBounds: CameraTargetBounds(
           LatLngBounds(
             southwest: LatLng(0.565224, 103.914942), 
