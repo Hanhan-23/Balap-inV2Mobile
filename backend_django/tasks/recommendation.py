@@ -203,7 +203,7 @@ def recommendations():
                     'jumlah_laporan': row['NumReports'],
                     'status_urgent': row['Priority'],
                     'tingkat_urgent': float(row['TOPSIS_Score']),
-                    'status_rekom': 'valid',
+                    'status_rekom': 'belum_valid',
                     'tgl_rekom': datetime.now(),
                     'id_laporan': row['laporan_ids']
                 }

@@ -12,7 +12,7 @@ from bson import ObjectId
 
 @shared_task
 def hello_celery():
-    print("Hello from Celery")
+    clustering()
 
     channel_layer = get_channel_layer()
     async_to_sync(channel_layer.group_send)(
