@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 
 
 Future<String> getMapKey() async {
-  const platform = MethodChannel('com.example.frontend/api_key');
+  const platform = MethodChannel('com.balapin.app/api_key');
   try {
     final String apiKey = await platform.invokeMethod('getApiKey');
     return apiKey;

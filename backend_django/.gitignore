@@ -12,6 +12,7 @@ venv/
 env/
 .env/
 *.env
+serviceAccountKey.json
 
 # Django specific
 *.log

@@ -10,6 +10,7 @@ from firebase_admin import messaging
 from bson import ObjectId
 from datetime import datetime
 from decouple import config
+from backend_django.firebase_config import firebase_admin
 
 def recommendations():
     # MongoDB connection
@@ -213,7 +214,7 @@ def recommendations():
                 previous_status = None
             
             # Check if notification should be sent
-            if (previous_status in ["sedang", "rendah"]) and row['Priority'] == "tinggi":
+            if (previous_status in ["sedang", "rendah", None]) and row['Priority'] == "tinggi":
                 notification_message = f"Prioritas {row['lokasi']} dari {previous_status} Menjadi Tinggi!"
                 
                 # Insert notification

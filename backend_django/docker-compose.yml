@@ -3,6 +3,7 @@ services:
     build: .
     volumes:
       - .:/app
+      - ./backend_django/serviceAccountKey.json:/app/serviceAccountKey.json
     ports:
       - "8000:8000"
     depends_on:
@@ -13,6 +14,7 @@ services:
     command: celery -A backend_django worker --loglevel=info
     volumes:
       - .:/app
+      - ./backend_django/serviceAccountKey.json:/app/serviceAccountKey.json
     depends_on:
       - redis
 
@@ -21,6 +23,7 @@ services:
     command: celery -A backend_django beat --loglevel=info
     volumes:
       - .:/app
+      - ./backend_django/serviceAccountKey.json:/app/serviceAccountKey.json
     depends_on:
       - redis
 
