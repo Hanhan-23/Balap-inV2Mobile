@@ -14,11 +14,34 @@ class MapBeranda extends StatefulWidget {
 }
 
 class _MapBerandaState extends State<MapBeranda> {
+
+  Set<Marker> markers = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _addMarkers();
+  }
+
+  void _addMarkers() {
+    markers.add(
+      Marker(
+        markerId: MarkerId("marker1"),
+        position: LatLng(1.1193094237028431, 104.04850845799535), // Ganti dengan koordinat kamu
+        infoWindow: InfoWindow(title: "Judul Marker", snippet: "Keterangan"),
+      ),
+    );
+
+    setState(() {}); 
+  }
+
   @override
   Widget build(BuildContext context) {
-
     viewMap() {
       return GoogleMap(
+        markers: markers,
+        myLocationButtonEnabled: true,
+        myLocationEnabled: true,
         minMaxZoomPreference: initialMinMaxZoom(),
         cameraTargetBounds: CameraTargetBounds(
           LatLngBounds(

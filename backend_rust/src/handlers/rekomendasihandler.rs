@@ -14,7 +14,7 @@ pub async fn get_rekomendasi(db: web::Data<MongoRepo>) -> impl Responder{
 }
 
 pub async fn get_rekomendasi_card(db: web::Data<MongoRepo>, query: web::Query<SortQuery>) -> impl Responder{
-    let cursor = db.rekomendasi_collection.find(doc! {}).await.expect("Failed to find rekomendasi");
+    let cursor = db.rekomendasi_collection.find(doc! { "status_rekom": { "$ne": "selesai" } }).await.expect("Failed to find rekomendasi");
     let docs = cursor.try_collect::<Vec<Rekomendasi>>().await.expect("Failed to collect rekomendasi");
     
     let mut result = Vec::new();
