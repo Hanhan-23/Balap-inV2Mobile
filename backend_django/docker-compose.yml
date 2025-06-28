@@ -1,9 +1,13 @@
 services:
   django:
     build: .
+    command: daphne -b 0.0.0.0 -p 8000 backend_django.asgi:application
+    # Memuat semua variabel dari file .env
+    env_file:
+      - ./backend_django/.env
     volumes:
       - .:/app
-      - ./backend_django/serviceAccountKey.json:/app/serviceAccountKey.json
+      - ./backend_django/serviceAccountKey.json:/app/backend_django/serviceAccountKey.json
     ports:
       - "8000:8000"
     depends_on:
@@ -12,22 +16,30 @@ services:
   celery:
     build: .
     command: celery -A backend_django worker --loglevel=info
+    # Memuat semua variabel dari file .env
+    env_file:
+      - ./backend_django/.env
     volumes:
       - .:/app
-      - ./backend_django/serviceAccountKey.json:/app/serviceAccountKey.json
+      - ./backend_django/serviceAccountKey.json:/app/backend_django/serviceAccountKey.json
     depends_on:
+      - django
       - redis
 
   celery-beat:
     build: .
     command: celery -A backend_django beat --loglevel=info
+    # Memuat semua variabel dari file .env
+    env_file:
+      - ./backend_django/.env
     volumes:
       - .:/app
-      - ./backend_django/serviceAccountKey.json:/app/serviceAccountKey.json
+      - ./backend_django/serviceAccountKey.json:/app/backend_django/serviceAccountKey.json
     depends_on:
+      - django
       - redis
 
   redis:
-    image: redis:alpine
+    image: "redis:alpine"
     ports:
       - "6379:6379"
