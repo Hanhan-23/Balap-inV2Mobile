@@ -69,6 +69,6 @@ services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     restart: unless-stopped
-    command: tunnel --url django:8000 --no-autoupdate run --token eyJhIjoiZDE2NDIwMTU3NzIxYTljNmYzMWQzNjE1NDE3ZmViYjkiLCJzIjoiMUR2V3RJUklaQ1oybTNyVDRKUDNWSEV5TG52SEQyV29lVU94QjMycE53UT0iLCJ0IjoiNDQ3MmY4YjYtMTA2Ny00YWU4LTg1ZTMtMDcxOTg2NjQzMTUyIn0=
+    command: tunnel --url django:8000 --no-autoupdate run --token <token>
     depends_on:
       - django

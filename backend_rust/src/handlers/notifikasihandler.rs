@@ -9,6 +9,7 @@ pub async fn get_card_notifikasi(db: web::Data<MongoRepo>) -> impl Responder {
     let cursor = db.notifikasi_collection
         .find(doc! {})
         .sort(doc! {"tgl_notif": -1})
+        .limit(10)
         .await
         .expect("Failed to find documents.");
 
