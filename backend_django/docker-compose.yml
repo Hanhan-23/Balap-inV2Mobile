@@ -51,3 +51,17 @@ services:
   #   command: http --url=rational-ready-marmoset.ngrok-free.app django:8000
   #   depends_on:
   #     - django 
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /var/lib/letsencrypt:/var/lib/letsencrypt
+    depends_on:
+      - django

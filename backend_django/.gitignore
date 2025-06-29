@@ -37,3 +37,7 @@ Thumbs.db
 *__pycache__
 
 integrated_abusive_classifier_v2.pth
+
+/etc/letsencrypt/*
+/var/lib/letsencrypt/*
+*.pem
