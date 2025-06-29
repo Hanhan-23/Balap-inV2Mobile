@@ -26,7 +26,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     const InformasiUmumPages(),
   ];
 
-  List<TabItem> items = [
+  List<TabItem> items = const [
     TabItem(
       icon: IconData(0xe903, fontFamily: 'CustomIconsBotNav'),
       title: 'Beranda',

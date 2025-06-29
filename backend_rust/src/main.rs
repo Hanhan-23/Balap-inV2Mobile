@@ -45,9 +45,12 @@ async fn main() -> std::io::Result<()> {
 
     verify_bucket(&client, bucket).await.map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
+    let ai_uri = dotenvy::var("AI_URI").expect("second server not found");
+
     let app_state = Arc::new(AppState {
         s3_client: client.clone(),
         bucket_name: bucket_name.clone(),
+        ai_uri: ai_uri.clone(),
     });
 
     HttpServer::new(move || {

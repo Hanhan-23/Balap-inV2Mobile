@@ -2,7 +2,6 @@ services:
   django:
     build: .
     command: daphne -b 0.0.0.0 -p 8000 backend_django.asgi:application
-    # Memuat semua variabel dari file .env
     env_file:
       - ./backend_django/.env
     volumes:
@@ -16,7 +15,6 @@ services:
   celery:
     build: .
     command: celery -A backend_django worker --loglevel=info
-    # Memuat semua variabel dari file .env
     env_file:
       - ./backend_django/.env
     volumes:
@@ -29,7 +27,6 @@ services:
   celery-beat:
     build: .
     command: celery -A backend_django beat --loglevel=info
-    # Memuat semua variabel dari file .env
     env_file:
       - ./backend_django/.env
     volumes:
@@ -43,3 +40,14 @@ services:
     image: "redis:alpine"
     ports:
       - "6379:6379"
+  
+  # ngrok:
+  #   image: ngrok/ngrok:latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - "4040:4040" 
+  #   env_file:
+  #     - ./backend_django/.env
+  #   command: http --url=rational-ready-marmoset.ngrok-free.app django:8000
+  #   depends_on:
+  #     - django 

@@ -21,3 +21,4 @@ chrono = "0.4.40"
 regex = "1.11.1"
 shuttle-actix-web = "0.55.0"
 shuttle-runtime = "0.55.0"
+reqwest = { version = "0.12.20", features = ["json"] }

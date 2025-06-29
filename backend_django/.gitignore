@@ -35,6 +35,5 @@ Thumbs.db
 .ipynb_checkpoints/
 
 *__pycache__
-./model/model_files/integrated_abusive_classifier_v2.pth
-.\model\model_files\integrated_abusive_classifier_v2.pth
-backend_django\model\model_files\integrated_abusive_classifier_v2.pth
+
+integrated_abusive_classifier_v2.pth

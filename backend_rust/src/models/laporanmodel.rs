@@ -75,3 +75,18 @@ pub struct SortCardLaporan{
     pub period: Option<i8>,
     pub search: Option<String>,
 }
+
+#[derive(Deserialize)]
+pub struct TextAnalysisResult {
+    pub original_text: String,
+    pub processed_text: String,
+    pub predicted_label: String,
+    pub confidence: f32,
+    pub censored_text: String,
+}
+
+#[derive(Deserialize)]
+pub struct SensorResponse {
+    pub judul: TextAnalysisResult,
+    pub deskripsi: TextAnalysisResult,
+}

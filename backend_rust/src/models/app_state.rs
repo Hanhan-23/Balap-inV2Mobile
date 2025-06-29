@@ -4,4 +4,5 @@ use aws_sdk_s3::Client;
 pub struct AppState {
     pub s3_client: Client,
     pub bucket_name: String,
+    pub ai_uri: String,
 }

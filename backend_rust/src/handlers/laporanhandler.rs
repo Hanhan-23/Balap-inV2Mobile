@@ -2,7 +2,7 @@ use std::sync::Arc;
 use actix_multipart::Multipart;
 use actix_web::{web, HttpResponse, Responder, HttpRequest};
 use futures::{StreamExt, TryStreamExt};
-use crate::models::laporanmodel::{CardLaporan, DetailLaporan, Laporan, LaporanBaru, SortCardLaporan};
+use crate::models::laporanmodel::{CardLaporan, DetailLaporan, Laporan, LaporanBaru, SortCardLaporan, SensorResponse};
 use crate::mongorepo::MongoRepo;
 use serde_json::json;
 use crate::models::app_state::AppState;
@@ -10,6 +10,7 @@ use crate::utils::s3service::upload_photo;
 use chrono::{Duration, Utc};
 use mongodb::bson::{doc, Regex, oid::ObjectId, DateTime as BsonDateTime};
 use crate::models::petamodel::Peta;
+use reqwest;
 
 pub async fn get_laporan(db: web::Data<MongoRepo>) -> impl Responder {
     let filter = doc! {"status": "selesai"};
@@ -110,6 +111,24 @@ pub async fn get_detail_laporan(db: web::Data<MongoRepo>, oid: web::Path<String>
     HttpResponse::Ok().json(docs)
 }
 
+async fn get_sensor_result(
+    state: web::Data<Arc<AppState>>,
+    laporan: &LaporanBaru,
+) -> Result<SensorResponse, reqwest::Error> {
+    let uri = state.ai_uri.clone();
+    let client = reqwest::Client::new();
+    let res = client
+        .post(uri)
+        .json(&serde_json::json!({
+            "judul": laporan.judul,
+            "deskripsi": laporan.deskripsi
+        }))
+        .send()
+        .await?;
+
+    res.json::<SensorResponse>().await
+}
+
 pub async fn upload_laporan_gambar(
     state: web::Data<Arc<AppState>>,
     db: web::Data<MongoRepo>,
@@ -159,11 +178,40 @@ pub async fn upload_laporan_gambar(
         Some(other) => return HttpResponse::BadRequest().body(format!("Unsupported file type: {}", other)),
         None => return HttpResponse::BadRequest().body("Missing file extension"),
     };
+    
+    // PROCESS DETECTION ABUSIVE WORDS
+    
+    // Ambil status awal dari laporan
+    let mut status = laporan.status.clone();
+
+    // Panggil sensor API
+    let sensor_result = get_sensor_result(state.clone() ,&laporan).await.ok();
+
+    if let Some(sensor) = sensor_result {
+        let count_star = |s: &str| s.matches('*').count();
+
+        let abusive_judul = sensor.judul.predicted_label == "abusive";
+        let abusive_deskripsi = sensor.deskripsi.predicted_label == "abusive";
+
+        if (abusive_judul && count_star(&sensor.judul.censored_text) < 3)
+            || (abusive_deskripsi && count_star(&sensor.deskripsi.censored_text) < 3)
+        {
+            status = "disembunyikan".to_string();
+        }
+
+        // Timpa teks dengan hasil sensor
+        laporan.judul = sensor.judul.censored_text;
+        laporan.deskripsi = sensor.deskripsi.censored_text;
+    } else {
+        println!("Sensor API tidak tersedia, lanjutkan tanpa klasifikasi.");
+    }
+
 
     // let mut req_with_ext = req.clone();
     // req_with_ext.headers_mut().insert("x-file-ext", ext.parse().unwrap());
-
-    let key = match upload_photo(data, &ext, state).await {
+    
+    // PROCESS UPLOAD IMAGE AWS S3
+    let key = match upload_photo(data, &ext, state.clone()).await {
         Ok(k) => k,
         Err(_) => return HttpResponse::InternalServerError().body("Failed to upload image"),
     };
@@ -176,7 +224,7 @@ pub async fn upload_laporan_gambar(
         deskripsi: laporan.deskripsi,
         cuaca: laporan.cuaca,
         persentase: laporan.persentase,
-        status: laporan.status,
+        status: status.to_string(),
         tgl_lapor: BsonDateTime::from_millis(Utc::now().timestamp_millis()),
         cluster: laporan.cluster,
         id_masyarakat: laporan.id_masyarakat,
