@@ -3,11 +3,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:balapin/provider/laporan_provider.dart';
 import 'package:balapin/services/apiservicemap.dart';
-import 'package:balapin/services/geocodmaps.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 Future pickerMap(BuildContext context) {
+  var initialCamera = initialCameraPosition();
+
   return showDialog(
     barrierDismissible: true,
     context: context,
@@ -24,32 +25,47 @@ Future pickerMap(BuildContext context) {
                 child: Consumer<LaporanProvider>(
                   builder: (context, laporanProvider, _) {
                     final pickedLocation = laporanProvider.pickedLocation;
+                    if (pickedLocation != null) {
+                      initialCamera = CameraPosition(
+                        zoom: 15,
+                        target: LatLng(
+                          pickedLocation.latitude,
+                          pickedLocation.longitude,
+                        ),
+                      );
+                    }
 
                     return Stack(
                       children: [
                         GoogleMap(
                           onTap: (LatLng latLng) {
-                            context.read<LaporanProvider>().setPickedLocation(latLng);
+                            context.read<LaporanProvider>().setPickedLocation(
+                              latLng,
+                            );
                           },
-                          markers: pickedLocation != null
-                              ? {
-                                  Marker(
-                                    markerId: MarkerId("picked"),
-                                    position: pickedLocation,
-                                  ),
-                                }
-                              : {},
+                          markers:
+                              pickedLocation != null
+                                  ? {
+                                    Marker(
+                                      markerId: MarkerId("picked"),
+                                      position: pickedLocation,
+                                    ),
+                                  }
+                                  : {},
                           minMaxZoomPreference: initialMinMaxZoom(),
                           cameraTargetBounds: CameraTargetBounds(
                             LatLngBounds(
                               southwest: LatLng(0.565224, 103.914942),
-                              northeast: LatLng(1.2314551402831757, 104.29134516648656),
+                              northeast: LatLng(
+                                1.2314551402831757,
+                                104.29134516648656,
+                              ),
                             ),
                           ),
                           zoomGesturesEnabled: true,
                           zoomControlsEnabled: false,
                           mapType: MapType.hybrid,
-                          initialCameraPosition: initialCameraPosition(),
+                          initialCameraPosition: initialCamera,
                           gestureRecognizers: {
                             Factory<OneSequenceGestureRecognizer>(
                               () => EagerGestureRecognizer(),
@@ -58,7 +74,11 @@ Future pickerMap(BuildContext context) {
                         ),
                         if (pickedLocation == null)
                           Container(
-                            margin: EdgeInsets.only(top: 10, left: 20, right: 20),
+                            margin: EdgeInsets.only(
+                              top: 10,
+                              left: 20,
+                              right: 20,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20),
@@ -91,8 +111,7 @@ Future pickerMap(BuildContext context) {
                                   width: double.infinity,
                                   child: ElevatedButton(
                                     onPressed: () async {
-                                      final alamat = await geocodelocation(pickedLocation);
-                                      Navigator.pop(context, alamat);
+                                      Navigator.pop(context);
                                     },
                                     child: Text(
                                       "Pilih Lokasi Ini",

@@ -66,7 +66,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         context, [keyCaraMelapor], 
         'Ayo lihat bagaimana cara melapor disini', 
         () {
-          Navigator.pushReplacement(
+          Navigator.push(
             context, MaterialPageRoute(builder: (context) => InformasiUmumPages())
           );
         }
