@@ -31,15 +31,15 @@ class _CardUrgensiState extends State<CardUrgensi> {
 
     if (dataStatus == 'tinggi') {
       statusUrgent = 'Tinggi';
-      warnaUrgent = Color.fromRGBO(255, 201, 201, 100);
+      warnaUrgent = Color.fromRGBO(255, 201, 201, 1);
       teksUrgent = Color.fromRGBO(231, 0, 11, 100);
     } else if (dataStatus == 'sedang') {
       statusUrgent = 'Sedang';
-      warnaUrgent = Color.fromRGBO(255, 240, 133, 100);
+      warnaUrgent = Color.fromRGBO(255, 240, 133, 1);
       teksUrgent = Color.fromRGBO(240, 177, 0, 100);
     } else if (dataStatus == 'rendah') {
       statusUrgent = 'Rendah';
-      warnaUrgent = Color.fromRGBO(164, 244, 207, 100);
+      warnaUrgent = Color.fromRGBO(164, 244, 207, 1);
       teksUrgent = Color.fromRGBO(0, 153, 102, 100);
     } else {
       statusUrgent = 'Tidak Dikenali';
@@ -80,6 +80,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                 ),
+                clipBehavior: Clip.hardEdge,
                 width: 104,
                 height: 104,
                 child: Image.network(
@@ -116,7 +117,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
                     children: [
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 1,
-                        height: 20,
+                        height: 24,
                         child: Text(
                           widget.indexrekomen.idLaporan.judul,
                           style: TextStyle(

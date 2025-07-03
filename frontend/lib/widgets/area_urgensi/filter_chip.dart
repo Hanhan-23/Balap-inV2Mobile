@@ -25,7 +25,7 @@ class _FilterUrgensiState extends State<FilterUrgensi> {
           TextButton.icon(
             style: TextButton.styleFrom(
               shape: StadiumBorder(
-                side: BorderSide(color: Colors.black, width: 1),
+                side: BorderSide(color: Color.fromRGBO(202, 213, 226, 1), width: 1),
               ),
             ),
             onPressed: () {},
@@ -56,9 +56,11 @@ class _FilterUrgensiState extends State<FilterUrgensi> {
             ),
             direction: Axis.horizontal,
             choiceStyle: C2ChipStyle.outlined(
+              color: Color.fromRGBO(202, 213, 226, 1),
+              foregroundStyle: TextStyle(color: Colors.black),
               borderRadius: BorderRadius.circular(20),
               selectedStyle: C2ChipStyle.filled(
-                color: Colors.black,
+                color: Color.fromRGBO(17, 84, 237, 1),
                 foregroundStyle: TextStyle(color: Colors.white),
               ),
             ),

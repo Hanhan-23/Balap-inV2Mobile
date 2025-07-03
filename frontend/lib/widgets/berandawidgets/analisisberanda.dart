@@ -32,7 +32,7 @@ class _AnalisisBerandaState extends State<AnalisisBeranda> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Color.fromRGBO(202, 213, 226, 100)),
+          border: Border.all(color: Color.fromRGBO(202, 213, 226, 1)),
         ),
         width: MediaQuery.of(context).size.width * 0.425,
         height: double.infinity,

@@ -48,6 +48,7 @@ class _JudulpengaduanState extends State<Judulpengaduan> {
               color: Color.fromRGBO(46, 55, 68, 1)
             ),
             decoration: InputDecoration(
+              hintMaxLines: 1,
               counterText: '',
               hintText: 'Jalan di simpang lampu merah berlubang',
               hintStyle: TextStyle(

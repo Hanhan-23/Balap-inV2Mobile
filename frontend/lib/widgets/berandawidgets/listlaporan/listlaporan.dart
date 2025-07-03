@@ -111,7 +111,7 @@ class _ListLaporanState extends State<ListLaporan> {
 
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 1,
-                      height: 20,
+                      height: 24,
                       child: Text(
                         widget.dataCardLaporan!.judul.toString(),
                         style: TextStyle(
