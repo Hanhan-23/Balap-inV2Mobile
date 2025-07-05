@@ -95,6 +95,7 @@ class _BerandaPagesState extends State<BerandaPages>
               child: Scrollbar(
                 radius: Radius.circular(100),
                 child: RefreshIndicator(
+                  color: Color.fromRGBO(17, 84, 237, 1),
                   onRefresh: _handleRefresh,
                   child: DraggableHome(
                     centerTitle: true,

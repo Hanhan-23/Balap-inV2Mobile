@@ -75,6 +75,7 @@ class _RekomendasiUrgensiPagesState extends State<RekomendasiUrgensiPages>
                     var listData = snapshot.data;
 
                     return RefreshIndicator(
+                      color: Color.fromRGBO(17, 84, 237, 1),
                       onRefresh: _handleRefresh,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),

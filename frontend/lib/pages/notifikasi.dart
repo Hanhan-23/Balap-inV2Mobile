@@ -21,6 +21,12 @@ class _NotifikasiPagesState extends State<NotifikasiPages> {
     _futurenotifikasi = getCardNotifikasi();
   }
 
+  Future<void> _handleRefresh() async {
+    setState(() {
+      _futurenotifikasi = getCardNotifikasi();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,15 +61,19 @@ class _NotifikasiPagesState extends State<NotifikasiPages> {
           builder: (context, snapshot) {
             var listData = snapshot.data;
             if (snapshot.connectionState == ConnectionState.done) {
-              return ListView.builder(
-                physics: BouncingScrollPhysics(),
-                itemCount: listData!.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(top: 0, bottom: 14),
-                    child: CardNotifikasi(data: listData[index]),
-                  );
-                },
+              return RefreshIndicator(
+                color: Color.fromRGBO(17, 84, 237, 1),
+                onRefresh: _handleRefresh,
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: listData!.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(top: 0, bottom: 14),
+                      child: CardNotifikasi(data: listData[index]),
+                    );
+                  },
+                ),
               );
             } else if (snapshot.connectionState == ConnectionState.waiting) {
               return Text('Sedang menyediakan layanan mohon menunggu');

@@ -4,6 +4,7 @@ import 'package:balapin/pages/privacy_policy.dart';
 import 'package:balapin/provider/laporan_provider.dart';
 import 'package:balapin/widgets/navigations/botnav.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get_time_ago/get_time_ago.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,6 +18,26 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   _showNotification(message);
 }
+
+Future<Position> getCurrentPosition() async {
+  bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    throw Exception('Location services are disabled.');
+  }
+
+  LocationPermission permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      throw Exception('Location permissions are denied.');
+    }
+  }
+
+  return await Geolocator.getCurrentPosition(
+    desiredAccuracy: LocationAccuracy.high,
+  );
+}
+
 
 void _showNotification(RemoteMessage message) async {
   const androidDetails = AndroidNotificationDetails(
@@ -42,6 +63,7 @@ void main() async {
 
   // Izin notifikasi (Android 13+)
   await FirebaseMessaging.instance.requestPermission();
+  await getCurrentPosition();
 
   // Subscribe ke topik
   await FirebaseMessaging.instance.subscribeToTopic('global_notifications');

@@ -94,7 +94,7 @@ class _MapBerandaState extends State<MapBeranda> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Stack(
-        alignment: Alignment.topRight,
+        alignment: Alignment.topLeft,
         children: [viewMap(), mapButton()],
       ),
     );
