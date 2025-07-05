@@ -20,6 +20,10 @@ class _RekomendasiUrgensiPagesState extends State<RekomendasiUrgensiPages>
   bool get wantKeepAlive => true;
   String _order = 'desc';
 
+  Future<void> _handleRefresh() async {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -70,17 +74,20 @@ class _RekomendasiUrgensiPagesState extends State<RekomendasiUrgensiPages>
                   if (snapshot.connectionState == ConnectionState.done) {
                     var listData = snapshot.data;
 
-                    return ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: listData!.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: CardUrgensi(
-                            indexrekomen: listData[index],
-                          ), // komponen kartu kamu
-                        );
-                      },
+                    return RefreshIndicator(
+                      onRefresh: _handleRefresh,
+                      child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: listData!.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: CardUrgensi(
+                              indexrekomen: listData[index],
+                            ), // komponen kartu kamu
+                          );
+                        },
+                      ),
                     );
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {

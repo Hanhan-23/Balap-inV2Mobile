@@ -162,6 +162,8 @@ class _CardUrgensiState extends State<CardUrgensi> {
                             ),
                           ),
 
+                          SizedBox(width: 4,),
+
                           SizedBox(
                             height: 20,
                             child: Align(
