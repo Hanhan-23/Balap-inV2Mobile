@@ -1,4 +1,3 @@
-use actix_web::cookie::time::format_description::modifier::Period;
 use mongodb::bson::oid::ObjectId;
 use serde::{Deserialize, Serialize};
 use crate::models::petamodel::{Peta, PetaBaru, PetaCardRekomendasi};
@@ -68,6 +67,7 @@ pub struct LaporanCardRekomendasi{
     pub jenis: String,
     pub judul: String,
     pub id_peta: PetaCardRekomendasi,
+    pub status: String
 }
 
 #[derive(Deserialize)]
