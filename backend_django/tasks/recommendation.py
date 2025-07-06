@@ -215,6 +215,9 @@ def recommendations():
             
             # Check if notification should be sent
             if (previous_status in ["sedang", "rendah", None]) and row['Priority'] == "tinggi":
+                if previous_status == None:
+                    previous_status = 'Baru'
+                
                 notification_message = f"Prioritas {row['lokasi']} dari {previous_status} Menjadi Tinggi!"
                 
                 # Insert notification
