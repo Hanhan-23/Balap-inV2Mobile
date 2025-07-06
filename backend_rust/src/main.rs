@@ -23,7 +23,7 @@ async fn main() -> std::io::Result<()> {
     dotenvy::dotenv().ok();
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
     let uri = env::var("MONGODB_URI").expect("MONGODB_URI must be set");
-    
+
     // init Client Mongodb
     let init_db = init_mongo(uri).await.expect("Failed to init mongo");
 
@@ -35,7 +35,7 @@ async fn main() -> std::io::Result<()> {
     }
 
     let mongorepo = MongoRepo::new(&init_db);
-    
+
     //init Client aws
     let bucket_name = dotenvy::var("S3_BUCKET").expect("bucket not found");
     let region_provider = RegionProviderChain::first_try(Region::new("ap-southeast-1"));

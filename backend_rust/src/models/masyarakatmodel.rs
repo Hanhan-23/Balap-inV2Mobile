@@ -9,3 +9,8 @@ pub struct Masyarakat {
     pub tgl_pengguna: DateTime,
     pub token: String,
 }
+
+#[derive(Deserialize)]
+pub struct TokenRequest {
+    pub token: String,
+}

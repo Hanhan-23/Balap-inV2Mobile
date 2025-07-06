@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:balapin/models/model_laporan.dart';
 import 'package:mime/mime.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<List<ModelCardLaporan>> getCardLaporan(
   int period,
@@ -82,6 +83,9 @@ Future buatLapor(
 
     var client = http.Client();
 
+    final prefs = await SharedPreferences.getInstance();
+    final akunMasyarakat = prefs.getString('user_id');
+
     try {
       var url = Uri.parse('$service/laporan/uploadlaporan');
 
@@ -93,7 +97,7 @@ Future buatLapor(
         "persentase": nilaikerusakan,
         "status": "selesai",
         "cluster": null,
-        "id_masyarakat": "680577cc557c0d8723af0b13",
+        "id_masyarakat": akunMasyarakat ?? "680577cc557c0d8723af0b13",
         "id_peta": {
           "alamat": alamat,
           "jalan": jalan,

@@ -1,3 +1,4 @@
+import 'package:balapin/services/apiservicemasyarakat.dart';
 import 'package:flutter/material.dart';
 import 'package:balapin/callback/callbackpenggunabaru.dart';
 import 'package:balapin/pages/privacy_policy.dart';
@@ -80,6 +81,7 @@ void main() async {
   GetTimeAgo.setDefaultLocale('id');
 
   final cekpengguna = await checkPenggunaBaru();
+  await checkAkunMasyarakat();
 
   runApp(
     ChangeNotifierProvider(
