@@ -62,6 +62,7 @@ async fn main() -> std::io::Result<()> {
             .configure(routes::laporanroute::laporan_routes)
             .configure(routes::rekomendasiroute::rekomendasi_routes)
             .configure(routes::notifikasiroute::notifikasi_route)
+            .configure(routes::akunroute::akun_routes)
     })
     .bind(("127.0.0.1", 8080))?
     .run()

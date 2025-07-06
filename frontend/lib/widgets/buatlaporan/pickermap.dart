@@ -38,6 +38,8 @@ Future pickerMap(BuildContext context) {
                     return Stack(
                       children: [
                         GoogleMap(
+                          myLocationEnabled: true,
+                          myLocationButtonEnabled: true,
                           onTap: (LatLng latLng) {
                             context.read<LaporanProvider>().setPickedLocation(
                               latLng,
