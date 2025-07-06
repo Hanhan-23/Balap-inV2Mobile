@@ -37,10 +37,18 @@ class _MapBerandaState extends State<MapBeranda> {
         hue = BitmapDescriptor.hueGreen;
       }
 
+      String judullaporan = '';
+
+      if (item.status == 'selesai') {
+        judullaporan = item.judul;
+      } else if (item.status == 'disembunyikan') {
+        judullaporan = 'Judul disembunyikan';
+      }
+
       return Marker(
         markerId: MarkerId(item.idRekomendasi.toString()),
         position: LatLng(item.latitude, item.longitude),
-        infoWindow: InfoWindow(title: item.judul, snippet: item.alamat),
+        infoWindow: InfoWindow(title: judullaporan, snippet: item.alamat),
         icon: BitmapDescriptor.defaultMarkerWithHue(hue)
       );
     }).toList();

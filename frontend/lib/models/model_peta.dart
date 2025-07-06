@@ -57,6 +57,7 @@ class ModelRekomendasiPeta {
   final double latitude;
   final double longitude;
   final String alamat;
+  final String status;
 
   ModelRekomendasiPeta({
     required this.idRekomendasi,
@@ -68,6 +69,7 @@ class ModelRekomendasiPeta {
     required this.latitude,
     required this.longitude,
     required this.alamat,
+    required this.status,
   });
 
   factory ModelRekomendasiPeta.fromJson(Map<String, dynamic> json) {
@@ -80,7 +82,8 @@ class ModelRekomendasiPeta {
       judul: json['judul'], 
       latitude: json['latitude'], 
       longitude: json['longitude'], 
-      alamat: json['alamat']
+      alamat: json['alamat'],
+      status: json['status']
     );
   }
 }

@@ -24,6 +24,7 @@ pub async fn get_peta_rekomendasi(
                     "status_rekom": rekom.status_rekom,
                     "id_laporan": laporan.id,
                     "judul": laporan.judul,
+                    "status": laporan.status,
                     "latitude": laporan.id_peta.latitude,
                     "longitude": laporan.id_peta.longitude,
                     "alamat": laporan.id_peta.alamat,
