@@ -3,6 +3,7 @@ import 'package:balapin/models/model_rekomendasi.dart';
 import 'package:balapin/services/apiservicerekomendasi.dart';
 import 'package:balapin/widgets/area_urgensi/card_urgensi.dart';
 import 'package:balapin/widgets/navigations/botnav.dart';
+import 'package:lottie/lottie.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:balapin/widgets/area_urgensi/filter_chip.dart';
 
@@ -74,25 +75,50 @@ class _RekomendasiUrgensiPagesState extends State<RekomendasiUrgensiPages>
                   if (snapshot.connectionState == ConnectionState.done) {
                     var listData = snapshot.data;
 
-                    return RefreshIndicator(
-                      color: Color.fromRGBO(17, 84, 237, 1),
-                      onRefresh: _handleRefresh,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: listData!.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: CardUrgensi(
-                              indexrekomen: listData[index],
-                            ), // komponen kartu kamu
-                          );
-                        },
-                      ),
-                    );
+                    if (listData!.length == 0) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(PhosphorIconsBold.chartBar),
+                          Text(
+                            'Belum ada rekomendasi saat ini',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return RefreshIndicator(
+                        color: Color.fromRGBO(17, 84, 237, 1),
+                        onRefresh: _handleRefresh,
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: listData.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: CardUrgensi(
+                                indexrekomen: listData[index],
+                              ), // komponen kartu kamu
+                            );
+                          },
+                        ),
+                      );
+                    }
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return Text('Sedang menyediakan layanan mohon menunggu');
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Lottie.asset(
+                            'assets/icons/dialog/loadinganimation.json',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    );
                   } else if (snapshot.connectionState != ConnectionState.none) {
                     return Text('Layanan sedang nonaktif mohon maaf');
                   } else {

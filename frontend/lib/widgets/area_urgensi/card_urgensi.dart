@@ -33,7 +33,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
       gambarlaporan = widget.indexrekomen.idLaporan.gambar;
     } else if (statuslaporan == 'disembunyikan') {
       judullaporan = 'Laporan disembunyikan';
-      gambarlaporan = 'https://media.discordapp.net/attachments/1352465794377842838/1391009640845934602/melanggar.png?ex=686a562e&is=686904ae&hm=4ad9bb00df2d342b6d339dbeaf40415cc2004db71430ffe76baaf5a2e2054f5c&=&format=webp&quality=lossless';
+      gambarlaporan = 'https://balapin.s3.ap-southeast-1.amazonaws.com/melanggar.png';
     }
 
     final dataStatus = widget.indexrekomen.statusUrgent;

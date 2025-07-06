@@ -104,6 +104,7 @@ flutter:
     - assets/icons/dialog/draftanimation.json
     - assets/icons/dialog/deletedraftanim.json
     - assets/icons/dialog/loaddrafanim.json
+    - assets/icons/dialog/loadinganimation.json
 
   fonts:
     - family: CustomIconsBotNav

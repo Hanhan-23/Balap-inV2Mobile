@@ -5,6 +5,7 @@ import 'package:balapin/pages/detaillaporan.dart';
 import 'package:balapin/services/apiservicerekomendasi.dart';
 import 'package:balapin/widgets/berandawidgets/listlaporan/listlaporan.dart';
 import 'package:balapin/widgets/textwidget.dart';
+import 'package:lottie/lottie.dart';
 
 class DetailRekomendasiScreen extends StatelessWidget {
   final dynamic index;
@@ -181,7 +182,19 @@ class DetailRekomendasiScreen extends StatelessWidget {
                   );
                 } else if (snapshot.connectionState ==
                     ConnectionState.waiting) {
-                  return Text('Sedang menyediakan layanan mohon menunggu');
+                                        return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: Lottie.asset(
+                              'assets/icons/dialog/loadinganimation.json',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ],
+                      );
                 } else if (snapshot.connectionState != ConnectionState.none) {
                   return Text('Layanan sedang nonaktif mohon maaf');
                 } else {

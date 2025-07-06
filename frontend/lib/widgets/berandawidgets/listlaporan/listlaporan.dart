@@ -181,7 +181,7 @@ class _ListLaporanState extends State<ListLaporan> {
                   width: 104,
                   height: 104,
                   child: Image.network(
-                    'https://media.discordapp.net/attachments/1352465794377842838/1391009640845934602/melanggar.png?ex=686a562e&is=686904ae&hm=4ad9bb00df2d342b6d339dbeaf40415cc2004db71430ffe76baaf5a2e2054f5c&=&format=webp&quality=lossless',
+                    'https://balapin.s3.ap-southeast-1.amazonaws.com/melanggar.png',
                     loadingBuilder: (context, child, loadingProgress) {
                       return loadingProgress == null
                           ? child

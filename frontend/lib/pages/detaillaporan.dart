@@ -5,6 +5,7 @@ import 'package:balapin/services/apiservicelaporan.dart';
 import 'package:balapin/widgets/parsebsondate.dart';
 import 'package:balapin/widgets/parsetimeago.dart';
 import 'package:balapin/widgets/textwidget.dart';
+import 'package:lottie/lottie.dart';
 
 class DetailLaporanScreen extends StatelessWidget {
   final dynamic idIndex;
@@ -36,7 +37,19 @@ class DetailLaporanScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 var listData = snapshot.data;
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Text('Memuat detail laporan');
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Lottie.asset(
+                          'assets/icons/dialog/loadinganimation.json',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
+                  );
                 } else if (snapshot.connectionState == ConnectionState.none) {
                   return Text('Layanan sedang nonaktif mohon maaf');
                 } else if (snapshot.connectionState == ConnectionState.done ||
