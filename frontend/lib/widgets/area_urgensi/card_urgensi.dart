@@ -13,6 +13,7 @@ class CardUrgensi extends StatefulWidget {
 class _CardUrgensiState extends State<CardUrgensi> {
   @override
   Widget build(BuildContext context) {
+    final statuslaporan = widget.indexrekomen.idLaporan.status;
     final dataJenis = widget.indexrekomen.idLaporan.jenis;
     String jenislaporan = '';
 
@@ -22,6 +23,17 @@ class _CardUrgensiState extends State<CardUrgensi> {
       jenislaporan = 'Lampu Jalan';
     } else if (dataJenis == 'jembatan') {
       jenislaporan = 'Jembatan Rusak';
+    }
+
+
+    String judullaporan = '';
+    String gambarlaporan = '';
+    if(statuslaporan == 'selesai') {
+      judullaporan = widget.indexrekomen.idLaporan.judul;
+      gambarlaporan = widget.indexrekomen.idLaporan.gambar;
+    } else if (statuslaporan == 'disembunyikan') {
+      judullaporan = 'Laporan disembunyikan';
+      gambarlaporan = 'https://media.discordapp.net/attachments/1352465794377842838/1391009640845934602/melanggar.png?ex=686a562e&is=686904ae&hm=4ad9bb00df2d342b6d339dbeaf40415cc2004db71430ffe76baaf5a2e2054f5c&=&format=webp&quality=lossless';
     }
 
     final dataStatus = widget.indexrekomen.statusUrgent;
@@ -84,7 +96,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
                 width: 104,
                 height: 104,
                 child: Image.network(
-                  widget.indexrekomen.idLaporan.gambar,
+                  gambarlaporan,
                   loadingBuilder: (context, child, loadingProgress) {
                     return loadingProgress == null
                         ? child
@@ -119,7 +131,7 @@ class _CardUrgensiState extends State<CardUrgensi> {
                         width: MediaQuery.of(context).size.width * 1,
                         height: 24,
                         child: Text(
-                          widget.indexrekomen.idLaporan.judul,
+                          judullaporan,
                           style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'Instrument-Sans',

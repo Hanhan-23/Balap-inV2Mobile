@@ -32,6 +32,7 @@ class ModelCardLaporanRekomendasi {
   final String jenis;
   final String judul;
   final String alamat;
+  final String status;
 
   ModelCardLaporanRekomendasi({
     required this.id,
@@ -39,6 +40,7 @@ class ModelCardLaporanRekomendasi {
     required this.jenis,
     required this.judul,
     required this.alamat,
+    required this.status
   });
 
   factory ModelCardLaporanRekomendasi.fromJson(Map<String, dynamic> json) {
@@ -47,7 +49,8 @@ class ModelCardLaporanRekomendasi {
       gambar: json['gambar'], 
       jenis: json['jenis'], 
       judul: json['judul'], 
-      alamat: json['id_peta']['alamat']
+      alamat: json['id_peta']['alamat'],
+      status: json['status']
     );
   }
 }

@@ -40,6 +40,8 @@ class DetailRekomendasiScreen extends StatelessWidget {
                   final dataJenis = listData!.laporanList.first.jenis;
                   String jenislaporan = '';
 
+                  final status = listData.laporanList.first.status;
+
                   if (dataJenis == 'jalan') {
                     jenislaporan = 'Jalan Rusak';
                   } else if (dataJenis == 'lampu_jalan') {
@@ -47,6 +49,14 @@ class DetailRekomendasiScreen extends StatelessWidget {
                   } else if (dataJenis == 'jembatan') {
                     jenislaporan = 'Jembatan Rusak';
                   }
+
+                  String judullaporanpertama = '';
+                  if (status == 'selesai') {
+                    judullaporanpertama = listData.laporanList.first.judul;
+                  } else if (status == 'disembunyikan') {
+                    judullaporanpertama = 'Judul laporan disembunyikan';
+                  }
+                  
                   return ListView(
                     children: [
                       Column(
@@ -69,7 +79,7 @@ class DetailRekomendasiScreen extends StatelessWidget {
                             child: SizedBox(
                               width: double.infinity,
                               child: TextWidget(
-                                text: listData.laporanList.first.judul,
+                                text: judullaporanpertama,
                                 colortext: Colors.black,
                                 fontsize: 20,
                                 fontweight: FontWeight.w600,
@@ -144,6 +154,7 @@ class DetailRekomendasiScreen extends StatelessWidget {
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: InkWell(
                                     onTap: () {
+                                      if (listData.laporanList[index].status == 'selesai') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -153,6 +164,9 @@ class DetailRekomendasiScreen extends StatelessWidget {
                                               ),
                                         ),
                                       );
+                                      } else {
+                                        Container();
+                                      }
                                     },
                                     child: ListLaporan
                                     (dataCardLaporan: listData.laporanList[index])

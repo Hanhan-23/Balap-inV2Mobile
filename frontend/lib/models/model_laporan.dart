@@ -7,6 +7,7 @@ class ModelCardLaporan {
   final String deskripsi;
   final String gambar;
   final dynamic tglLapor;
+  final String status;
 
   ModelCardLaporan({
     required this.id,
@@ -15,6 +16,7 @@ class ModelCardLaporan {
     required this.deskripsi,
     required this.gambar,
     required this.tglLapor,
+    required this.status,
   });
 
   factory ModelCardLaporan.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class ModelCardLaporan {
       deskripsi: json['deskripsi'],
       gambar: json['gambar'],
       tglLapor: json['tgl_lapor']['\$date']['\$numberLong'],
+      status: json['status'],
     );
   }
 }
