@@ -25,7 +25,7 @@ def recommendations():
     try:
         # Step 1: Get laporan IDs that are assigned to completed recommendations
         completed_recommendations = rekomendasi_collection.find({
-            'status_rekom': 'selesai'
+            'status_rekom': {'$in': ['selesai', 'disembunyikan']}
         })
         
         excluded_laporan_ids = []
@@ -37,7 +37,7 @@ def recommendations():
         
         # Step 2: Get all laporan except those in completed recommendations
         query_filter = {
-            'status': 'selesai',
+            'status': {'$in': ['selesai', 'disembunyikan']},
             '_id': {'$nin': excluded_laporan_ids}
         }
         
