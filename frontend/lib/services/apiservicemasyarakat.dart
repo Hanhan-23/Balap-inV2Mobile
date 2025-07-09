@@ -6,25 +6,31 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<ModelAkunMasyarakat?> buatAkunMasyarakat() async {
-  final url = Uri.parse('$service/akun/buat');
-  final response = await http.post(url);
+  try {
+    final url = Uri.parse('$service/akun/buat');
+    final response = await http.post(url).timeout(Duration(seconds: 10));
 
-  if (response.statusCode == 200) {
-    final jsonResponse = jsonDecode(response.body);
-    final token = jsonResponse['token'];
-    final id = jsonResponse['id'];
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      final token = jsonResponse['token'];
+      final id = jsonResponse['id'];
 
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('user_token', token);
-    await prefs.setString('user_id', id);
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('user_token', token);
+      await prefs.setString('user_id', id);
 
-    print('akun dibuat');
-    return ModelAkunMasyarakat.fromJson(jsonResponse);
-  } else {
-    print("Gagal membuat akun: ${response.body}");
+      print('akun dibuat');
+      return ModelAkunMasyarakat.fromJson(jsonResponse);
+    } else {
+      print("Gagal membuat akun: ${response.body}");
+      return null;
+    }
+  } catch (e) {
+    print("Error buatAkunMasyarakat: $e");
     return null;
   }
 }
+
 
 Future<String?> checkAkunMasyarakat() async {
   final prefs = await SharedPreferences.getInstance();
@@ -40,7 +46,10 @@ Future<String?> checkAkunMasyarakat() async {
     await prefs.setString('user_token', akunBaru.token);
     await prefs.setString('user_id', akunBaru.id);
     print('tidak ada akun, akun baru dibuat');
+    return akunBaru.token;
+  } else {
+    print("Gagal membuat akun baru");
+    return null;
   }
-
-  return null;
 }
+

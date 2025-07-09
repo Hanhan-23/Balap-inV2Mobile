@@ -29,16 +29,16 @@ Future<Position> getCurrentPosition() async {
   LocationPermission permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
       throw Exception('Location permissions are denied.');
     }
   }
 
   return await Geolocator.getCurrentPosition(
-    desiredAccuracy: LocationAccuracy.high,
+    locationSettings: LocationSettings(accuracy: LocationAccuracy.best),
   );
 }
-
 
 void _showNotification(RemoteMessage message) async {
   const androidDetails = AndroidNotificationDetails(
@@ -64,7 +64,11 @@ void main() async {
 
   // Izin notifikasi (Android 13+)
   await FirebaseMessaging.instance.requestPermission();
-  await getCurrentPosition();
+  try {
+    await getCurrentPosition();
+  } catch (e) {
+    debugPrint("Gagal mendapatkan lokasi: $e");
+  }
 
   // Subscribe ke topik
   await FirebaseMessaging.instance.subscribeToTopic('global_notifications');
@@ -80,8 +84,22 @@ void main() async {
   // GetTimeAgo
   GetTimeAgo.setDefaultLocale('id');
 
-  final cekpengguna = await checkPenggunaBaru();
-  await checkAkunMasyarakat();
+  bool cekpengguna = false;
+
+  try {
+    cekpengguna = await checkPenggunaBaru();
+  } catch (e) {
+    debugPrint("Gagal mengecek pengguna baru: $e");
+  }
+
+  try {
+    final token = await checkAkunMasyarakat();
+    if (token == null) {
+      debugPrint("Token akun masyarakat null. Akun mungkin gagal dibuat.");
+    }
+  } catch (e) {
+    debugPrint("Gagal cek atau buat akun masyarakat: $e");
+  }
 
   runApp(
     ChangeNotifierProvider(
@@ -118,9 +136,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [Locale('in'), Locale('en')],
-      home: cekpengguna
-          ? const PrivacyPolicyPages()
-          : const BottomNavigation(),
+      home: cekpengguna ? const PrivacyPolicyPages() : const BottomNavigation(),
     );
   }
 }
