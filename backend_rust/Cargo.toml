@@ -22,3 +22,5 @@ regex = "1.11.1"
 shuttle-actix-web = "0.55.0"
 shuttle-runtime = { version = "0.55.0", features = ["setup-otel-exporter"] }
 reqwest = { version = "0.12.20", features = ["json"] }
+actix-web-prom = "0.10.0"
+
