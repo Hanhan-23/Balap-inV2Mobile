@@ -50,7 +50,7 @@ impl MongoRepo {
 #[cfg(test)]
 impl MongoRepo {
     pub async fn init_test() -> Self {
-        let client = Client::with_uri_str("mongodb+srv://pbl20egovv:34HgRM15dPKCyuDM@balapin.q11l4z0.mongodb.net/?retryWrites=true&w=majority&appName=balapin")
+        let client = Client::with_uri_str("MONGODB")
             .await
             .expect("Failed to connect to MongoDB");
 
