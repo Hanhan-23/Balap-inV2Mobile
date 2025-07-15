@@ -23,4 +23,11 @@ shuttle-actix-web = "0.55.0"
 shuttle-runtime = { version = "0.55.0", features = ["setup-otel-exporter"] }
 reqwest = { version = "0.12.20", features = ["json"] }
 actix-web-prom = "0.10.0"
+mockall = "0.13.1"
+
+[dev-dependencies]
+actix-rt = "2"
+actix-http = "3"
+http = "0.2"
+multipart = "0.18"
 

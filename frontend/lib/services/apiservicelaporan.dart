@@ -203,3 +203,35 @@ Future<bool> handleDraftLaporan(
     return false;
   }
 }
+
+Future<String> kirimLaporan(http.Client client, Map<String, dynamic> fields, String gambar) async {
+  final url = Uri.parse('$service/laporan/uploadlaporan');
+  final request = http.MultipartRequest('POST', url);
+
+  request.headers.addAll({'Content-Type': 'multipart/form-data'});
+
+  final mimeType = lookupMimeType(gambar);
+  if (mimeType == null ||
+      !(mimeType == 'image/png' || mimeType == 'image/jpeg' || mimeType == 'image/jpg')) {
+    throw Exception('Tipe gambar tidak didukung.');
+  }
+
+  request.files.add(await http.MultipartFile.fromPath('gambar', gambar));
+  request.fields['laporan'] = convert.jsonEncode(fields);
+
+  // Gunakan client.send(), bukan request.send()
+  final streamedResponse = await client.send(request);
+  final response = await http.Response.fromStream(streamedResponse);
+
+  if (response.statusCode == 200) {
+    final jsonDecodeBody = convert.jsonDecode(response.body);
+    if (jsonDecodeBody['status'] == 'success') {
+      return 'berhasil';
+    } else {
+      return 'gagal';
+    }
+  }
+
+  return 'gagal';
+}
+

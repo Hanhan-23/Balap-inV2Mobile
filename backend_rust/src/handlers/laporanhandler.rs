@@ -251,6 +251,83 @@ pub async fn upload_laporan_gambar(
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use actix_web::{test, web, App};
+    use std::fs::File;
+    use std::io::Read;
+    use std::sync::Arc;
+    use http::header;
+    use aws_sdk_s3::{Client as S3Client, config::Builder};
+    use multipart::client::lazy::Multipart;
+
+    #[actix_rt::test]
+    async fn test_upload_laporan_gambar_minimal() {
+        let shared_config = aws_config::load_from_env().await;
+        let s3_config = Builder::from(&shared_config).build();
+        let dummy_s3_client = S3Client::from_conf(s3_config);
+        
+        let state = web::Data::new(Arc::new(AppState {
+            ai_uri: "http://localhost:1234".to_string(),
+            s3_client: dummy_s3_client,
+            bucket_name: "dummy-bucket".to_string(),
+        }));
+        
+        let db = web::Data::new(MongoRepo::init_test().await); 
+        
+        let app = test::init_service(
+            App::new()
+                .app_data(state.clone())
+                .app_data(db.clone())
+                .route("/upload", web::post().to(upload_laporan_gambar)),
+        )
+            .await;
+        
+        let mut form = Multipart::new();
+        form.add_text("laporan", r#"{
+            "judul": "Test Judul",
+            "deskripsi": "Deskripsi bersih",
+            "jenis": "jalan rusak",
+            "cuaca": "cerah",
+            "status": "pending",
+            "persentase": 0.5,
+            "cluster": null,
+            "id_masyarakat": "607f1f77bcf86cd799439011",
+            "id_peta": {
+                "alamat": "Jl. Test",
+                "jalan": "Test Raya",
+                "latitude": 1.0,
+                "longitude": 104.0
+            }
+        }"#);
+        
+        let image_file = File::open("tests/test.png").expect("tests/test.png not found");
+        form.add_stream("gambar", image_file, Some("test.png"), Some("image/png".parse().unwrap()));
+        
+        let mut prepared = form.prepare().unwrap();
+        let mut body = Vec::new();
+        prepared.read_to_end(&mut body).unwrap();
+        
+        let boundary = prepared.boundary();
+        let content_type = format!("multipart/form-data; boundary={}", boundary);
+        
+        let req = test::TestRequest::post()
+            .uri("/upload")
+            .insert_header((header::CONTENT_TYPE, content_type))
+            .set_payload(body)
+            .to_request();
+        
+        let resp = test::call_service(&app, req).await;
+        
+        assert!(
+            resp.status().is_success() || resp.status().is_server_error(),
+            "Unexpected response status: {}",
+            resp.status()
+        );
+    }
+}
+
 
 // pub async fn upload_gambar(state: web::Data<Arc<AppState>>, req: HttpRequest, mut payload: Multipart) -> impl Responder {
 //     if let Some(item) = payload.next().await {

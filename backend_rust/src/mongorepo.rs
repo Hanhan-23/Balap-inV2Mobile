@@ -46,3 +46,29 @@ impl MongoRepo {
         }
     }
 }
+
+#[cfg(test)]
+impl MongoRepo {
+    pub async fn init_test() -> Self {
+        let client = Client::with_uri_str("mongodb+srv://pbl20egovv:34HgRM15dPKCyuDM@balapin.q11l4z0.mongodb.net/?retryWrites=true&w=majority&appName=balapin")
+            .await
+            .expect("Failed to connect to MongoDB");
+
+        let db = client.database("balap_in");
+
+        MongoRepo {
+            masyarakat_collection: db.collection("masyarakat"),
+            pemerintah_collection: db.collection("pemerintah"),
+
+            laporan_collection: db.collection("laporan"),
+            card_laporan_collection: db.collection("laporan"),
+            detail_laporan_collection: db.collection("laporan"),
+            buat_laporan_baru_collection: db.collection("laporan"),
+            laporan_card_rekomendasi: db.collection("laporan"),
+
+            rekomendasi_collection: db.collection("rekomendasi"),
+            notifikasi_collection: db.collection("notifikasi"),
+            notifikasi_rekomendasi_collection: db.collection("rekomendasi"),
+        }
+    }
+}
