@@ -34,6 +34,7 @@ class _JenisPengaduanState extends State<JenisPengaduan> {
         SizedBox(
           height: 52,
           child: DropdownButtonFormField<String>(
+              key: const Key('jenis_dropdown'),
               borderRadius: BorderRadius.circular(20),
               icon: Icon(Icons.keyboard_arrow_down),
               dropdownColor: Colors.white,

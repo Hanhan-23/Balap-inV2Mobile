@@ -66,6 +66,7 @@ class _NilaiKerusakanState extends State<NilaiKerusakan> {
                   inactiveTickMarkColor: Color.fromRGBO(102, 112, 133, 1),
                 ),
                 child: Slider(
+                  key: const Key('kerusakan_slider'),
                   value: _currentSliderValue!,
                   min: 0.0,
                   max: 1.0,

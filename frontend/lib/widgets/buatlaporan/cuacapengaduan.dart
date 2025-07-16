@@ -33,6 +33,7 @@ class _CuacaPengaduanState extends State<CuacaPengaduan> {
         SizedBox(
           height: 52,
           child: DropdownButtonFormField<String>(
+              key: const Key('cuaca_dropdown'),
               borderRadius: BorderRadius.circular(20),
               icon: Icon(Icons.keyboard_arrow_down),
               dropdownColor: Colors.white,

@@ -1,3 +1,4 @@
+import 'package:balapin/pages/buatlapor.dart';
 import 'package:balapin/services/apiservicemasyarakat.dart';
 import 'package:flutter/material.dart';
 import 'package:balapin/callback/callbackpenggunabaru.dart';
@@ -57,6 +58,20 @@ void _showNotification(RemoteMessage message) async {
     platformDetails,
   );
 }
+
+// Entry point untuk testing langsung ke halaman Buat Laporan
+void mainBuatLaporan() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => LaporanProvider(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: BuatLaporanPages(),
+      ),
+    ),
+  );
+}
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

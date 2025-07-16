@@ -41,7 +41,7 @@ class _BuatLaporanPagesState extends State<BuatLaporanPages> with AutomaticKeepA
     final cekCoachMarkBuat = checkBuatLaporan();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (await cekCoachMarkBuat == true && mounted) {
+      if (await cekCoachMarkBuat == false && mounted) {
         choachMarkBuatLapor(
           context,
           [
