@@ -31,7 +31,6 @@ class _DeskripsiPengaduanState extends State<DeskripsiPengaduan> {
         SizedBox(
           height: 150,
           child: TextField(
-            key: const Key("deskripsi_form"),
             controller: laporanProvider.deskripsiController,
             inputFormatters: [
               FilteringTextInputFormatter.deny(RegExp(r'[\n\r]'))

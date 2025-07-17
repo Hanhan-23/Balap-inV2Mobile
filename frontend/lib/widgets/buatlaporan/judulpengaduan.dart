@@ -32,7 +32,6 @@ class _JudulpengaduanState extends State<Judulpengaduan> {
         SizedBox(
           height: 54,
           child: TextField(
-            key: const Key("judul_form"),
             controller: laporanProvider.judulController,
             inputFormatters: [
               FilteringTextInputFormatter.deny(RegExp(r'[\n\r]'))

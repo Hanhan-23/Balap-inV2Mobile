@@ -93,7 +93,6 @@ class _AlamatPengaduanState extends State<AlamatPengaduan> {
         SizedBox(
           height: 70,
           child: TextFormField(
-            key: const Key('alamat_form'),
             cursorColor: const Color(0XFF1154ED),
             readOnly: true,
             textAlignVertical: TextAlignVertical.top,
