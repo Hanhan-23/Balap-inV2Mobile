@@ -1,3 +1,8 @@
+// Nama File: apiservicemap.dart
+// Deskripsi: File ini bertujuan untuk menangani API untuk penampilan titik lokasi perekomendasian untuk peta
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 import 'package:balapin/models/model_peta.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;

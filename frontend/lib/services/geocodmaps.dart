@@ -1,3 +1,8 @@
+// Nama File: tasks.py
+// Deskripsi: File ini bertujuan untuk menangani tugas celery yang dijalankan untuk perekomendasian setiap 5 menit
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 import 'package:balapin/services/getmapskey.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;

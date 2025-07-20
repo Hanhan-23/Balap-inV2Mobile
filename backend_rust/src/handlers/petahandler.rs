@@ -1,3 +1,8 @@
+// Nama File: petahandler.rs
+// Deskripsi: File ini bertujuan untuk menangani logika dari peta interaktif untuk sisi mobile masyarakat
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 use actix_web::{web, HttpResponse, Responder};
 use futures::TryStreamExt;
 use mongodb::bson::doc;

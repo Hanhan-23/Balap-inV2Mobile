@@ -1,3 +1,9 @@
+// Nama File: main.rs
+// Deskripsi: File ini bertujuan untuk inisialisasi dari aplikasi backend untuk mobile app
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
+
 mod config;
 mod mongorepo;
 mod models;

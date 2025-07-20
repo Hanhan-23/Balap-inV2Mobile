@@ -1,3 +1,8 @@
+// Nama File: getmapskey.dart
+// Deskripsi: File ini bertujuan untuk menangani api key google map yang telah ditentukan di gradle
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 import 'package:flutter/services.dart';
 
 

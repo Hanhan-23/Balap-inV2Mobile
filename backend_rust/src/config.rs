@@ -1,3 +1,9 @@
+// Nama File: config.rs
+// Deskripsi: File ini bertujuan untuk menangani konfigurasi database
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
+
 use mongodb::{options::{ClientOptions}, Client};
 
 pub async fn init_mongo(uri: String) -> mongodb::error::Result<Client>{

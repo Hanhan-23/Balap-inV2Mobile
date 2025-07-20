@@ -1,3 +1,8 @@
+// Nama File: cors.rs
+// Deskripsi: File ini bertujuan untuk menangani cors origin
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 use actix_cors::Cors;
 
 pub fn cors_middleware() -> Cors {

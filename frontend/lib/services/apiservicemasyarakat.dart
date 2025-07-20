@@ -1,3 +1,8 @@
+// Nama File: apiservicemasyarakat.dart
+// Deskripsi: File ini bertujuan untuk menangani API untuk buat akun masyarakat
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 import 'dart:convert';
 
 import 'package:balapin/models/model_akun.dart';

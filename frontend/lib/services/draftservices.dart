@@ -1,3 +1,8 @@
+// Nama File: draftservices.dart
+// Deskripsi: File ini bertujuan untuk menangani logika dari draf laporan
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 import 'dart:convert';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';

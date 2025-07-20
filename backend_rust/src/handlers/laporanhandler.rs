@@ -1,3 +1,9 @@
+// Nama File: laporanhandler.rs
+// Deskripsi: File ini bertujuan untuk menangani seluruh logika dari data laporan
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
+
 use std::sync::Arc;
 use actix_multipart::Multipart;
 use actix_web::{web, HttpResponse, Responder, HttpRequest};

@@ -1,3 +1,8 @@
+// Nama File: laporanroute.rs
+// Deskripsi: File ini bertujuan untuk menangani routingan dari data laporan
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 use actix_web::{web};
 use crate::handlers::laporanhandler::{get_card_laporan, get_detail_laporan, get_laporan, upload_laporan_gambar};
 

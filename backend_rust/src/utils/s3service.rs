@@ -1,3 +1,8 @@
+// Nama File: s3service.rs
+// Deskripsi: File ini bertujuan untuk menangani layanan amazon web service s3
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 use aws_sdk_s3::Client;
 use std::error::Error;
 use std::sync::Arc;

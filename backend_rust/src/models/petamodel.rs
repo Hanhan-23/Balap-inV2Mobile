@@ -1,3 +1,8 @@
+// Nama File: petamodel.rs
+// Deskripsi: File ini bertujuan untuk menangani deklarasi tipe data dari data peta seperti titik lokasi dan alamat
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 use mongodb::bson::oid::ObjectId;
 use serde::{Deserialize, Serialize};
 

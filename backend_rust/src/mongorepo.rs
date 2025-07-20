@@ -1,3 +1,9 @@
+// Nama File: mongorepo.rs
+// Deskripsi: File ini bertujuan untuk menangani pemodelan koleksi untuk mongodb
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
+
 use mongodb::{Client, Collection};
 use crate::models::laporanmodel::{Laporan, CardLaporan, DetailLaporan, LaporanCardRekomendasi};
 use crate::models::masyarakatmodel::Masyarakat;

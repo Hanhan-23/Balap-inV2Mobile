@@ -1,3 +1,8 @@
+// Nama File: apiservicenotifikasi.dart
+// Deskripsi: File ini bertujuan untuk menangani API notifikasi
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 import 'dart:convert';
 
 import 'package:balapin/models/model_notifikasi.dart';

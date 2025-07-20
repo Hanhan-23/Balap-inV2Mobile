@@ -1,3 +1,8 @@
+// Nama File: apiservicerekomendasi.dart
+// Deskripsi: File ini bertujuan untuk menangani API dari endpoint rekomendasi
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 import 'package:balapin/models/model_rekomendasi.dart';
 import 'package:balapin/services/service.dart';
 import 'package:http/http.dart' as http;

@@ -1,3 +1,9 @@
+# Nama File: tasks.py
+# Deskripsi: File ini bertujuan untuk menangani tugas celery yang dijalankan untuk klasterisasi dan perekomendasian setiap 5 menit
+# Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+# Tanggal: 20 Juli 2025
+
+
 from celery import shared_task
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer

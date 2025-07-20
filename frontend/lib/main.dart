@@ -1,3 +1,8 @@
+// Nama File: main.dart
+// Deskripsi: File ini bertujuan untuk inisialisasi dari aplikasi mobile masyarakat
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 import 'package:balapin/pages/buatlapor.dart';
 import 'package:balapin/services/apiservicemasyarakat.dart';
 import 'package:flutter/material.dart';

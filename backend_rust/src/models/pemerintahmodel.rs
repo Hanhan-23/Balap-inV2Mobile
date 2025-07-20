@@ -1,3 +1,8 @@
+// Nama File: pemerintahmodel.rs
+// Deskripsi: File ini bertujuan untuk menangani deklarasi tipe data dari akun pemerintah
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 use mongodb::bson::oid::ObjectId;
 use serde::{Deserialize, Serialize};
 
