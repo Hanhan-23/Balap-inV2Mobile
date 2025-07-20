@@ -1,3 +1,8 @@
+// Nama File: laporan_provider.dart
+// Deskripsi: File ini bertujuan untuk menangani penyediaan data untuk field buat laporan
+// Dibuat oleh: Farhan Ramadhan - Nim: 3312301105
+// Tanggal: 20 Juli 2025
+
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
