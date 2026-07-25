@@ -1,20 +1,69 @@
 # 🚧 BALAP-IN V2 Mobile
 
-BALAP-IN (Batam Road Infrastructure Reporting System) is a mobile application that enables citizens to report road infrastructure issues in Batam City. The system consists of a Flutter mobile application, a Django REST API backend, and a Rust service for additional functionalities.
+<div align="center">
+
+![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter)
+![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?style=for-the-badge&logo=dart)
+![Django](https://img.shields.io/badge/Django-5-092E20?style=for-the-badge&logo=django)
+![Rust](https://img.shields.io/badge/Rust-Backend-black?style=for-the-badge&logo=rust)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?style=for-the-badge&logo=mongodb)
+![Redis](https://img.shields.io/badge/Redis-Background%20Task-DC382D?style=for-the-badge&logo=redis)
+![License](https://img.shields.io/badge/License-Educational-blue?style=for-the-badge)
+
+**A cross-platform mobile application for reporting, monitoring, and managing road infrastructure issues in Batam City.**
+
+</div>
+
+---
+
+# Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Technology Stack](#technology-stack)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Django Backend](#running-the-django-backend)
+- [Running the Flutter Application](#running-the-flutter-application)
+- [Running the Rust Backend](#running-the-rust-backend)
+- [Quick Start](#quick-start)
+- [Environment Configuration](#environment-configuration)
+- [Firebase Configuration](#firebase-configuration)
+- [Google Maps Configuration](#google-maps-configuration)
+- [Building the APK](#building-the-apk)
+- [Troubleshooting](#troubleshooting)
+- [Contributors](#contributors)
+- [License](#license)
+
+---
+
+# Overview
+
+BALAP-IN (Batam Road Infrastructure Reporting System) is a cross-platform mobile application developed to help citizens report road infrastructure issues in Batam City.
+
+The system consists of three main components:
+
+- 📱 Flutter Mobile Application
+- 🚀 Django REST API Backend
+- ⚡ Rust Backend Service
+
+The application provides location-based reporting, interactive maps, image uploads, push notifications, and background processing for efficient infrastructure management.
 
 ---
 
 # Features
 
-- 📱 Cross-platform mobile application built with Flutter
-- 🗺 Google Maps integration
-- 📍 Location-based road damage reporting
-- 📷 Image upload support
-- 🔔 Push notifications using Firebase Cloud Messaging (FCM)
-- 🚀 RESTful API powered by Django
-- ⚡ High-performance backend service built with Rust
-- 🔄 Asynchronous task processing with Celery
-- 🧠 Redis for background task management
+- Cross-platform mobile application built with Flutter
+- Google Maps integration
+- Location-based road damage reporting
+- Image upload support
+- Firebase Cloud Messaging (FCM)
+- RESTful API powered by Django
+- High-performance backend service built with Rust
+- Background task processing using Celery
+- Redis message broker
+- MongoDB database support
 
 ---
 
@@ -23,18 +72,18 @@ BALAP-IN (Batam Road Infrastructure Reporting System) is a mobile application th
 ```text
 Balap-inV2Mobile/
 │
-├── frontend/              # Flutter Mobile Application
+├── frontend/                 # Flutter Mobile Application
 │
-├── backend_django/        # Django REST API Backend
+├── backend_django/           # Django REST API Backend
 │
-├── backend_rust/          # Rust Backend Service
+├── backend_rust/             # Rust Backend Service
 │
 └── README.md
 ```
 
 ---
 
-# Tech Stack
+# Technology Stack
 
 ## Frontend
 
@@ -56,7 +105,7 @@ Balap-inV2Mobile/
 - Firebase Admin SDK
 - MongoDB
 
-## Rust Service
+## Rust Backend
 
 - Rust
 - Actix Web
@@ -68,16 +117,16 @@ Balap-inV2Mobile/
 
 # Prerequisites
 
-Before running this project, make sure the following software is installed.
+Before running this project, install the following software.
 
 ## Flutter
 
-- Flutter SDK (3.7 or later)
+- Flutter SDK 3.x
 - Android Studio
 - Android SDK
 - VS Code (optional)
 
-Verify your Flutter installation:
+Verify Flutter installation.
 
 ```bash
 flutter doctor
@@ -87,11 +136,9 @@ flutter doctor
 
 ## Django Backend
 
-You can either use Docker (recommended) or install Python manually.
+Install either:
 
-### Required
-
-- Docker Desktop
+- Docker Desktop (Recommended)
 
 or
 
@@ -102,54 +149,80 @@ or
 
 ## Rust Backend
 
-Install the latest stable Rust compiler.
+Install Rust.
 
 ```bash
 rustup install stable
 ```
 
+Verify installation.
+
+```bash
+rustc --version
+cargo --version
+```
+
 ---
 
-# Clone the Repository
+# Installation
+
+## Step 1 — Clone the Repository
+
+Clone the repository from GitHub.
 
 ```bash
 git clone https://github.com/Hanhan-23/Balap-inV2Mobile.git
+```
 
+Navigate to the project.
+
+```bash
 cd Balap-inV2Mobile
+```
+
+Project structure.
+
+```text
+Balap-inV2Mobile/
+│
+├── frontend/
+├── backend_django/
+├── backend_rust/
+└── README.md
 ```
 
 ---
 
 # Running the Django Backend
 
-Navigate to the backend directory.
+Navigate to the backend.
 
 ```bash
 cd backend_django
 ```
 
-## Option 1 — Using Docker (Recommended)
+## Option 1 — Docker (Recommended)
 
-Build the Docker image.
+Build Docker images.
 
 ```bash
 docker compose build
 ```
 
-Start all services.
+Run all services.
 
 ```bash
 docker compose up
 ```
 
-The following services will be started:
+This will start:
 
 - Django API
 - Redis
 - Celery Worker
 - Celery Beat
 
-The API will be available at
+Backend URL
 
 ```
 http://localhost:8000
@@ -157,7 +230,7 @@ http://localhost:8000
 
 ---
 
-## Option 2 — Without Docker
+## Option 2 — Local Installation
 
 Create a virtual environment.
 
@@ -179,7 +252,7 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-Install all required packages.
+Install dependencies.
 
 ```bash
 pip install -r requirements.txt
@@ -191,7 +264,7 @@ Run database migrations.
 python manage.py migrate
 ```
 
-Start the development server.
+Start Django.
 
 ```bash
 python manage.py runserver
@@ -201,37 +274,45 @@ python manage.py runserver
 
 # Environment Configuration
 
-Create a `.env` file inside the `backend_django` directory and configure all required environment variables.
+Create a `.env` file.
 
 ```text
 backend_django/.env
 ```
 
-The backend also requires a Firebase Admin SDK credential file.
+Configure all required environment variables.
 
-Place it here:
+The backend also requires:
 
 ```text
 backend_django/serviceAccountKey.json
 ```
 
+This file is used by Firebase Admin SDK.
+
 ---
 
 # Running the Flutter Application
 
-Navigate to the frontend directory.
+Open another terminal.
+
+Navigate to the frontend.
 
 ```bash
 cd frontend
 ```
 
-Install Flutter dependencies.
+Install dependencies.
 
 ```bash
 flutter pub get
 ```
 
-Make sure an Android emulator or physical device is connected.
+Verify connected devices.
+
+```bash
+flutter devices
+```
 
 Run the application.
 
@@ -259,41 +340,47 @@ flutter build apk --release
 
 # Configure the API Base URL
 
-Update the backend API endpoint in the Flutter service configuration.
+Update the backend endpoint.
 
-Example location:
+Example file:
 
 ```text
 frontend/lib/services/service.dart
 ```
 
-Replace the base URL with your server address.
+Example URLs.
 
-Examples:
+Android Emulator
 
 ```text
 http://10.0.2.2:8000
 ```
 
-or
+Localhost
 
 ```text
 http://127.0.0.1:8000
 ```
 
-or your production server URL.
+Production
+
+```text
+https://your-domain.com
+```
 
 ---
 
 # Running the Rust Backend
 
-Navigate to the Rust backend.
+Open another terminal.
+
+Navigate to the Rust project.
 
 ```bash
 cd backend_rust
 ```
 
-Build the project.
+Build the application.
 
 ```bash
 cargo build
@@ -307,6 +394,66 @@ cargo run
 
 ---
 
+# Quick Start
+
+After cloning the repository, run each component in a separate terminal.
+
+## Terminal 1 — Django Backend
+
+```bash
+cd backend_django
+
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# Linux/macOS
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+python manage.py migrate
+
+python manage.py runserver
+```
+
+---
+
+## Terminal 2 — Flutter Mobile
+
+```bash
+cd frontend
+
+flutter pub get
+
+flutter run
+```
+
+---
+
+## Terminal 3 — Rust Backend
+
+```bash
+cd backend_rust
+
+cargo build
+
+cargo run
+```
+
+---
+
+### Application Services
+
+| Service | Address |
+|----------|----------|
+| Flutter Application | Android Emulator / Physical Device |
+| Django API | http://127.0.0.1:8000 |
+| Rust Service | Configured Port |
+
+---
+
 # Firebase Configuration
 
 This project uses Firebase for:
@@ -315,9 +462,9 @@ This project uses Firebase for:
 - Firebase Cloud Messaging (FCM)
 - Firebase Admin SDK
 
-Required files:
+Required files.
 
-Android application
+Android
 
 ```text
 frontend/android/app/google-services.json
@@ -333,21 +480,23 @@ backend_django/serviceAccountKey.json
 
 # Google Maps Configuration
 
-This application uses the Google Maps SDK.
-
-Make sure your Google Maps API key is properly configured in:
+Configure your Google Maps API Key in:
 
 ```text
 frontend/android/app/src/main/AndroidManifest.xml
 ```
 
-Enable the required APIs in the Google Cloud Console before running the application.
+Enable:
+
+- Maps SDK for Android
+- Places API
+- Geocoding API
 
 ---
 
 # Troubleshooting
 
-## Flutter cannot detect a device
+## Flutter cannot detect devices
 
 ```bash
 flutter doctor
@@ -355,7 +504,7 @@ flutter doctor
 
 ---
 
-## Dependency installation issues
+## Dependency Issues
 
 ```bash
 flutter clean
@@ -365,11 +514,9 @@ flutter pub get
 
 ---
 
-## Docker services fail to start
+## Docker Issues
 
 Ensure Docker Desktop is running.
-
-Check active containers.
 
 ```bash
 docker ps
@@ -379,12 +526,34 @@ docker ps
 
 ## Celery is not processing tasks
 
-Verify that Redis is running.
+Verify Redis.
 
-Default Redis port:
+```bash
+redis-cli ping
+```
+
+Expected output
 
 ```text
-localhost:6379
+PONG
+```
+
+---
+
+## Rust Build Issues
+
+Update Rust.
+
+```bash
+rustup update
+```
+
+Clean previous builds.
+
+```bash
+cargo clean
+
+cargo build
 ```
 
 ---
@@ -400,6 +569,6 @@ localhost:6379
 
 # License
 
-This project was developed as part of the **BALAP-IN** road infrastructure reporting system for academic purposes at **Politeknik Negeri Batam**.
+This project was developed as part of the **BALAP-IN (Batam Road Infrastructure Reporting System)** at **Politeknik Negeri Batam**.
 
-Feel free to use and modify this project for educational purposes.
+The source code is provided for educational and research purposes. Feel free to use and modify it in accordance with your institution's guidelines.
